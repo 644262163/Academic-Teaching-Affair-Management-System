@@ -70,3 +70,4 @@ NIIT项目：教务管理系统
 ![教务管理系统对象类模型](MarkdownPhotos/11.jpg)
 
 4，项目组成员及成员github地址，维护者的github地址
+   马少东 https://github.com/toujian
