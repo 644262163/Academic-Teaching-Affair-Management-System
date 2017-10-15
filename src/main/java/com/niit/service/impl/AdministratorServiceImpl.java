@@ -8,7 +8,7 @@ import com.niit.bean.Administrator;
 import com.niit.dao.AdministratorDao;
 import com.niit.service.AdministratorService;
 
-@Service("accountService")
+@Service("administratorService")
 public class AdministratorServiceImpl implements AdministratorService{
 
 	@Resource

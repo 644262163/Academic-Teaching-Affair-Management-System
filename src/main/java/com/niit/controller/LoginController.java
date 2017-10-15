@@ -20,6 +20,6 @@ public class LoginController {
 	public String index(ModelMap resultMap, String user) {
 		Administrator administrator = administratorService.getAdministrator(user);
 		resultMap.addAttribute("administrator", administrator);
-		return "index";
+		return "admin";
 	}
 }

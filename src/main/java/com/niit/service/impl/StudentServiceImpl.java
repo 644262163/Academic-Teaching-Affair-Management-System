@@ -8,7 +8,7 @@ import com.niit.bean.Student;
 import com.niit.dao.StudentDao;
 import com.niit.service.StudentService;
 
-@Service("accountService")
+@Service("studentService")
 public class StudentServiceImpl implements StudentService{
 
 	@Resource
