@@ -7,10 +7,7 @@
 <title>在此处插入标题</title>
 </head>
 <body>
-hello
-<form action="index.do">
-    <input id="user" name="user" type="text" />
-    <input type="submit" value="登录" />
-</form>
+账号：${administrator.user }
+密码：${administrator.password }
 </body>
 </html>
