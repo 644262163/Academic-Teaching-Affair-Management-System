@@ -15,9 +15,9 @@ public class TeacherServiceImpl implements TeacherService{
 	private TeacherDao teacherDao;
 	
 	@Override
-	public Teacher getTeacher(String id) {
+	public Teacher getTeacherById(String id) {
 		// TODO 自动生成的方法存根
-		Teacher teacher = teacherDao.getTeacher(id);
+		Teacher teacher = teacherDao.getTeacherById(id);
 		return teacher;
 	}
 

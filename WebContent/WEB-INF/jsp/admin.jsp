@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>后台管理</title>
   <link rel="stylesheet" href="<%=request.getContextPath() %>/static/layui/css/layui.css">
+  <script src="<%=request.getContextPath() %>/static/jquery-easyui-1.3.5/jquery.min.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -45,12 +46,11 @@
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item layui-nav-itemed">
-          <a class="" href="javascript:;">用户管理</a>
+          <a class="" href="javascript:$('#iframe').attr('src','');">用户管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="javascript:;">添加用户</a></dd>
-            <dd><a href="javascript:;">列表二</a></dd>
-            <dd><a href="javascript:;">列表三</a></dd>
-            <dd><a href="">超链接</a></dd>
+            <dd><a href="javascript:$('#iframe').attr('src','admin/admin_list.do');">管理员</a></dd>
+            <dd><a href="javascript:;">老师</a></dd>
+            <dd><a href="javascript:;">学生</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">
@@ -69,7 +69,10 @@
   
   <div class="layui-body">
     <!-- 内容主体区域 -->
-    <div style="padding: 15px;">内容主体区域</div>
+    <iframe id="iframe" src=""
+      frameborder="0" width="100%" scrolling="no" height="100%">
+      <p>您的浏览器不支持  iframe 标签。</p>
+    </iframe>
   </div>
   
   <div class="layui-footer">

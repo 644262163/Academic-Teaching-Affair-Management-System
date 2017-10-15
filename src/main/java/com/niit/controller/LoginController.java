@@ -18,7 +18,7 @@ public class LoginController {
 	
 	@RequestMapping("/index")
 	public String index(ModelMap resultMap, String user) {
-		Administrator administrator = administratorService.getAdministrator(user);
+		Administrator administrator = administratorService.getAdministratorByUser(user);
 		resultMap.addAttribute("administrator", administrator);
 		return "admin";
 	}

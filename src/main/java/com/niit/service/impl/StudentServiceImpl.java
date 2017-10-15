@@ -15,9 +15,9 @@ public class StudentServiceImpl implements StudentService{
 	private StudentDao studentDao;
 	
 	@Override
-	public Student getStudent(String id) {
+	public Student getStudentById(String id) {
 		// TODO 自动生成的方法存根
-		Student student = studentDao.getStudent(id);
+		Student student = studentDao.getStudentById(id);
 		return student;
 	}
 

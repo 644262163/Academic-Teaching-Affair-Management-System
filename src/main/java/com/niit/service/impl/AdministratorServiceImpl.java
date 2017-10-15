@@ -1,5 +1,7 @@
 package com.niit.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -15,10 +17,17 @@ public class AdministratorServiceImpl implements AdministratorService{
 	private AdministratorDao administratorDao;
 	
 	@Override
-	public Administrator getAdministrator(String user) {
+	public Administrator getAdministratorByUser(String user) {
 		// TODO 自动生成的方法存根
-		Administrator administrator = administratorDao.getAdministrator(user);
+		Administrator administrator = administratorDao.getAdministratorByUser(user);
 		return administrator;
+	}
+
+	@Override
+	public List<Administrator> getAdministratorList() {
+		// TODO 自动生成的方法存根
+		List<Administrator> list = administratorDao.getAdministratorList();
+		return list;
 	}
 
 }
