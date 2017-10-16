@@ -1,9 +1,12 @@
 package com.niit.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.niit.bean.PageBean;
 import com.niit.bean.Teacher;
 import com.niit.dao.TeacherDao;
 import com.niit.service.TeacherService;
@@ -19,6 +22,23 @@ public class TeacherServiceImpl implements TeacherService{
 		// TODO 自动生成的方法存根
 		Teacher teacher = teacherDao.getTeacherById(id);
 		return teacher;
+	}
+
+	@Override
+	public List<Teacher> getTeacherList() {
+		// TODO 自动生成的方法存根
+		List<Teacher> list = teacherDao.getTeacherList();
+		return list;
+	}
+
+	@Override
+	public PageBean<Teacher> getTeacherListByPage(PageBean<Teacher> pageBean) {
+		// TODO 自动生成的方法存根
+		//查询分页结果
+        pageBean.setResult(teacherDao.getTeacherListByPage(pageBean.getStart(), pageBean.getEnd()));
+        //查询记录总数
+        pageBean.setTotal(teacherDao.getTotal());
+		return pageBean;
 	}
 
 }

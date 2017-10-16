@@ -2,8 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.niit.dao.TeacherDao">
+    <!--
+        返回结果映射
+        如果开启驼峰命名转换且命名规范该段代码可以不写
+        因为配置别名 所以type属性使用的是mybatis-conf中的别名
+    -->
+    <resultMap type="com.niit.bean.Teacher" id="TeacherResult">
+        <id property="id" column="id"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+    </resultMap>
+    
+    <!--  定义字段集合 -->
+    <sql id="TeacherColumns">
+        id, password, name
+    </sql>
+    
+    <!-- 接口中getTeacherById 具体实现-->
 	<select id="getTeacherById" resultType="com.niit.bean.Teacher">
-		select * from teacher where id = #{id}
+		select
+		<include refid="TeacherColumns"/>
+		from teacher
+		where id = #{id}
 	</select>
 	
+	<select id="getTeacherList" resultMap="TeacherResult">
+		select 
+		<include refid="TeacherColumns"/>
+		from teacher
+	</select>
+	
+	<select id="getTeacherListByPage" resultMap="TeacherResult">
+	    select 
+		<include refid="TeacherColumns"/>
+		from teacher
+        limit #{start} ,#{end}
+    </select>
+    
+    <select id="getTotal" resultType="java.lang.Long">
+        select
+        count(*)
+        from teacher
+    </select>
+    
 </mapper>

@@ -1,4 +1,4 @@
-package com.niit.controller.admin;
+package com.niit.controller.teacher;
 
 import java.util.List;
 
@@ -13,37 +13,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.niit.bean.Administrator;
 import com.niit.bean.PageBean;
-import com.niit.service.AdministratorService;
+import com.niit.bean.Student;
+import com.niit.bean.Teacher;
+import com.niit.service.StudentService;
+import com.niit.service.TeacherService;
 import com.niit.util.ResponseUtil;
 
 @Controller
-@RequestMapping("/admin")
-public class AdministratorController {
+@RequestMapping("/teacher")
+public class TeacherController {
 	
 	@Resource
-	private AdministratorService administratorService;
+	private TeacherService teacherService;
 	
-	@RequestMapping("/admin_list")
-	public String adminList(ModelMap resultMap) {
-		List<Administrator> list = administratorService.getAdministratorList();
+	@RequestMapping("/teacher_list")
+	public String teacherList(ModelMap resultMap) {
+		List<Teacher> list = teacherService.getTeacherList();
 		resultMap.addAttribute("list", list);
-		return "admin/admin_list";
+		return "teacher/teacher_list";
 	}
 	
-	@RequestMapping("/get_admin_list")
-	public String getAdminList(
+	@RequestMapping("/get_teacher_list")
+	public String getTeacherList(
 			@RequestParam(value = "page", required = false) String page,
             @RequestParam(value = "limit", required = false) String limit,
 			HttpServletResponse response) throws Exception {
 		
 		//定义分页
-		PageBean<Administrator> pageBean = new PageBean<Administrator>(
+		PageBean<Teacher> pageBean = new PageBean<Teacher>(
             Integer.parseInt(page),
             Integer.parseInt(limit));
         //拿到分页结果已经记录总数的page
-        pageBean = administratorService.getAdministratorListByPage(pageBean);
+        pageBean = teacherService.getTeacherListByPage(pageBean);
 
 		//使用阿里巴巴的fastJson创建JSONObject
         JSONObject result = new JSONObject();

@@ -11,12 +11,10 @@
   <link rel="stylesheet" href="<%=request.getContextPath() %>/static/layui/css/layui.css"  media="all">
   <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
-<body>  
+<body style="margin: 15px;">  
 <div style="margin-bottom: 5px;">          
- 
-<!-- 示例-970 -->
-<ins class="adsbygoogle" style="display:inline-block;width:970px;height:90px" data-ad-client="ca-pub-6111334333458862" data-ad-slot="3820120620"></ins>
- 
+  <p>管理员用户：</p>
+
 </div>
  
 <div class="layui-btn-group demoTable">
@@ -25,17 +23,18 @@
   <button class="layui-btn" data-type="isAll">验证是否全选</button>
 </div>
  
-<table class="layui-table" lay-data="{width: 892, height:332, url:'<%=request.getContextPath() %>/admin/get_admin_list.do', page:true, id:'idTest'}" lay-filter="demo">
+<table class="layui-table" lay-data="{height:400, url:'<%=request.getContextPath() %>/admin/get_admin_list.do', page:true, id:'idTest'}" lay-filter="demo">
   <thead>
     <tr>
       <th lay-data="{checkbox:true, fixed: true}"></th>
-      <th lay-data="{field:'user', width:180, sort: true, fixed: true}">ID</th>
-      <th lay-data="{field:'user', width:180}">用户名</th>
-      <th lay-data="{field:'password', width:180, sort: true}">密码</th>
+      <th lay-data="{field:'user', width:220, sort: true, fixed: true}">ID</th>
+      <th lay-data="{field:'user', width:220}">用户名</th>
+      <th lay-data="{field:'password', width:220, sort: true}">密码</th>
       <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>
     </tr>
   </thead>
 </table>
+
  
 <script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>

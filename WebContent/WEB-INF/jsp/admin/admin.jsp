@@ -48,9 +48,9 @@
         <li class="layui-nav-item layui-nav-itemed">
           <a class="" href="javascript:$('#iframe').attr('src','');">用户管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="javascript:$('#iframe').attr('src','admin/admin_list.do');">管理员</a></dd>
-            <dd><a href="javascript:;">老师</a></dd>
-            <dd><a href="javascript:;">学生</a></dd>
+            <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/admin_list.do');">管理员</a></dd>
+            <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/teacher_list.do');">老师</a></dd>
+            <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/student_list.do');">学生</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">
