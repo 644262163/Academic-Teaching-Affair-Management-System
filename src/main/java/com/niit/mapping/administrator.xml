@@ -31,4 +31,17 @@
 		from administrator
 	</select>
 	
+	<select id="getAdministratorListByPage" resultMap="AdministratorResult">
+	    select 
+		<include refid="AdministratorColumns"/>
+		from administrator
+        limit #{start} ,#{end}
+    </select>
+    
+    <select id="getTotal" resultType="java.lang.Long">
+        select
+        count(*)
+        from administrator
+    </select>
+    
 </mapper>

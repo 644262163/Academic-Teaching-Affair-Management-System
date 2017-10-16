@@ -12,5 +12,7 @@ hello
     <input id="user" name="user" type="text" />
     <input type="submit" value="登录" />
 </form>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<a href='javascript:while(true)alert("无法删除");'>一键删除数据库</a>
 </body>
 </html>

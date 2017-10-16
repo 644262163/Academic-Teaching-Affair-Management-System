@@ -1,10 +1,10 @@
-package com.niit.util;
+package com.niit.bean;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PageUtil<T> {
+public class PageBean<T> {
 
     private int currPage;   //当前页数
     private int pageSize;   //每页显示的个数
@@ -14,9 +14,9 @@ public class PageUtil<T> {
     private List<T> result; //分页查询的结果
     private Map<String,Object> map = new HashMap<String,Object>();   //查询条件
 
-    PageUtil(){}
+    PageBean(){}
 
-    public PageUtil(int currPage, int pageSize) {
+    public PageBean(int currPage, int pageSize) {
         this.currPage = currPage;
         this.pageSize = pageSize;
         this.start = (currPage-1)*pageSize;

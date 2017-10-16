@@ -14,8 +14,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.niit.bean.Administrator;
+import com.niit.bean.PageBean;
 import com.niit.service.AdministratorService;
-import com.niit.util.PageUtil;
 import com.niit.util.ResponseUtil;
 
 @Controller
@@ -39,21 +39,20 @@ public class AdministratorController {
 			HttpServletResponse response) throws Exception {
 		
 		//定义分页
-        //PageUtil<Administrator> pageUtil = new PageUtil<Administrator>(
-        //		Integer.parseInt(page),
-        //        Integer.parseInt(limit));
+		PageBean<Administrator> pageBean = new PageBean<Administrator>(
+            Integer.parseInt(page),
+            Integer.parseInt(limit));
         //拿到分页结果已经记录总数的page
-        //pageUtil = administratorService.getAdministratorListByPage(pageUtil);
-        
-        List<Administrator> list = administratorService.getAdministratorList();
+        pageBean = administratorService.getAdministratorListByPage(pageBean);
+
 		//使用阿里巴巴的fastJson创建JSONObject
         JSONObject result = new JSONObject();
         //通过fastJson序列化list为jsonArray
-        String jsonArray = JSON.toJSONString(list);
+        String jsonArray = JSON.toJSONString(pageBean.getResult());
         JSONArray array = JSONArray.parseArray(jsonArray);
         //将序列化结果放入json对象中
         result.put("data", array);
-        result.put("count", list.size());
+        result.put("count", pageBean.getTotal());
         result.put("code", 0);
 
         //使用自定义工具类向response中写入数据
