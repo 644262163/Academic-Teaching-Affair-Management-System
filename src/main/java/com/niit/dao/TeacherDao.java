@@ -11,4 +11,10 @@ public interface TeacherDao {
     public List<Teacher> selectTeacherList();
     public List<Teacher> selectTeacherListByPage(@Param("start") Integer start, @Param("end") Integer end);
     public Long selectTotal();
+    
+    public Integer updateTeacher(Teacher teacher);
+    
+    public Integer deleteTeacherById(String id);
+    
+    public Integer insertTeacher(Teacher teacher);
 }

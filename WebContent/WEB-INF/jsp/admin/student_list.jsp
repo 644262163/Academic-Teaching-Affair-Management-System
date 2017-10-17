@@ -9,29 +9,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/static/layui/css/layui.css"  media="all">
-  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+  <script src="<%=request.getContextPath() %>/static/jquery-easyui-1.3.5/jquery.min.js"></script>
 </head>
 <body style="margin: 15px;">  
-<div style="margin-bottom: 5px;">          
-  <p>学生用户：</p>
-
+ 
+<div class="demoTable">
+  <span>学生用户：</span>
+  <button class="layui-btn" data-type="insertStudent">添加学生</button>
 </div>
  
-<div class="layui-btn-group demoTable">
-  <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
-  <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-  <button class="layui-btn" data-type="isAll">验证是否全选</button>
-</div>
- 
-<table class="layui-table" lay-data="{height:400, url:'<%=request.getContextPath() %>/admin/select_student_list.do', page:true, id:'idTest'}" lay-filter="demo">
+<table class="layui-table" lay-data="{height:471, limit: 10, url:'<%=request.getContextPath() %>/admin/select_student_list.do', page:true, id:'idTest'}" lay-filter="demo">
   <thead>
     <tr>
-      <th lay-data="{checkbox:true, fixed: true}"></th>
-      <th lay-data="{field:'id', width:180, sort: true, fixed: true}">ID</th>
-      <th lay-data="{field:'id', width:180}">用户名</th>
-      <th lay-data="{field:'password', width:180, sort: true}">密码</th>
-      <th lay-data="{field:'name', width:180}">名字</th>
-      <th lay-data="{field:'clazz', width:180, sort: true}">班级</th>
+      <th lay-data="{field:'id', width:250, sort: true, fixed: true}">ID</th>
+      <th lay-data="{field:'id', width:250, sort: true}">用户名</th>
+      <th lay-data="{field:'password', width:250, sort: true}">密码</th>
+      <th lay-data="{field:'name', width:100, sort: true}">姓名</th>
+      <th lay-data="{field:'clazz', width:100, sort: true}">班级</th>
       <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>
     </tr>
   </thead>
@@ -46,7 +40,7 @@
                
           
 <script src="<%=request.getContextPath() %>/static/layui/layui.js" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
 <script>
 layui.use('table', function(){
   var table = layui.table;
@@ -60,29 +54,113 @@ layui.use('table', function(){
     if(obj.event === 'detail'){
       layer.msg('ID：'+ data.id + ' 的查看操作');
     } else if(obj.event === 'del'){
-      layer.confirm('真的删除行么', function(index){
-        obj.del();
-        layer.close(index);
-      });
+      if(false){
+        layer.alert('不能删除自己');
+      } else{
+        layer.confirm('真的删除行么', function(index){
+          $.ajax({
+            url:'<%=request.getContextPath() %>/admin/delete_student.do',
+            type:'GET', 
+            async:false,    //是否异步
+            data:{
+                id:data.id
+            },
+            timeout:5000,    //超时时间
+            dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            success:function(result){
+                if(result.success){
+                    layer.msg('删除成功');
+                    obj.del();
+                } else{
+                    layer.msg('删除失败');
+                }
+            },
+            error:function(xhr,textStatus){
+                layer.msg('删除失败');
+            }
+          });
+          layer.close(index);
+        });
+      }
     } else if(obj.event === 'edit'){
-      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+      //layer.alert('编辑行：<br>'+ JSON.stringify(data));
+      layer.open({
+        type: 1,
+        skin: 'layui-layer-rim', //加上边框
+        area: ['840px', '420px'], //宽高
+        content: '\
+          <form class="layui-form layui-form-pane" action="<%=request.getContextPath() %>/admin/update_student.do">\
+            <div class="layui-form-item">\
+              <label class="layui-form-label">用户名</label>\
+              <div class="layui-input-block">\
+                <input type="text" id="id" name="id" autocomplete="off" placeholder="请输入用户名" class="layui-input" readonly unselectable="on">\
+              </div>\
+            </div>\
+            <div class="layui-form-item">\
+                <label class="layui-form-label">密码</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="password" name="password" autocomplete="off" placeholder="请输入密码" class="layui-input">\
+                </div>\
+              </div>\
+            <div class="layui-form-item">\
+                <label class="layui-form-label">姓名</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="name" name="name" autocomplete="off" placeholder="请输入姓名" class="layui-input">\
+                </div>\
+              </div>\
+            <div class="layui-form-item">\
+                <label class="layui-form-label">班级</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="clazz" name="clazz" autocomplete="off" placeholder="请输入班级" class="layui-input">\
+                </div>\
+              </div>\
+            <input type="submit" class="layui-btn" value="修改信息" />\
+          </form>\
+        '
+      });
+      $("#id").val(data.id);
+      $("#password").val(data.password);
+      $("#name").val(data.name);
+      $("#clazz").val(data.clazz);
     }
   });
   
   var $ = layui.$, active = {
-    getCheckData: function(){ //获取选中数据
-      var checkStatus = table.checkStatus('idTest')
-      ,data = checkStatus.data;
-      layer.alert(JSON.stringify(data));
-    }
-    ,getCheckLength: function(){ //获取选中数目
-      var checkStatus = table.checkStatus('idTest')
-      ,data = checkStatus.data;
-      layer.msg('选中了：'+ data.length + ' 个');
-    }
-    ,isAll: function(){ //验证是否全选
-      var checkStatus = table.checkStatus('idTest');
-      layer.msg(checkStatus.isAll ? '全选': '未全选')
+    insertStudent: function(){ //添加学生
+      layer.open({
+        type: 1,
+        skin: 'layui-layer-rim', //加上边框
+        area: ['840px', '420px'], //宽高
+        content: '\
+          <form class="layui-form layui-form-pane" action="<%=request.getContextPath() %>/admin/insert_student.do">\
+            <div class="layui-form-item">\
+              <label class="layui-form-label">用户名</label>\
+              <div class="layui-input-block">\
+                <input type="text" id="id" name="id" autocomplete="off" placeholder="请输入用户名" class="layui-input">\
+              </div>\
+            </div>\
+            <div class="layui-form-item">\
+                <label class="layui-form-label">密码</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="password" name="password" autocomplete="off" placeholder="请输入密码" class="layui-input">\
+                </div>\
+              </div>\
+            <div class="layui-form-item">\
+                <label class="layui-form-label">姓名</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="name" name="name" autocomplete="off" placeholder="请输入姓名" class="layui-input">\
+                </div>\
+              </div>\
+            <div class="layui-form-item">\
+                <label class="layui-form-label">班级</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="clazz" name="clazz" autocomplete="off" placeholder="请输入班级" class="layui-input">\
+                </div>\
+              </div>\
+            <input type="submit" class="layui-btn" value="添加信息" />\
+          </form>\
+        '
+      });
     }
   };
   
@@ -91,6 +169,7 @@ layui.use('table', function(){
     active[type] ? active[type].call(this) : '';
   });
 });
+
 </script>
 
 </body>

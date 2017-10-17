@@ -41,4 +41,25 @@ public class TeacherServiceImpl implements TeacherService{
         return pageBean;
     }
 
+    @Override
+    public Integer updateTeacher(Teacher teacher) {
+        // TODO 自动生成的方法存根
+        Integer i = teacherDao.updateTeacher(teacher);
+        return i;
+    }
+
+    @Override
+    public Integer deleteTeacherById(String id) {
+        // TODO 自动生成的方法存根
+        Integer i = teacherDao.deleteTeacherById(id);
+        return i;
+    }
+
+    @Override
+    public Integer insertTeacher(Teacher teacher) {
+        // TODO 自动生成的方法存根
+        Integer i = teacherDao.insertTeacher(teacher);
+        return i;
+    }
+
 }

@@ -46,4 +46,34 @@
         from student
     </select>
     
+    
+    <update id="updateStudent" parameterType="com.niit.bean.Student">
+        update student
+        <set>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="clazz!=null and clazz!=''">
+                clazz=#{clazz},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <delete id="deleteStudentById">
+        delete
+        from student
+        where id=#{id}
+    </delete>
+    
+    <insert id="insertStudent" parameterType="com.niit.bean.Student">
+        insert into student
+        values (
+        #{id},#{password},#{name},#{clazz}
+        )
+    </insert>
+    
 </mapper>

@@ -45,4 +45,31 @@
         from teacher
     </select>
     
+    
+    <update id="updateTeacher" parameterType="com.niit.bean.Teacher">
+        update teacher
+        <set>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <delete id="deleteTeacherById">
+        delete
+        from teacher
+        where id=#{id}
+    </delete>
+    
+    <insert id="insertTeacher" parameterType="com.niit.bean.Teacher">
+        insert into teacher
+        values (
+        #{id},#{password},#{name}
+        )
+    </insert>
+    
 </mapper>

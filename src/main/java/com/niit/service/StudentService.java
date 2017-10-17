@@ -9,4 +9,10 @@ public interface StudentService {
     public Student selectStudentById(String id);
     public List<Student> selectStudentList();
     public PageBean<Student> selectStudentListByPage(PageBean<Student> page);
+    
+    public Integer updateStudent(Student student);
+    
+    public Integer deleteStudentById(String id);
+    
+    public Integer insertStudent(Student student);
 }

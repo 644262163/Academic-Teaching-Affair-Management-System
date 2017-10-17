@@ -9,4 +9,10 @@ public interface TeacherService {
     public Teacher selectTeacherById(String id);
     public List<Teacher> selectTeacherList();
     public PageBean<Teacher> selectTeacherListByPage(PageBean<Teacher> page);
+    
+    public Integer updateTeacher(Teacher teacher);
+    
+    public Integer deleteTeacherById(String id);
+    
+    public Integer insertTeacher(Teacher teacher);
 }

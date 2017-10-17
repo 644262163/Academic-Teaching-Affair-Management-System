@@ -44,7 +44,7 @@
         from administrator
     </select>
     
-    
+
     <update id="updateAdministrator" parameterType="com.niit.bean.Administrator">
         update administrator
         <set>

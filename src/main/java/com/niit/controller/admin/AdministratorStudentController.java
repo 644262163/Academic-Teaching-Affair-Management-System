@@ -59,4 +59,33 @@ public class AdministratorStudentController {
         ResponseUtil.write(response, result);
         return null;
     }
+    
+    @RequestMapping("/update_student")
+    public String updateStudent(Student student) {
+        Integer i = studentService.updateStudent(student);
+        
+        return "admin/student_list";
+    }
+
+    @RequestMapping(value="/delete_student")
+    public String deleteStudent(String id, HttpServletResponse response) throws Exception {
+        Integer i = studentService.deleteStudentById(id);
+        
+        //使用阿里巴巴的fastJson创建JSONObject
+        JSONObject result = new JSONObject();
+        //将序列化结果放入json对象中
+        result.put("success", true);
+        
+        //使用自定义工具类向response中写入数据
+        ResponseUtil.write(response, result);
+        return null;
+    }
+    
+    @RequestMapping("/insert_student")
+    public String insertStudent(Student student, HttpServletResponse response) throws Exception {
+        Integer i = studentService.insertStudent(student);
+        
+        return "admin/student_list";
+    }
+    
 }

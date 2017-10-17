@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.niit.bean.Administrator;
 import com.niit.bean.Student;
 
 public interface StudentDao {
@@ -12,4 +11,10 @@ public interface StudentDao {
     public List<Student> selectStudentList();
     public List<Student> selectStudentListByPage(@Param("start") Integer start, @Param("end") Integer end);
     public Long selectTotal();
+    
+    public Integer updateStudent(Student student);
+    
+    public Integer deleteStudentById(String id);
+    
+    public Integer insertStudent(Student student);
 }

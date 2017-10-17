@@ -13,7 +13,7 @@
 </head>
 <body style="margin: 15px;">  
  
-<div class="">
+<div class="demoTable">
   <span>管理员用户：</span>
   <button class="layui-btn" data-type="insertAdmin">添加管理员</button>
 </div>

@@ -41,4 +41,25 @@ public class StudentServiceImpl implements StudentService{
         return pageBean;
     }
 
+    @Override
+    public Integer updateStudent(Student student) {
+        // TODO 自动生成的方法存根
+        Integer i = studentDao.updateStudent(student);
+        return i;
+    }
+
+    @Override
+    public Integer deleteStudentById(String id) {
+        // TODO 自动生成的方法存根
+        Integer i = studentDao.deleteStudentById(id);
+        return i;
+    }
+
+    @Override
+    public Integer insertStudent(Student student) {
+        // TODO 自动生成的方法存根
+        Integer i = studentDao.insertStudent(student);
+        return i;
+    }
+
 }
