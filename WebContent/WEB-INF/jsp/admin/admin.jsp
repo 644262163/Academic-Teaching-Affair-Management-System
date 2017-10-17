@@ -1,28 +1,27 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<%@ page language="java" contentType="text/html; charset=GB18030"
-    pageEncoding="GB18030"%>
-  <meta charset="utf-8">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>ºóÌ¨¹ÜÀí</title>
+  <title>åŽå°ç®¡ç†</title>
   <link rel="stylesheet" href="<%=request.getContextPath() %>/static/layui/css/layui.css">
   <script src="<%=request.getContextPath() %>/static/jquery-easyui-1.3.5/jquery.min.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header">
-    <div class="layui-logo">¹ÜÀíÔ±ºóÌ¨¹ÜÀí</div>
-    <!-- Í·²¿ÇøÓò£¨¿ÉÅäºÏlayuiÒÑÓÐµÄË®Æ½µ¼º½£© -->
+    <div class="layui-logo">ç®¡ç†å‘˜åŽå°ç®¡ç†</div>
+    <!-- å¤´éƒ¨åŒºåŸŸï¼ˆå¯é…åˆlayuiå·²æœ‰çš„æ°´å¹³å¯¼èˆªï¼‰ -->
     <ul class="layui-nav layui-layout-left">
-      <li class="layui-nav-item"><a href="">¿ØÖÆÌ¨</a></li>
-      <li class="layui-nav-item"><a href="">ÓÃ»§¹ÜÀí</a></li>
+      <li class="layui-nav-item"><a href="">æŽ§åˆ¶å°</a></li>
+      <li class="layui-nav-item"><a href="">ç”¨æˆ·ç®¡ç†</a></li>
       <li class="layui-nav-item">
-        <a href="javascript:;">ÆäËüÏµÍ³</a>
+        <a href="javascript:;">å…¶å®ƒç³»ç»Ÿ</a>
         <dl class="layui-nav-child">
-          <dd><a href="">¿Î³Ì¹ÜÀí</a></dd>
-          <dd><a href="">³É¼¨¹ÜÀí</a></dd>
-          <dd><a href="">ÆÀ¼Û¹ÜÀí</a></dd>
+          <dd><a href="">è¯¾ç¨‹ç®¡ç†</a></dd>
+          <dd><a href="">æˆç»©ç®¡ç†</a></dd>
+          <dd><a href="">è¯„ä»·ç®¡ç†</a></dd>
         </dl>
       </li>
     </ul>
@@ -33,56 +32,56 @@
           ${user }
         </a>
         <dl class="layui-nav-child">
-          <dd><a href="">»ù±¾×ÊÁÏ</a></dd>
-          <dd><a href="">ÐÞ¸ÄÃÜÂë</a></dd>
+          <dd><a href="">åŸºæœ¬èµ„æ–™</a></dd>
+          <dd><a href="">ä¿®æ”¹å¯†ç </a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="">ÍË³ö</a></li>
+      <li class="layui-nav-item"><a href="">é€€å‡º</a></li>
     </ul>
   </div>
   
   <div class="layui-side layui-bg-black">
     <div class="layui-side-scroll">
-      <!-- ×ó²àµ¼º½ÇøÓò£¨¿ÉÅäºÏlayuiÒÑÓÐµÄ´¹Ö±µ¼º½£© -->
+      <!-- å·¦ä¾§å¯¼èˆªåŒºåŸŸï¼ˆå¯é…åˆlayuiå·²æœ‰çš„åž‚ç›´å¯¼èˆªï¼‰ -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item layui-nav-itemed">
-          <a class="" href="javascript:$('#iframe').attr('src','');">ÓÃ»§¹ÜÀí</a>
+          <a class="" href="javascript:$('#iframe').attr('src','');">ç”¨æˆ·ç®¡ç†</a>
           <dl class="layui-nav-child">
-            <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/admin_list.do');">¹ÜÀíÔ±</a></dd>
-            <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/teacher_list.do');">ÀÏÊ¦</a></dd>
-            <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/student_list.do');">Ñ§Éú</a></dd>
+            <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/admin_list.do');">ç®¡ç†å‘˜</a></dd>
+            <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/teacher_list.do');">è€å¸ˆ</a></dd>
+            <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/student_list.do');">å­¦ç”Ÿ</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">
-          <a href="javascript:;">¿Î³Ì¹ÜÀí</a>
+          <a href="javascript:;">è¯¾ç¨‹ç®¡ç†</a>
           <dl class="layui-nav-child">
-            <dd><a href="javascript:;">ÁÐ±íÒ»</a></dd>
-            <dd><a href="javascript:;">ÁÐ±í¶þ</a></dd>
-            <dd><a href="">³¬Á´½Ó</a></dd>
+            <dd><a href="javascript:;">åˆ—è¡¨ä¸€</a></dd>
+            <dd><a href="javascript:;">åˆ—è¡¨äºŒ</a></dd>
+            <dd><a href="">è¶…é“¾æŽ¥</a></dd>
           </dl>
         </li>
-        <li class="layui-nav-item"><a href="">³É¼¨¹ÜÀí</a></li>
-        <li class="layui-nav-item"><a href="">ÆÀ¼Û¹ÜÀí</a></li>
+        <li class="layui-nav-item"><a href="">æˆç»©ç®¡ç†</a></li>
+        <li class="layui-nav-item"><a href="">è¯„ä»·ç®¡ç†</a></li>
       </ul>
     </div>
   </div>
   
   <div class="layui-body">
-    <!-- ÄÚÈÝÖ÷ÌåÇøÓò -->
+    <!-- å†…å®¹ä¸»ä½“åŒºåŸŸ -->
     <iframe id="iframe" src=""
       frameborder="0" width="100%" scrolling="no" height="100%">
-      <p>ÄúµÄä¯ÀÀÆ÷²»Ö§³Ö  iframe ±êÇ©¡£</p>
+      <p>æ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒ  iframe æ ‡ç­¾ã€‚</p>
     </iframe>
   </div>
   
   <div class="layui-footer">
-    <!-- µ×²¿¹Ì¶¨ÇøÓò -->
+    <!-- åº•éƒ¨å›ºå®šåŒºåŸŸ -->
     Academic-Teaching-Affair-Management-System
   </div>
 </div>
 <script src="<%=request.getContextPath() %>/static/layui/layui.js"></script>
 <script>
-//JavaScript´úÂëÇøÓò
+//JavaScriptä»£ç åŒºåŸŸ
 layui.use('element', function(){
   var element = layui.element;
   

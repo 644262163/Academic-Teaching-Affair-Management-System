@@ -1,13 +1,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<%@ page language="java" contentType="text/html; charset=GB18030"
-    pageEncoding="GB18030"%>
-<meta http-equiv="Content-Type" content="text/html; charset=GB18030">
-<title>ÔÚ´Ë´¦²åÈë±êÌâ</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>åœ¨æ­¤å¤„æ’å…¥æ ‡é¢˜</title>
 </head>
 <body>
-ÕËºÅ£º${administrator.user }
-ÃÜÂë£º${administrator.password }
+è´¦å·ï¼š${administrator.user }
+å¯†ç ï¼š${administrator.password }
 </body>
 </html>

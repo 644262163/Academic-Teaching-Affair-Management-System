@@ -1,9 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<%@ page language="java" contentType="text/html; charset=GB18030"
-    pageEncoding="GB18030"%>
-  <meta charset="utf-8">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
   <title>layui</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -14,18 +13,18 @@
 <body style="margin: 15px;">  
  
 <div class="demoTable">
-  <span>Ñ§ÉúÓÃ»§£º</span>
-  <button class="layui-btn" data-type="insertStudent">Ìí¼ÓÑ§Éú</button>
+  <span>å­¦ç”Ÿç”¨æˆ·ï¼š</span>
+  <button class="layui-btn" data-type="insertStudent">æ·»åŠ å­¦ç”Ÿ</button>
 </div>
  
 <table class="layui-table" lay-data="{height:471, limit: 10, url:'<%=request.getContextPath() %>/admin/select_student_list.do', page:true, id:'idTest'}" lay-filter="demo">
   <thead>
     <tr>
       <th lay-data="{field:'id', width:250, sort: true, fixed: true}">ID</th>
-      <th lay-data="{field:'id', width:250, sort: true}">ÓÃ»§Ãû</th>
-      <th lay-data="{field:'password', width:250, sort: true}">ÃÜÂë</th>
-      <th lay-data="{field:'name', width:100, sort: true}">ĞÕÃû</th>
-      <th lay-data="{field:'clazz', width:100, sort: true}">°à¼¶</th>
+      <th lay-data="{field:'id', width:250, sort: true}">ç”¨æˆ·å</th>
+      <th lay-data="{field:'password', width:250, sort: true}">å¯†ç </th>
+      <th lay-data="{field:'name', width:100, sort: true}">å§“å</th>
+      <th lay-data="{field:'clazz', width:100, sort: true}">ç­çº§</th>
       <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>
     </tr>
   </thead>
@@ -33,9 +32,9 @@
 
  
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">²é¿´</a>
-  <a class="layui-btn layui-btn-mini" lay-event="edit">±à¼­</a>
-  <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">É¾³ı</a>
+  <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">æŸ¥çœ‹</a>
+  <a class="layui-btn layui-btn-mini" lay-event="edit">ç¼–è¾‘</a>
+  <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">åˆ é™¤</a>
 </script>
                
           
@@ -44,77 +43,77 @@
 <script>
 layui.use('table', function(){
   var table = layui.table;
-  //¼àÌı±í¸ñ¸´Ñ¡¿òÑ¡Ôñ
+  //ç›‘å¬è¡¨æ ¼å¤é€‰æ¡†é€‰æ‹©
   table.on('checkbox(demo)', function(obj){
     console.log(obj)
   });
-  //¼àÌı¹¤¾ßÌõ
+  //ç›‘å¬å·¥å…·æ¡
   table.on('tool(demo)', function(obj){
     var data = obj.data;
     if(obj.event === 'detail'){
-      layer.msg('ID£º'+ data.id + ' µÄ²é¿´²Ù×÷');
+      layer.msg('IDï¼š'+ data.id + ' çš„æŸ¥çœ‹æ“ä½œ');
     } else if(obj.event === 'del'){
       if(false){
-        layer.alert('²»ÄÜÉ¾³ı×Ô¼º');
+        layer.alert('ä¸èƒ½åˆ é™¤è‡ªå·±');
       } else{
-        layer.confirm('ÕæµÄÉ¾³ıĞĞÃ´', function(index){
+        layer.confirm('çœŸçš„åˆ é™¤è¡Œä¹ˆ', function(index){
           $.ajax({
             url:'<%=request.getContextPath() %>/admin/delete_student.do',
             type:'GET', 
-            async:false,    //ÊÇ·ñÒì²½
+            async:false,    //æ˜¯å¦å¼‚æ­¥
             data:{
                 id:data.id
             },
-            timeout:5000,    //³¬Ê±Ê±¼ä
-            dataType:'json',    //·µ»ØµÄÊı¾İ¸ñÊ½£ºjson/xml/html/script/jsonp/text
+            timeout:5000,    //è¶…æ—¶æ—¶é—´
+            dataType:'json',    //è¿”å›çš„æ•°æ®æ ¼å¼ï¼šjson/xml/html/script/jsonp/text
             success:function(result){
                 if(result.success){
-                    layer.msg('É¾³ı³É¹¦');
+                    layer.msg('åˆ é™¤æˆåŠŸ');
                     obj.del();
                 } else{
-                    layer.msg('É¾³ıÊ§°Ü');
+                    layer.msg('åˆ é™¤å¤±è´¥');
                 }
             },
             error:function(xhr,textStatus){
-                layer.msg('É¾³ıÊ§°Ü');
+                layer.msg('åˆ é™¤å¤±è´¥');
             }
           });
           layer.close(index);
         });
       }
     } else if(obj.event === 'edit'){
-      //layer.alert('±à¼­ĞĞ£º<br>'+ JSON.stringify(data));
+      //layer.alert('ç¼–è¾‘è¡Œï¼š<br>'+ JSON.stringify(data));
       layer.open({
         type: 1,
-        skin: 'layui-layer-rim', //¼ÓÉÏ±ß¿ò
-        area: ['840px', '420px'], //¿í¸ß
+        skin: 'layui-layer-rim', //åŠ ä¸Šè¾¹æ¡†
+        area: ['840px', '420px'], //å®½é«˜
         content: '\
           <form class="layui-form layui-form-pane" action="<%=request.getContextPath() %>/admin/update_student.do">\
             <div class="layui-form-item">\
-              <label class="layui-form-label">ÓÃ»§Ãû</label>\
+              <label class="layui-form-label">ç”¨æˆ·å</label>\
               <div class="layui-input-block">\
-                <input type="text" id="id" name="id" autocomplete="off" placeholder="ÇëÊäÈëÓÃ»§Ãû" class="layui-input" readonly unselectable="on">\
+                <input type="text" id="id" name="id" autocomplete="off" placeholder="è¯·è¾“å…¥ç”¨æˆ·å" class="layui-input" readonly unselectable="on">\
               </div>\
             </div>\
             <div class="layui-form-item">\
-                <label class="layui-form-label">ÃÜÂë</label>\
+                <label class="layui-form-label">å¯†ç </label>\
                 <div class="layui-input-block">\
-                  <input type="text" id="password" name="password" autocomplete="off" placeholder="ÇëÊäÈëÃÜÂë" class="layui-input">\
+                  <input type="text" id="password" name="password" autocomplete="off" placeholder="è¯·è¾“å…¥å¯†ç " class="layui-input">\
                 </div>\
               </div>\
             <div class="layui-form-item">\
-                <label class="layui-form-label">ĞÕÃû</label>\
+                <label class="layui-form-label">å§“å</label>\
                 <div class="layui-input-block">\
-                  <input type="text" id="name" name="name" autocomplete="off" placeholder="ÇëÊäÈëĞÕÃû" class="layui-input">\
+                  <input type="text" id="name" name="name" autocomplete="off" placeholder="è¯·è¾“å…¥å§“å" class="layui-input">\
                 </div>\
               </div>\
             <div class="layui-form-item">\
-                <label class="layui-form-label">°à¼¶</label>\
+                <label class="layui-form-label">ç­çº§</label>\
                 <div class="layui-input-block">\
-                  <input type="text" id="clazz" name="clazz" autocomplete="off" placeholder="ÇëÊäÈë°à¼¶" class="layui-input">\
+                  <input type="text" id="clazz" name="clazz" autocomplete="off" placeholder="è¯·è¾“å…¥ç­çº§" class="layui-input">\
                 </div>\
               </div>\
-            <input type="submit" class="layui-btn" value="ĞŞ¸ÄĞÅÏ¢" />\
+            <input type="submit" class="layui-btn" value="ä¿®æ”¹ä¿¡æ¯" />\
           </form>\
         '
       });
@@ -126,38 +125,38 @@ layui.use('table', function(){
   });
   
   var $ = layui.$, active = {
-    insertStudent: function(){ //Ìí¼ÓÑ§Éú
+    insertStudent: function(){ //æ·»åŠ å­¦ç”Ÿ
       layer.open({
         type: 1,
-        skin: 'layui-layer-rim', //¼ÓÉÏ±ß¿ò
-        area: ['840px', '420px'], //¿í¸ß
+        skin: 'layui-layer-rim', //åŠ ä¸Šè¾¹æ¡†
+        area: ['840px', '420px'], //å®½é«˜
         content: '\
           <form class="layui-form layui-form-pane" action="<%=request.getContextPath() %>/admin/insert_student.do">\
             <div class="layui-form-item">\
-              <label class="layui-form-label">ÓÃ»§Ãû</label>\
+              <label class="layui-form-label">ç”¨æˆ·å</label>\
               <div class="layui-input-block">\
-                <input type="text" id="id" name="id" autocomplete="off" placeholder="ÇëÊäÈëÓÃ»§Ãû" class="layui-input">\
+                <input type="text" id="id" name="id" autocomplete="off" placeholder="è¯·è¾“å…¥ç”¨æˆ·å" class="layui-input">\
               </div>\
             </div>\
             <div class="layui-form-item">\
-                <label class="layui-form-label">ÃÜÂë</label>\
+                <label class="layui-form-label">å¯†ç </label>\
                 <div class="layui-input-block">\
-                  <input type="text" id="password" name="password" autocomplete="off" placeholder="ÇëÊäÈëÃÜÂë" class="layui-input">\
+                  <input type="text" id="password" name="password" autocomplete="off" placeholder="è¯·è¾“å…¥å¯†ç " class="layui-input">\
                 </div>\
               </div>\
             <div class="layui-form-item">\
-                <label class="layui-form-label">ĞÕÃû</label>\
+                <label class="layui-form-label">å§“å</label>\
                 <div class="layui-input-block">\
-                  <input type="text" id="name" name="name" autocomplete="off" placeholder="ÇëÊäÈëĞÕÃû" class="layui-input">\
+                  <input type="text" id="name" name="name" autocomplete="off" placeholder="è¯·è¾“å…¥å§“å" class="layui-input">\
                 </div>\
               </div>\
             <div class="layui-form-item">\
-                <label class="layui-form-label">°à¼¶</label>\
+                <label class="layui-form-label">ç­çº§</label>\
                 <div class="layui-input-block">\
-                  <input type="text" id="clazz" name="clazz" autocomplete="off" placeholder="ÇëÊäÈë°à¼¶" class="layui-input">\
+                  <input type="text" id="clazz" name="clazz" autocomplete="off" placeholder="è¯·è¾“å…¥ç­çº§" class="layui-input">\
                 </div>\
               </div>\
-            <input type="submit" class="layui-btn" value="Ìí¼ÓĞÅÏ¢" />\
+            <input type="submit" class="layui-btn" value="æ·»åŠ ä¿¡æ¯" />\
           </form>\
         '
       });

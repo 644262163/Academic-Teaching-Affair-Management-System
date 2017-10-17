@@ -1,28 +1,28 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<%@ page language="java" contentType="text/html; charset=GB18030"
-    pageEncoding="GB18030"%>
-<meta http-equiv="Content-Type" content="text/html; charset=GB18030">
-<title>在此处插入标题</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>鏁欏姟绠＄悊绯荤粺</title>
 </head>
 <body>
 hello
 <form action="<%=request.getContextPath() %>/admin_login.do">
     <input id="user" name="user" type="text" value="admin01" />
-    <input type="submit" value="管理员登录" />
+    <input type="submit" value="绠＄悊鍛樼櫥褰�" />
 </form>
 <br>
 <form action="<%=request.getContextPath() %>/student_login.do">
     <input id="id" name="id" type="text" value="s1" />
-    <input type="submit" value="学生登录" />
+    <input type="submit" value="瀛︾敓鐧诲綍" />
 </form>
 <br>
 <form action="<%=request.getContextPath() %>/teacher_login.do">
     <input id="id" name="id" type="text" value="t1" />
-    <input type="submit" value="老师登录" />
+    <input type="submit" value="鑰佸笀鐧诲綍" />
 </form>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<a href='javascript:while(true)alert("无法删除");'>一键删除数据库</a>
+<a href='javascript:while(true)alert("鏃犳硶鍒犻櫎");'>涓�閿垹闄ゆ暟鎹簱</a>
 </body>
 </html>
