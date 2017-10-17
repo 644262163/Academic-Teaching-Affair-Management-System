@@ -11,4 +11,6 @@ public interface AdministratorService {
 	public PageBean<Administrator> selectAdministratorListByPage(PageBean<Administrator> page);
 	
 	public Integer updateAdministrator(Administrator administrator);
+	
+	public Integer deleteAdministratorByUser(String user);
 }

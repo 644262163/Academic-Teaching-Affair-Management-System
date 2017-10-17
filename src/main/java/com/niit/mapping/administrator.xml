@@ -55,4 +55,10 @@
         where user=#{user}
     </update>
     
+    <delete id="deleteAdministratorByUser">
+        delete
+        from administrator
+        where user=#{user}
+    </delete>
+    
 </mapper>

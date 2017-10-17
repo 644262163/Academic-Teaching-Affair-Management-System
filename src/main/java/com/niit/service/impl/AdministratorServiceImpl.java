@@ -48,4 +48,11 @@ public class AdministratorServiceImpl implements AdministratorService{
 		return i;
 	}
 
+	@Override
+	public Integer deleteAdministratorByUser(String user) {
+		// TODO 自动生成的方法存根
+		Integer i = administratorDao.deleteAdministratorByUser(user);
+		return i;
+	}
+
 }

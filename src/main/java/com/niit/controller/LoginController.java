@@ -1,6 +1,8 @@
 package com.niit.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,10 +27,13 @@ public class LoginController {
 	private TeacherService teacherService;
 	
 	@RequestMapping("/admin_login")
-	public String adminLogin(ModelMap resultMap, String user) {
+	public String adminLogin(ModelMap resultMap, String user, HttpServletRequest request) {
 		Administrator administrator = administratorService.selectAdministratorByUser(user);
-		resultMap.addAttribute("administrator", administrator);
-		return "admin/admin";
+		if(administrator != null) {
+			request.getSession().setAttribute("user", user);
+			return "admin/admin";
+		}
+		return null;
 	}
 	
 	@RequestMapping("/student_login")

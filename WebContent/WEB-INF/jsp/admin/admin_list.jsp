@@ -58,10 +58,34 @@ layui.use('table', function(){
     if(obj.event === 'detail'){
       layer.msg('ID：'+ data.id + ' 的查看操作');
     } else if(obj.event === 'del'){
-      layer.confirm('真的删除行么', function(index){
-        obj.del();
-        layer.close(index);
-      });
+      if(data.user === '${user }'){
+        layer.alert('不能删除自己');
+      } else{
+        layer.confirm('真的删除行么', function(index){
+            $.ajax({
+        	    url:'<%=request.getContextPath() %>/admin/delete_admin.do',
+        	    type:'GET', 
+        	    async:false,    //是否异步
+        	    data:{
+        	        user:data.user
+        	    },
+        	    timeout:5000,    //超时时间
+        	    dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+        	    success:function(result){
+        	        if(result.success){
+        	        	layer.msg('删除成功');
+        	        	obj.del();
+        	        } else{
+        	        	layer.msg('删除失败');
+        	        }
+        	    },
+        	    error:function(xhr,textStatus){
+        	    	layer.msg('删除失败');
+        	    }
+        	});
+          layer.close(index);
+        });
+      }
     } else if(obj.event === 'edit'){
       //layer.alert('编辑行：<br>'+ JSON.stringify(data));
       layer.open({
@@ -69,7 +93,7 @@ layui.use('table', function(){
     	  skin: 'layui-layer-rim', //加上边框
     	  area: ['840px', '420px'], //宽高
     	  content: '\
-    	      <form class="layui-form layui-form-pane" action="update_admin.do">\
+    	      <form class="layui-form layui-form-pane" action="<%=request.getContextPath() %>/admin/update_admin.do">\
         	    <div class="layui-form-item">\
         	      <label class="layui-form-label">用户名</label>\
         	      <div class="layui-input-block">\
@@ -86,8 +110,8 @@ layui.use('table', function(){
         	  </form>\
     	  '
     	});
-      $("#user").val(eval(JSON.stringify(data.user)));
-      $("#password").val(eval(JSON.stringify(data.password)));
+      $("#user").val(data.user);
+      $("#password").val(data.password);
     }
   });
   

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alibaba.fastjson.JSON;
@@ -65,6 +66,20 @@ public class AdministratorController {
 		Integer i = administratorService.updateAdministrator(administrator);
 		
 		return "admin/admin_list";
+	}
+
+	@RequestMapping(value="/delete_admin")
+	public String deleteAdmin(String user, HttpServletResponse response) throws Exception {
+		Integer i = administratorService.deleteAdministratorByUser(user);
+		
+		//使用阿里巴巴的fastJson创建JSONObject
+		JSONObject result = new JSONObject();
+		//将序列化结果放入json对象中
+		result.put("success", true);
+		
+		//使用自定义工具类向response中写入数据
+		ResponseUtil.write(response, result);
+		return null;
 	}
 	
 }

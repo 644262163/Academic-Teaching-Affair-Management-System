@@ -13,4 +13,6 @@ public interface AdministratorDao {
 	public Long selectTotal();
 	
 	public Integer updateAdministrator(Administrator administrator);
+	
+	public Integer deleteAdministratorByUser(String user);
 }

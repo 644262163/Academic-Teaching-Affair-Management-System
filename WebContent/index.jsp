@@ -14,12 +14,12 @@ hello
 </form>
 <br>
 <form action="<%=request.getContextPath() %>/student_login.do">
-    <input id="id" name="id" type="text" value="s01" />
+    <input id="id" name="id" type="text" value="s1" />
     <input type="submit" value="学生登录" />
 </form>
 <br>
 <form action="<%=request.getContextPath() %>/teacher_login.do">
-    <input id="id" name="id" type="text" value="t01" />
+    <input id="id" name="id" type="text" value="t1" />
     <input type="submit" value="老师登录" />
 </form>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
