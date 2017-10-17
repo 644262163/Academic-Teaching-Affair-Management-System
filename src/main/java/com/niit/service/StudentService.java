@@ -6,7 +6,7 @@ import com.niit.bean.PageBean;
 import com.niit.bean.Student;
 
 public interface StudentService {
-	public Student getStudentById(String id);
-	public List<Student> getStudentList();
-	public PageBean<Student> getStudentListByPage(PageBean<Student> page);
+	public Student selectStudentById(String id);
+	public List<Student> selectStudentList();
+	public PageBean<Student> selectStudentListByPage(PageBean<Student> page);
 }

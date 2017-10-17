@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/static/layui/css/layui.css"  media="all">
-  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+  <script src="<%=request.getContextPath() %>/static/jquery-easyui-1.3.5/jquery.min.js"></script>
 </head>
 <body style="margin: 15px;">  
 <div style="margin-bottom: 5px;">          
@@ -23,7 +23,7 @@
   <button class="layui-btn" data-type="isAll">验证是否全选</button>
 </div>
  
-<table class="layui-table" lay-data="{height:400, url:'<%=request.getContextPath() %>/admin/get_admin_list.do', page:true, id:'idTest'}" lay-filter="demo">
+<table class="layui-table" lay-data="{height:400, url:'<%=request.getContextPath() %>/admin/select_admin_list.do', page:true, id:'idTest'}" lay-filter="demo">
   <thead>
     <tr>
       <th lay-data="{checkbox:true, fixed: true}"></th>
@@ -44,7 +44,7 @@
                
           
 <script src="<%=request.getContextPath() %>/static/layui/layui.js" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
 <script>
 layui.use('table', function(){
   var table = layui.table;
@@ -63,7 +63,31 @@ layui.use('table', function(){
         layer.close(index);
       });
     } else if(obj.event === 'edit'){
-      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+      //layer.alert('编辑行：<br>'+ JSON.stringify(data));
+      layer.open({
+    	  type: 1,
+    	  skin: 'layui-layer-rim', //加上边框
+    	  area: ['840px', '420px'], //宽高
+    	  content: '\
+    	      <form class="layui-form layui-form-pane" action="update_admin.do">\
+        	    <div class="layui-form-item">\
+        	      <label class="layui-form-label">用户名</label>\
+        	      <div class="layui-input-block">\
+        	        <input type="text" id="user" name="user" autocomplete="off" placeholder="请输入用户名" class="layui-input" readonly unselectable="on">\
+        	      </div>\
+        	    </div>\
+        	    <div class="layui-form-item">\
+      	          <label class="layui-form-label">密码</label>\
+      	          <div class="layui-input-block">\
+      	            <input type="text" id="password" name="password" autocomplete="off" placeholder="请输入密码" class="layui-input">\
+      	          </div>\
+      	        </div>\
+        	    <input type="submit" class="layui-btn" value="修改信息" />\
+        	  </form>\
+    	  '
+    	});
+      $("#user").val(eval(JSON.stringify(data.user)));
+      $("#password").val(eval(JSON.stringify(data.password)));
     }
   });
   
@@ -89,6 +113,7 @@ layui.use('table', function(){
     active[type] ? active[type].call(this) : '';
   });
 });
+
 </script>
 
 </body>

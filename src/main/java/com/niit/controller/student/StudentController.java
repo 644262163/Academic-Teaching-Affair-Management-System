@@ -27,13 +27,13 @@ public class StudentController {
 	
 	@RequestMapping("/student_list")
 	public String studentList(ModelMap resultMap) {
-		List<Student> list = studentService.getStudentList();
+		List<Student> list = studentService.selectStudentList();
 		resultMap.addAttribute("list", list);
 		return "student/student_list";
 	}
 	
-	@RequestMapping("/get_student_list")
-	public String getStudentList(
+	@RequestMapping("/select_student_list")
+	public String selectStudentList(
 			@RequestParam(value = "page", required = false) String page,
             @RequestParam(value = "limit", required = false) String limit,
 			HttpServletResponse response) throws Exception {
@@ -43,7 +43,7 @@ public class StudentController {
             Integer.parseInt(page),
             Integer.parseInt(limit));
         //拿到分页结果已经记录总数的page
-        pageBean = studentService.getStudentListByPage(pageBean);
+        pageBean = studentService.selectStudentListByPage(pageBean);
 
 		//使用阿里巴巴的fastJson创建JSONObject
         JSONObject result = new JSONObject();

@@ -17,31 +17,42 @@
         user, password
     </sql>
     
-    <!-- 接口中getAdministratorByUser 具体实现-->
-	<select id="getAdministratorByUser" resultMap="AdministratorResult">
+    <!-- 接口中selectAdministratorByUser 具体实现-->
+	<select id="selectAdministratorByUser" resultMap="AdministratorResult">
 		select 
 		<include refid="AdministratorColumns"/>
 		from administrator
 		where user = #{user}
 	</select>
 	
-	<select id="getAdministratorList" resultMap="AdministratorResult">
+	<select id="selectAdministratorList" resultMap="AdministratorResult">
 		select 
 		<include refid="AdministratorColumns"/>
 		from administrator
 	</select>
 	
-	<select id="getAdministratorListByPage" resultMap="AdministratorResult">
+	<select id="selectAdministratorListByPage" resultMap="AdministratorResult">
 	    select 
 		<include refid="AdministratorColumns"/>
 		from administrator
         limit #{start} ,#{end}
     </select>
     
-    <select id="getTotal" resultType="java.lang.Long">
+    <select id="selectTotal" resultType="java.lang.Long">
         select
         count(*)
         from administrator
     </select>
+    
+    
+    <update id="updateAdministrator" parameterType="com.niit.bean.Administrator">
+        update administrator
+        <set>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+        </set>
+        where user=#{user}
+    </update>
     
 </mapper>

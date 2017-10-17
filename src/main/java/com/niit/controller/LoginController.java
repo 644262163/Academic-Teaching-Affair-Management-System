@@ -26,21 +26,21 @@ public class LoginController {
 	
 	@RequestMapping("/admin_login")
 	public String adminLogin(ModelMap resultMap, String user) {
-		Administrator administrator = administratorService.getAdministratorByUser(user);
+		Administrator administrator = administratorService.selectAdministratorByUser(user);
 		resultMap.addAttribute("administrator", administrator);
 		return "admin/admin";
 	}
 	
 	@RequestMapping("/student_login")
 	public String studentLogin(ModelMap resultMap, String id) {
-		Student student = studentService.getStudentById(id);
+		Student student = studentService.selectStudentById(id);
 		resultMap.addAttribute("student", student);
 		return "student/student";
 	}
 	
 	@RequestMapping("/teacher_login")
 	public String teacherLogin(ModelMap resultMap, String id) {
-		Teacher teacher = teacherService.getTeacherById(id);
+		Teacher teacher = teacherService.selectTeacherById(id);
 		resultMap.addAttribute("teacher", teacher);
 		return "teacher/teacher";
 	}

@@ -18,26 +18,26 @@ public class StudentServiceImpl implements StudentService{
 	private StudentDao studentDao;
 	
 	@Override
-	public Student getStudentById(String id) {
+	public Student selectStudentById(String id) {
 		// TODO 自动生成的方法存根
-		Student student = studentDao.getStudentById(id);
+		Student student = studentDao.selectStudentById(id);
 		return student;
 	}
 
 	@Override
-	public List<Student> getStudentList() {
+	public List<Student> selectStudentList() {
 		// TODO 自动生成的方法存根
-		List<Student> list = studentDao.getStudentList();
+		List<Student> list = studentDao.selectStudentList();
 		return list;
 	}
 
 	@Override
-	public PageBean<Student> getStudentListByPage(PageBean<Student> pageBean) {
+	public PageBean<Student> selectStudentListByPage(PageBean<Student> pageBean) {
 		// TODO 自动生成的方法存根
 		//查询分页结果
-        pageBean.setResult(studentDao.getStudentListByPage(pageBean.getStart(), pageBean.getEnd()));
+        pageBean.setResult(studentDao.selectStudentListByPage(pageBean.getStart(), pageBean.getEnd()));
         //查询记录总数
-        pageBean.setTotal(studentDao.getTotal());
+        pageBean.setTotal(studentDao.selectTotal());
 		return pageBean;
 	}
 

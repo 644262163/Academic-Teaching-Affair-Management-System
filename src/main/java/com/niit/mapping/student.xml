@@ -19,28 +19,28 @@
         id, password, name, clazz
     </sql>
     
-    <!-- 接口中getStudentById 具体实现-->
-	<select id="getStudentById" resultType="com.niit.bean.Student">
+    <!-- 接口中selectStudentById 具体实现-->
+	<select id="selectStudentById" resultType="com.niit.bean.Student">
 		select
 		<include refid="StudentColumns"/>
 		from student
 		where id = #{id}
 	</select>
 	
-	<select id="getStudentList" resultMap="StudentResult">
+	<select id="selectStudentList" resultMap="StudentResult">
 		select 
 		<include refid="StudentColumns"/>
 		from student
 	</select>
 	
-	<select id="getStudentListByPage" resultMap="StudentResult">
+	<select id="selectStudentListByPage" resultMap="StudentResult">
 	    select 
 		<include refid="StudentColumns"/>
 		from student
         limit #{start} ,#{end}
     </select>
     
-    <select id="getTotal" resultType="java.lang.Long">
+    <select id="selectTotal" resultType="java.lang.Long">
         select
         count(*)
         from student

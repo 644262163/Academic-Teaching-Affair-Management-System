@@ -29,13 +29,13 @@ public class AdministratorTeacherController {
 	
 	@RequestMapping("/teacher_list")
 	public String teacherList(ModelMap resultMap) {
-		List<Teacher> list = teacherService.getTeacherList();
+		List<Teacher> list = teacherService.selectTeacherList();
 		resultMap.addAttribute("list", list);
 		return "admin/teacher_list";
 	}
 	
-	@RequestMapping("/get_teacher_list")
-	public String getTeacherList(
+	@RequestMapping("/select_teacher_list")
+	public String selectTeacherList(
 			@RequestParam(value = "page", required = false) String page,
             @RequestParam(value = "limit", required = false) String limit,
 			HttpServletResponse response) throws Exception {
@@ -45,7 +45,7 @@ public class AdministratorTeacherController {
             Integer.parseInt(page),
             Integer.parseInt(limit));
         //拿到分页结果已经记录总数的page
-        pageBean = teacherService.getTeacherListByPage(pageBean);
+        pageBean = teacherService.selectTeacherListByPage(pageBean);
 
 		//使用阿里巴巴的fastJson创建JSONObject
         JSONObject result = new JSONObject();

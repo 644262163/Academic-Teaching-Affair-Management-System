@@ -18,26 +18,26 @@ public class TeacherServiceImpl implements TeacherService{
 	private TeacherDao teacherDao;
 	
 	@Override
-	public Teacher getTeacherById(String id) {
+	public Teacher selectTeacherById(String id) {
 		// TODO 自动生成的方法存根
-		Teacher teacher = teacherDao.getTeacherById(id);
+		Teacher teacher = teacherDao.selectTeacherById(id);
 		return teacher;
 	}
 
 	@Override
-	public List<Teacher> getTeacherList() {
+	public List<Teacher> selectTeacherList() {
 		// TODO 自动生成的方法存根
-		List<Teacher> list = teacherDao.getTeacherList();
+		List<Teacher> list = teacherDao.selectTeacherList();
 		return list;
 	}
 
 	@Override
-	public PageBean<Teacher> getTeacherListByPage(PageBean<Teacher> pageBean) {
+	public PageBean<Teacher> selectTeacherListByPage(PageBean<Teacher> pageBean) {
 		// TODO 自动生成的方法存根
 		//查询分页结果
-        pageBean.setResult(teacherDao.getTeacherListByPage(pageBean.getStart(), pageBean.getEnd()));
+        pageBean.setResult(teacherDao.selectTeacherListByPage(pageBean.getStart(), pageBean.getEnd()));
         //查询记录总数
-        pageBean.setTotal(teacherDao.getTotal());
+        pageBean.setTotal(teacherDao.selectTotal());
 		return pageBean;
 	}
 

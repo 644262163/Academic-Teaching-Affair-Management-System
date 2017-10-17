@@ -23,7 +23,7 @@
   <button class="layui-btn" data-type="isAll">验证是否全选</button>
 </div>
  
-<table class="layui-table" lay-data="{height:400, url:'<%=request.getContextPath() %>/admin/get_student_list.do', page:true, id:'idTest'}" lay-filter="demo">
+<table class="layui-table" lay-data="{height:400, url:'<%=request.getContextPath() %>/admin/select_student_list.do', page:true, id:'idTest'}" lay-filter="demo">
   <thead>
     <tr>
       <th lay-data="{checkbox:true, fixed: true}"></th>

@@ -18,27 +18,34 @@ public class AdministratorServiceImpl implements AdministratorService{
 	private AdministratorDao administratorDao;
 	
 	@Override
-	public Administrator getAdministratorByUser(String user) {
+	public Administrator selectAdministratorByUser(String user) {
 		// TODO 自动生成的方法存根
-		Administrator administrator = administratorDao.getAdministratorByUser(user);
+		Administrator administrator = administratorDao.selectAdministratorByUser(user);
 		return administrator;
 	}
 
 	@Override
-	public List<Administrator> getAdministratorList() {
+	public List<Administrator> selectAdministratorList() {
 		// TODO 自动生成的方法存根
-		List<Administrator> list = administratorDao.getAdministratorList();
+		List<Administrator> list = administratorDao.selectAdministratorList();
 		return list;
 	}
 
 	@Override
-	public PageBean<Administrator> getAdministratorListByPage(PageBean<Administrator> pageBean) {
+	public PageBean<Administrator> selectAdministratorListByPage(PageBean<Administrator> pageBean) {
 		// TODO 自动生成的方法存根
 		//查询分页结果
-        pageBean.setResult(administratorDao.getAdministratorListByPage(pageBean.getStart(), pageBean.getEnd()));
+        pageBean.setResult(administratorDao.selectAdministratorListByPage(pageBean.getStart(), pageBean.getEnd()));
         //查询记录总数
-        pageBean.setTotal(administratorDao.getTotal());
+        pageBean.setTotal(administratorDao.selectTotal());
         return pageBean;
+	}
+
+	@Override
+	public Integer updateAdministrator(Administrator administrator) {
+		// TODO 自动生成的方法存根
+		Integer i = administratorDao.updateAdministrator(administrator);
+		return i;
 	}
 
 }

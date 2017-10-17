@@ -27,13 +27,13 @@ public class AdministratorController {
 	
 	@RequestMapping("/admin_list")
 	public String adminList(ModelMap resultMap) {
-		List<Administrator> list = administratorService.getAdministratorList();
+		List<Administrator> list = administratorService.selectAdministratorList();
 		resultMap.addAttribute("list", list);
 		return "admin/admin_list";
 	}
 	
-	@RequestMapping("/get_admin_list")
-	public String getAdminList(
+	@RequestMapping("/select_admin_list")
+	public String selectAdminList(
 			@RequestParam(value = "page", required = false) String page,
             @RequestParam(value = "limit", required = false) String limit,
 			HttpServletResponse response) throws Exception {
@@ -43,7 +43,7 @@ public class AdministratorController {
             Integer.parseInt(page),
             Integer.parseInt(limit));
         //拿到分页结果已经记录总数的page
-        pageBean = administratorService.getAdministratorListByPage(pageBean);
+        pageBean = administratorService.selectAdministratorListByPage(pageBean);
 
 		//使用阿里巴巴的fastJson创建JSONObject
         JSONObject result = new JSONObject();
@@ -59,4 +59,12 @@ public class AdministratorController {
         ResponseUtil.write(response, result);
 		return null;
 	}
+	
+	@RequestMapping("/update_admin")
+	public String updateAdmin(Administrator administrator) {
+		Integer i = administratorService.updateAdministrator(administrator);
+		
+		return "admin/admin_list";
+	}
+	
 }

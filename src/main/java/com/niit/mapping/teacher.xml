@@ -18,28 +18,28 @@
         id, password, name
     </sql>
     
-    <!-- 接口中getTeacherById 具体实现-->
-	<select id="getTeacherById" resultType="com.niit.bean.Teacher">
+    <!-- 接口中selectTeacherById 具体实现-->
+	<select id="selectTeacherById" resultType="com.niit.bean.Teacher">
 		select
 		<include refid="TeacherColumns"/>
 		from teacher
 		where id = #{id}
 	</select>
 	
-	<select id="getTeacherList" resultMap="TeacherResult">
+	<select id="selectTeacherList" resultMap="TeacherResult">
 		select 
 		<include refid="TeacherColumns"/>
 		from teacher
 	</select>
 	
-	<select id="getTeacherListByPage" resultMap="TeacherResult">
+	<select id="selectTeacherListByPage" resultMap="TeacherResult">
 	    select 
 		<include refid="TeacherColumns"/>
 		from teacher
         limit #{start} ,#{end}
     </select>
     
-    <select id="getTotal" resultType="java.lang.Long">
+    <select id="selectTotal" resultType="java.lang.Long">
         select
         count(*)
         from teacher
