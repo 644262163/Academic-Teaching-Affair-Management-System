@@ -19,23 +19,23 @@
     </sql>
     
     <!-- 接口中selectTeacherById 具体实现-->
-	<select id="selectTeacherById" resultType="com.niit.bean.Teacher">
-		select
-		<include refid="TeacherColumns"/>
-		from teacher
-		where id = #{id}
-	</select>
-	
-	<select id="selectTeacherList" resultMap="TeacherResult">
-		select 
-		<include refid="TeacherColumns"/>
-		from teacher
-	</select>
-	
-	<select id="selectTeacherListByPage" resultMap="TeacherResult">
-	    select 
-		<include refid="TeacherColumns"/>
-		from teacher
+    <select id="selectTeacherById" resultType="com.niit.bean.Teacher">
+        select
+        <include refid="TeacherColumns"/>
+        from teacher
+        where id = #{id}
+    </select>
+    
+    <select id="selectTeacherList" resultMap="TeacherResult">
+        select 
+        <include refid="TeacherColumns"/>
+        from teacher
+    </select>
+    
+    <select id="selectTeacherListByPage" resultMap="TeacherResult">
+        select 
+        <include refid="TeacherColumns"/>
+        from teacher
         limit #{start} ,#{end}
     </select>
     

@@ -14,31 +14,31 @@ import com.niit.service.TeacherService;
 @Service("teacherService")
 public class TeacherServiceImpl implements TeacherService{
 
-	@Resource
-	private TeacherDao teacherDao;
-	
-	@Override
-	public Teacher selectTeacherById(String id) {
-		// TODO 自动生成的方法存根
-		Teacher teacher = teacherDao.selectTeacherById(id);
-		return teacher;
-	}
+    @Resource
+    private TeacherDao teacherDao;
+    
+    @Override
+    public Teacher selectTeacherById(String id) {
+        // TODO 自动生成的方法存根
+        Teacher teacher = teacherDao.selectTeacherById(id);
+        return teacher;
+    }
 
-	@Override
-	public List<Teacher> selectTeacherList() {
-		// TODO 自动生成的方法存根
-		List<Teacher> list = teacherDao.selectTeacherList();
-		return list;
-	}
+    @Override
+    public List<Teacher> selectTeacherList() {
+        // TODO 自动生成的方法存根
+        List<Teacher> list = teacherDao.selectTeacherList();
+        return list;
+    }
 
-	@Override
-	public PageBean<Teacher> selectTeacherListByPage(PageBean<Teacher> pageBean) {
-		// TODO 自动生成的方法存根
-		//查询分页结果
+    @Override
+    public PageBean<Teacher> selectTeacherListByPage(PageBean<Teacher> pageBean) {
+        // TODO 自动生成的方法存根
+        //查询分页结果
         pageBean.setResult(teacherDao.selectTeacherListByPage(pageBean.getStart(), pageBean.getEnd()));
         //查询记录总数
         pageBean.setTotal(teacherDao.selectTotal());
-		return pageBean;
-	}
+        return pageBean;
+    }
 
 }

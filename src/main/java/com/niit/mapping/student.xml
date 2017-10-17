@@ -20,23 +20,23 @@
     </sql>
     
     <!-- 接口中selectStudentById 具体实现-->
-	<select id="selectStudentById" resultType="com.niit.bean.Student">
-		select
-		<include refid="StudentColumns"/>
-		from student
-		where id = #{id}
-	</select>
-	
-	<select id="selectStudentList" resultMap="StudentResult">
-		select 
-		<include refid="StudentColumns"/>
-		from student
-	</select>
-	
-	<select id="selectStudentListByPage" resultMap="StudentResult">
-	    select 
-		<include refid="StudentColumns"/>
-		from student
+    <select id="selectStudentById" resultType="com.niit.bean.Student">
+        select
+        <include refid="StudentColumns"/>
+        from student
+        where id = #{id}
+    </select>
+    
+    <select id="selectStudentList" resultMap="StudentResult">
+        select 
+        <include refid="StudentColumns"/>
+        from student
+    </select>
+    
+    <select id="selectStudentListByPage" resultMap="StudentResult">
+        select 
+        <include refid="StudentColumns"/>
+        from student
         limit #{start} ,#{end}
     </select>
     

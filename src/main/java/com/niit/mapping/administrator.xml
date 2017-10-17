@@ -18,23 +18,23 @@
     </sql>
     
     <!-- 接口中selectAdministratorByUser 具体实现-->
-	<select id="selectAdministratorByUser" resultMap="AdministratorResult">
-		select 
-		<include refid="AdministratorColumns"/>
-		from administrator
-		where user = #{user}
-	</select>
-	
-	<select id="selectAdministratorList" resultMap="AdministratorResult">
-		select 
-		<include refid="AdministratorColumns"/>
-		from administrator
-	</select>
-	
-	<select id="selectAdministratorListByPage" resultMap="AdministratorResult">
-	    select 
-		<include refid="AdministratorColumns"/>
-		from administrator
+    <select id="selectAdministratorByUser" resultMap="AdministratorResult">
+        select 
+        <include refid="AdministratorColumns"/>
+        from administrator
+        where user = #{user}
+    </select>
+    
+    <select id="selectAdministratorList" resultMap="AdministratorResult">
+        select 
+        <include refid="AdministratorColumns"/>
+        from administrator
+    </select>
+    
+    <select id="selectAdministratorListByPage" resultMap="AdministratorResult">
+        select 
+        <include refid="AdministratorColumns"/>
+        from administrator
         limit #{start} ,#{end}
     </select>
     
@@ -60,5 +60,12 @@
         from administrator
         where user=#{user}
     </delete>
+    
+    <insert id="insertAdministrator" parameterType="com.niit.bean.Administrator">
+        insert into administrator
+        values (
+        #{user},#{password}
+        )
+    </insert>
     
 </mapper>

@@ -14,31 +14,31 @@ import com.niit.service.StudentService;
 @Service("studentService")
 public class StudentServiceImpl implements StudentService{
 
-	@Resource
-	private StudentDao studentDao;
-	
-	@Override
-	public Student selectStudentById(String id) {
-		// TODO 自动生成的方法存根
-		Student student = studentDao.selectStudentById(id);
-		return student;
-	}
+    @Resource
+    private StudentDao studentDao;
+    
+    @Override
+    public Student selectStudentById(String id) {
+        // TODO 自动生成的方法存根
+        Student student = studentDao.selectStudentById(id);
+        return student;
+    }
 
-	@Override
-	public List<Student> selectStudentList() {
-		// TODO 自动生成的方法存根
-		List<Student> list = studentDao.selectStudentList();
-		return list;
-	}
+    @Override
+    public List<Student> selectStudentList() {
+        // TODO 自动生成的方法存根
+        List<Student> list = studentDao.selectStudentList();
+        return list;
+    }
 
-	@Override
-	public PageBean<Student> selectStudentListByPage(PageBean<Student> pageBean) {
-		// TODO 自动生成的方法存根
-		//查询分页结果
+    @Override
+    public PageBean<Student> selectStudentListByPage(PageBean<Student> pageBean) {
+        // TODO 自动生成的方法存根
+        //查询分页结果
         pageBean.setResult(studentDao.selectStudentListByPage(pageBean.getStart(), pageBean.getEnd()));
         //查询记录总数
         pageBean.setTotal(studentDao.selectTotal());
-		return pageBean;
-	}
+        return pageBean;
+    }
 
 }

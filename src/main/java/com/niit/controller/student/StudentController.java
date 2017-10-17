@@ -21,31 +21,31 @@ import com.niit.util.ResponseUtil;
 @Controller
 @RequestMapping("/student")
 public class StudentController {
-	
-	@Resource
-	private StudentService studentService;
-	
-	@RequestMapping("/student_list")
-	public String studentList(ModelMap resultMap) {
-		List<Student> list = studentService.selectStudentList();
-		resultMap.addAttribute("list", list);
-		return "student/student_list";
-	}
-	
-	@RequestMapping("/select_student_list")
-	public String selectStudentList(
-			@RequestParam(value = "page", required = false) String page,
+    
+    @Resource
+    private StudentService studentService;
+    
+    @RequestMapping("/student_list")
+    public String studentList(ModelMap resultMap) {
+        List<Student> list = studentService.selectStudentList();
+        resultMap.addAttribute("list", list);
+        return "student/student_list";
+    }
+    
+    @RequestMapping("/select_student_list")
+    public String selectStudentList(
+            @RequestParam(value = "page", required = false) String page,
             @RequestParam(value = "limit", required = false) String limit,
-			HttpServletResponse response) throws Exception {
-		
-		//定义分页
-		PageBean<Student> pageBean = new PageBean<Student>(
+            HttpServletResponse response) throws Exception {
+        
+        //定义分页
+        PageBean<Student> pageBean = new PageBean<Student>(
             Integer.parseInt(page),
             Integer.parseInt(limit));
         //拿到分页结果已经记录总数的page
         pageBean = studentService.selectStudentListByPage(pageBean);
 
-		//使用阿里巴巴的fastJson创建JSONObject
+        //使用阿里巴巴的fastJson创建JSONObject
         JSONObject result = new JSONObject();
         //通过fastJson序列化list为jsonArray
         String jsonArray = JSON.toJSONString(pageBean.getResult());
@@ -57,6 +57,6 @@ public class StudentController {
 
         //使用自定义工具类向response中写入数据
         ResponseUtil.write(response, result);
-		return null;
-	}
+        return null;
+    }
 }

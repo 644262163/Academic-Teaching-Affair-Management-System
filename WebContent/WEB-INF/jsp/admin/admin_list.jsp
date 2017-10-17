@@ -12,24 +12,18 @@
   <script src="<%=request.getContextPath() %>/static/jquery-easyui-1.3.5/jquery.min.js"></script>
 </head>
 <body style="margin: 15px;">  
-<div style="margin-bottom: 5px;">          
-  <p>管理员用户：</p>
-
+ 
+<div class="">
+  <span>管理员用户：</span>
+  <button class="layui-btn" data-type="insertAdmin">添加管理员</button>
 </div>
  
-<div class="layui-btn-group demoTable">
-  <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
-  <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-  <button class="layui-btn" data-type="isAll">验证是否全选</button>
-</div>
- 
-<table class="layui-table" lay-data="{height:400, url:'<%=request.getContextPath() %>/admin/select_admin_list.do', page:true, id:'idTest'}" lay-filter="demo">
+<table class="layui-table" lay-data="{height:471, limit: 10, url:'<%=request.getContextPath() %>/admin/select_admin_list.do', page:true, id:'idTest'}" lay-filter="demo">
   <thead>
     <tr>
-      <th lay-data="{checkbox:true, fixed: true}"></th>
-      <th lay-data="{field:'user', width:220, sort: true, fixed: true}">ID</th>
-      <th lay-data="{field:'user', width:220}">用户名</th>
-      <th lay-data="{field:'password', width:220, sort: true}">密码</th>
+      <th lay-data="{field:'user', width:250, sort: true, fixed: true}">ID</th>
+      <th lay-data="{field:'user', width:250, sort: true}">用户名</th>
+      <th lay-data="{field:'password', width:250, sort: true}">密码</th>
       <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>
     </tr>
   </thead>
@@ -62,73 +56,83 @@ layui.use('table', function(){
         layer.alert('不能删除自己');
       } else{
         layer.confirm('真的删除行么', function(index){
-            $.ajax({
-        	    url:'<%=request.getContextPath() %>/admin/delete_admin.do',
-        	    type:'GET', 
-        	    async:false,    //是否异步
-        	    data:{
-        	        user:data.user
-        	    },
-        	    timeout:5000,    //超时时间
-        	    dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
-        	    success:function(result){
-        	        if(result.success){
-        	        	layer.msg('删除成功');
-        	        	obj.del();
-        	        } else{
-        	        	layer.msg('删除失败');
-        	        }
-        	    },
-        	    error:function(xhr,textStatus){
-        	    	layer.msg('删除失败');
-        	    }
-        	});
+          $.ajax({
+            url:'<%=request.getContextPath() %>/admin/delete_admin.do',
+            type:'GET', 
+            async:false,    //是否异步
+            data:{
+                user:data.user
+            },
+            timeout:5000,    //超时时间
+            dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            success:function(result){
+                if(result.success){
+                    layer.msg('删除成功');
+                    obj.del();
+                } else{
+                    layer.msg('删除失败');
+                }
+            },
+            error:function(xhr,textStatus){
+                layer.msg('删除失败');
+            }
+          });
           layer.close(index);
         });
       }
     } else if(obj.event === 'edit'){
       //layer.alert('编辑行：<br>'+ JSON.stringify(data));
       layer.open({
-    	  type: 1,
-    	  skin: 'layui-layer-rim', //加上边框
-    	  area: ['840px', '420px'], //宽高
-    	  content: '\
-    	      <form class="layui-form layui-form-pane" action="<%=request.getContextPath() %>/admin/update_admin.do">\
-        	    <div class="layui-form-item">\
-        	      <label class="layui-form-label">用户名</label>\
-        	      <div class="layui-input-block">\
-        	        <input type="text" id="user" name="user" autocomplete="off" placeholder="请输入用户名" class="layui-input" readonly unselectable="on">\
-        	      </div>\
-        	    </div>\
-        	    <div class="layui-form-item">\
-      	          <label class="layui-form-label">密码</label>\
-      	          <div class="layui-input-block">\
-      	            <input type="text" id="password" name="password" autocomplete="off" placeholder="请输入密码" class="layui-input">\
-      	          </div>\
-      	        </div>\
-        	    <input type="submit" class="layui-btn" value="修改信息" />\
-        	  </form>\
-    	  '
-    	});
+        type: 1,
+        skin: 'layui-layer-rim', //加上边框
+        area: ['840px', '420px'], //宽高
+        content: '\
+          <form class="layui-form layui-form-pane" action="<%=request.getContextPath() %>/admin/update_admin.do">\
+            <div class="layui-form-item">\
+              <label class="layui-form-label">用户名</label>\
+              <div class="layui-input-block">\
+                <input type="text" id="user" name="user" autocomplete="off" placeholder="请输入用户名" class="layui-input" readonly unselectable="on">\
+              </div>\
+            </div>\
+            <div class="layui-form-item">\
+                <label class="layui-form-label">密码</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="password" name="password" autocomplete="off" placeholder="请输入密码" class="layui-input">\
+                </div>\
+              </div>\
+            <input type="submit" class="layui-btn" value="修改信息" />\
+          </form>\
+        '
+      });
       $("#user").val(data.user);
       $("#password").val(data.password);
     }
   });
   
   var $ = layui.$, active = {
-    getCheckData: function(){ //获取选中数据
-      var checkStatus = table.checkStatus('idTest')
-      ,data = checkStatus.data;
-      layer.alert(JSON.stringify(data));
-    }
-    ,getCheckLength: function(){ //获取选中数目
-      var checkStatus = table.checkStatus('idTest')
-      ,data = checkStatus.data;
-      layer.msg('选中了：'+ data.length + ' 个');
-    }
-    ,isAll: function(){ //验证是否全选
-      var checkStatus = table.checkStatus('idTest');
-      layer.msg(checkStatus.isAll ? '全选': '未全选')
+    insertAdmin: function(){ //添加管理员
+      layer.open({
+        type: 1,
+        skin: 'layui-layer-rim', //加上边框
+        area: ['840px', '420px'], //宽高
+        content: '\
+          <form class="layui-form layui-form-pane" action="<%=request.getContextPath() %>/admin/insert_admin.do">\
+            <div class="layui-form-item">\
+              <label class="layui-form-label">用户名</label>\
+              <div class="layui-input-block">\
+                <input type="text" id="user" name="user" autocomplete="off" placeholder="请输入用户名" class="layui-input">\
+              </div>\
+            </div>\
+            <div class="layui-form-item">\
+                <label class="layui-form-label">密码</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="password" name="password" autocomplete="off" placeholder="请输入密码" class="layui-input">\
+                </div>\
+              </div>\
+            <input type="submit" class="layui-btn" value="添加信息" />\
+          </form>\
+        '
+      });
     }
   };
   
