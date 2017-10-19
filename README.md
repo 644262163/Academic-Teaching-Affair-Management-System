@@ -72,3 +72,4 @@ NIIT项目：教务管理系统
 4，项目组成员及成员github地址，维护者的github地址
 
 马少东 https://github.com/toujian
+徐瑞杰 https://github.com/shmilyrj
