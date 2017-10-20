@@ -71,6 +71,14 @@ NIIT项目：教务管理系统
 
 4，项目组成员及成员github地址，维护者的github地址
 
+维护者:
+
+潘籽成 https://github.com/644262163
+
+成员：
+
 马少东 https://github.com/toujian
+
 徐瑞杰 https://github.com/shmilyrj
+
 张少帅 https://github.com/Jesse-shuai
