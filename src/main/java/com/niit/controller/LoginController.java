@@ -1,52 +1,64 @@
 package com.niit.controller;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.niit.bean.Administrator;
-import com.niit.bean.Student;
-import com.niit.bean.Teacher;
-import com.niit.service.AdministratorService;
-import com.niit.service.StudentService;
-import com.niit.service.TeacherService;
 
 @Controller
 @RequestMapping()
 public class LoginController {
     
-    @Resource
-    private AdministratorService administratorService;
-    @Resource
-    private StudentService studentService;
-    @Resource
-    private TeacherService teacherService;
+    @RequestMapping("/login")
+    public String login(HttpServletRequest request) {
+        request.getSession().removeAttribute("msg");
+        return "login";
+    }
     
-    @RequestMapping("/admin_login")
-    public String adminLogin(ModelMap resultMap, String user, HttpServletRequest request) {
-        Administrator administrator = administratorService.selectAdministratorByUser(user);
-        if(administrator != null) {
-            request.getSession().setAttribute("user", user);
-            return "admin/admin";
+    @RequestMapping("/logout")
+    public String logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.getSession().removeAttribute("id");
+        subject.getSession().removeAttribute("no");
+        return "redirect:/index.jsp";
+    }
+    
+    @RequestMapping("/index")
+    public String index(ModelMap resultMap, String user, String password, HttpServletRequest request) {
+        Subject subject = SecurityUtils.getSubject();
+        String no = (String) subject.getSession().getAttribute("no");
+        if(no != null && user != null && "".equals(user)) {
+            switch (no) {
+            case "0":
+                return "admin/admin_index";
+            case "1":
+                return "teacher/teacher_index";
+            case "2":
+                return "student/student_index";
+            default:
+            }
         }
-        return null;
+        UsernamePasswordToken token = new UsernamePasswordToken(user, password);
+        try {
+            subject.login(token);
+            no = (String) subject.getSession().getAttribute("no");
+            switch (no) {
+            case "0":
+                return "admin/admin_index";
+            case "1":
+                return "teacher/teacher_index";
+            case "2":
+                return "student/student_index";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        request.getSession().setAttribute("msg", "’À∫≈ªÚ√‹¬Î¥ÌŒÛ£°");
+        return "login";
     }
     
-    @RequestMapping("/student_login")
-    public String studentLogin(ModelMap resultMap, String id) {
-        Student student = studentService.selectStudentById(id);
-        resultMap.addAttribute("student", student);
-        return "student/student";
-    }
-    
-    @RequestMapping("/teacher_login")
-    public String teacherLogin(ModelMap resultMap, String id) {
-        Teacher teacher = teacherService.selectTeacherById(id);
-        resultMap.addAttribute("teacher", teacher);
-        return "teacher/teacher";
-    }
 }

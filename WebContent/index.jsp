@@ -8,20 +8,7 @@
 </head>
 <body>
 hello
-<form action="<%=request.getContextPath() %>/admin_login.do">
-    <input id="user" name="user" type="text" value="admin01" />
-    <input type="submit" value="管理员登录" />
-</form>
-<br>
-<form action="<%=request.getContextPath() %>/student_login.do">
-    <input id="id" name="id" type="text" value="s1" />
-    <input type="submit" value="学生登录" />
-</form>
-<br>
-<form action="<%=request.getContextPath() %>/teacher_login.do">
-    <input id="id" name="id" type="text" value="t1" />
-    <input type="submit" value="老师登录" />
-</form>
+<a href="<%=request.getContextPath() %>/login.do" >登陆页面</a>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <a href='javascript:while(true)alert("无法删除");'>一键删除数据库</a>
 </body>

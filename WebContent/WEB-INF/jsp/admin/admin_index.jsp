@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>后台管理</title>
+  <title>管理员后台管理</title>
   <link rel="stylesheet" href="<%=request.getContextPath() %>/static/layui/css/layui.css">
   <script src="<%=request.getContextPath() %>/static/jquery-easyui-1.3.5/jquery.min.js"></script>
 </head>
@@ -29,14 +29,14 @@
       <li class="layui-nav-item">
         <a href="javascript:;">
           <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-          ${user }
+          ${id }
         </a>
         <dl class="layui-nav-child">
           <dd><a href="">基本资料</a></dd>
           <dd><a href="">修改密码</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="">退出</a></li>
+      <li class="layui-nav-item"><a href="<%=request.getContextPath() %>/logout.do">退出</a></li>
     </ul>
   </div>
   
