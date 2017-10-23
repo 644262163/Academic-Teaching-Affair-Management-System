@@ -24,6 +24,11 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         subject.getSession().removeAttribute("id");
         subject.getSession().removeAttribute("no");
+        try {
+            subject.logout();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "redirect:/index.jsp";
     }
     
@@ -31,7 +36,7 @@ public class LoginController {
     public String index(ModelMap resultMap, String user, String password, HttpServletRequest request) {
         Subject subject = SecurityUtils.getSubject();
         String no = (String) subject.getSession().getAttribute("no");
-        if(no != null && user != null && "".equals(user)) {
+        if(no != null && (user == null || "".equals(user))) {
             switch (no) {
             case "0":
                 return "admin/admin_index";

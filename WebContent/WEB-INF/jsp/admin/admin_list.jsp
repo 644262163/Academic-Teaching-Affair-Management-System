@@ -51,7 +51,7 @@ layui.use('table', function(){
     if(obj.event === 'detail'){
       layer.msg('ID：'+ data.id + ' 的查看操作');
     } else if(obj.event === 'del'){
-      if(data.user === '${user }'){
+      if(data.user === '${id }'){
         layer.alert('不能删除自己');
       } else{
         layer.confirm('真的删除行么', function(index){

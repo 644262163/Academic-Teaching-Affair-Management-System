@@ -239,6 +239,12 @@ a {
     </form>
     <div style="text-align:center;padding-top: 30px">
         待修改的登陆页面
+        <br>
+        <a href='javascript:$("#user").val("admin01");$("#password").val("123");'>一键填写管理员账号密码</a>
+        <br>
+        <a href='javascript:$("#user").val("11");$("#password").val("11");'>一键填写老师账号密码</a>
+        <br>
+        <a href='javascript:$("#user").val("22");$("#password").val("22");'>一键填写学生账号密码</a>
     </div>
 </body>
 </html>
