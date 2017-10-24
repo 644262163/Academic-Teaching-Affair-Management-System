@@ -13,37 +13,37 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.niit.bean.Administrator;
+import com.niit.bean.Evaluation;
 import com.niit.bean.PageBean;
-import com.niit.service.AdministratorService;
+import com.niit.service.EvaluationService;
 import com.niit.util.ResponseUtil;
 
 @Controller
 @RequestMapping("/admin")
-public class AdministratorController {
+public class AdministratorEvaluationController {
     
     @Resource
-    private AdministratorService administratorService;
+    private EvaluationService evaluationService;
     
-    @RequestMapping("/admin_list")
-    public String adminList(ModelMap resultMap) {
-        List<Administrator> list = administratorService.selectAdministratorList();
+    @RequestMapping("/evaluation_list")
+    public String evaluationList(ModelMap resultMap) {
+        List<Evaluation> list = evaluationService.selectEvaluationList();
         resultMap.addAttribute("list", list);
-        return "admin/admin_list";
+        return "admin/evaluation_list";
     }
     
-    @RequestMapping("/select_admin_list")
-    public String selectAdminList(
+    @RequestMapping("/select_evaluation_list")
+    public String selectEvaluationList(
             @RequestParam(value = "page", required = false) String page,
             @RequestParam(value = "limit", required = false) String limit,
             HttpServletResponse response) throws Exception {
         
         //定义分页
-        PageBean<Administrator> pageBean = new PageBean<Administrator>(
+        PageBean<Evaluation> pageBean = new PageBean<Evaluation>(
             Integer.parseInt(page),
             Integer.parseInt(limit));
         //拿到分页结果已经记录总数的page
-        pageBean = administratorService.selectAdministratorListByPage(pageBean);
+        pageBean = evaluationService.selectEvaluationListByPage(pageBean);
 
         //使用阿里巴巴的fastJson创建JSONObject
         JSONObject result = new JSONObject();
@@ -60,16 +60,16 @@ public class AdministratorController {
         return null;
     }
     
-    @RequestMapping("/update_admin")
-    public String updateAdmin(Administrator administrator) {
-        Integer i = administratorService.updateAdministrator(administrator);
+    @RequestMapping("/update_evaluation")
+    public String updateEvaluation(Evaluation evaluation) {
+        Integer i = evaluationService.updateEvaluation(evaluation);
         
-        return "admin/admin_list";
+        return "admin/evaluation_list";
     }
 
-    @RequestMapping(value="/delete_admin")
-    public String deleteAdmin(String id, HttpServletResponse response) throws Exception {
-        Integer i = administratorService.deleteAdministratorById(id);
+    @RequestMapping(value="/delete_evaluation")
+    public String deleteEvaluation(String studentId, String courseId, HttpServletResponse response) throws Exception {
+        Integer i = evaluationService.deleteEvaluationById(studentId, courseId);
         
         //使用阿里巴巴的fastJson创建JSONObject
         JSONObject result = new JSONObject();
@@ -81,11 +81,11 @@ public class AdministratorController {
         return null;
     }
     
-    @RequestMapping("/insert_admin")
-    public String insertAdmin(Administrator administrator, HttpServletResponse response) throws Exception {
-        Integer i = administratorService.insertAdministrator(administrator);
+    @RequestMapping("/insert_evaluation")
+    public String insertEvaluation(Evaluation evaluation, HttpServletResponse response) throws Exception {
+        Integer i = evaluationService.insertEvaluation(evaluation);
         
-        return "admin/admin_list";
+        return "admin/evaluation_list";
     }
 
 }

@@ -18,9 +18,9 @@ public class AdministratorServiceImpl implements AdministratorService{
     private AdministratorDao administratorDao;
     
     @Override
-    public Administrator selectAdministratorByUser(String user) {
+    public Administrator selectAdministratorById(String id) {
         // TODO 自动生成的方法存根
-        Administrator administrator = administratorDao.selectAdministratorByUser(user);
+        Administrator administrator = administratorDao.selectAdministratorById(id);
         return administrator;
     }
 
@@ -49,9 +49,9 @@ public class AdministratorServiceImpl implements AdministratorService{
     }
 
     @Override
-    public Integer deleteAdministratorByUser(String user) {
+    public Integer deleteAdministratorById(String id) {
         // TODO 自动生成的方法存根
-        Integer i = administratorDao.deleteAdministratorByUser(user);
+        Integer i = administratorDao.deleteAdministratorById(id);
         return i;
     }
 

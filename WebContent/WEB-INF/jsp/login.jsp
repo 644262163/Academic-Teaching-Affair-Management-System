@@ -187,9 +187,9 @@ a {
     });
 
     function checkForm() {
-        var user = $("#user").val();
+        var id = $("#id").val();
         var password = $("#password").val();
-        if (user == null || user == "") {
+        if (id == null || id == "") {
             $("#error").html("用户名不能为空！");
             return false;
         }
@@ -214,7 +214,7 @@ a {
             </DIV>
             <P style="padding: 30px 0px 10px; position: relative;">
                 <SPAN class="u_logo"></SPAN> 
-                <INPUT id="user" name="user" class="ipt" type="text"
+                <INPUT id="id" name="id" class="ipt" type="text"
                     placeholder="请输入用户名" value="admin01">
             </P>
             <P style="position: relative;">
@@ -240,11 +240,11 @@ a {
     <div style="text-align:center;padding-top: 30px">
         待修改的登陆页面
         <br>
-        <a href='javascript:$("#user").val("admin01");$("#password").val("123");'>一键填写管理员账号密码</a>
+        <a href='javascript:$("#id").val("admin01");$("#password").val("123");'>一键填写管理员账号密码</a>
         <br>
-        <a href='javascript:$("#user").val("11");$("#password").val("11");'>一键填写老师账号密码</a>
+        <a href='javascript:$("#id").val("s1");$("#password").val("123");'>一键填写老师账号密码</a>
         <br>
-        <a href='javascript:$("#user").val("22");$("#password").val("22");'>一键填写学生账号密码</a>
+        <a href='javascript:$("#id").val("t1");$("#password").val("123");'>一键填写学生账号密码</a>
     </div>
 </body>
 </html>

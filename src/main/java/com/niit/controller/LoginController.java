@@ -33,10 +33,10 @@ public class LoginController {
     }
     
     @RequestMapping("/index")
-    public String index(ModelMap resultMap, String user, String password, HttpServletRequest request) {
+    public String index(ModelMap resultMap, String id, String password, HttpServletRequest request) {
         Subject subject = SecurityUtils.getSubject();
         String no = (String) subject.getSession().getAttribute("no");
-        if(no != null && (user == null || "".equals(user))) {
+        if(no != null && (id == null || "".equals(id))) {
             switch (no) {
             case "0":
                 return "admin/admin_index";
@@ -47,7 +47,7 @@ public class LoginController {
             default:
             }
         }
-        UsernamePasswordToken token = new UsernamePasswordToken(user, password);
+        UsernamePasswordToken token = new UsernamePasswordToken(id, password);
         try {
             subject.login(token);
             no = (String) subject.getSession().getAttribute("no");

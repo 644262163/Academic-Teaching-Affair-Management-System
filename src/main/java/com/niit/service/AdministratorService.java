@@ -6,13 +6,13 @@ import com.niit.bean.Administrator;
 import com.niit.bean.PageBean;
 
 public interface AdministratorService {
-    public Administrator selectAdministratorByUser(String user);
+    public Administrator selectAdministratorById(String id);
     public List<Administrator> selectAdministratorList();
-    public PageBean<Administrator> selectAdministratorListByPage(PageBean<Administrator> page);
+    public PageBean<Administrator> selectAdministratorListByPage(PageBean<Administrator> pageBean);
     
     public Integer updateAdministrator(Administrator administrator);
     
-    public Integer deleteAdministratorByUser(String user);
+    public Integer deleteAdministratorById(String id);
     
     public Integer insertAdministrator(Administrator administrator);
 }

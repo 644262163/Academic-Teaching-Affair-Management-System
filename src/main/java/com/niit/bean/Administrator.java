@@ -1,14 +1,14 @@
 package com.niit.bean;
 
 public class Administrator {
-    private String user;
+    private String id;
     private String password;
     
-    public String getUser() {
-        return user;
+    public String getId() {
+        return id;
     }
-    public void setUser(String user) {
-        this.user = user;
+    public void setId(String id) {
+        this.id = id;
     }
     public String getPassword() {
         return password;

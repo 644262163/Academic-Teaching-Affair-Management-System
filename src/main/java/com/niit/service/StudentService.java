@@ -8,7 +8,7 @@ import com.niit.bean.Student;
 public interface StudentService {
     public Student selectStudentById(String id);
     public List<Student> selectStudentList();
-    public PageBean<Student> selectStudentListByPage(PageBean<Student> page);
+    public PageBean<Student> selectStudentListByPage(PageBean<Student> pageBean);
     
     public Integer updateStudent(Student student);
     

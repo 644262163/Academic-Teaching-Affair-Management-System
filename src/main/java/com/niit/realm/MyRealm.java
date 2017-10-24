@@ -38,25 +38,25 @@ public class MyRealm extends AuthorizingRealm{
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        String user = (String) principalCollection.getPrimaryPrincipal();
-        System.out.println(user);
+        String id = (String) principalCollection.getPrimaryPrincipal();
+        System.out.println(id + "访问权限页面");
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         // 根据用户名查询当前用户拥有的角色
         Set<String> roleNames = new HashSet<String>();
         // 根据用户名查询当前用户权限
         Set<String> permissionNames = new HashSet<String>();
         
-        Administrator administrator = administratorService.selectAdministratorByUser(user); //重数据库查询用户信息
+        Administrator administrator = administratorService.selectAdministratorById(id); //重数据库查询用户信息
         if (administrator != null) {
             roleNames.add("admin");
             permissionNames.add("admin");
         }
-        Teacher teacher = teacherService.selectTeacherById(user); //重数据库查询用户信息
+        Teacher teacher = teacherService.selectTeacherById(id); //重数据库查询用户信息
         if (teacher != null) {
             roleNames.add("teacher");
             permissionNames.add("teacher");
         }
-        Student student = studentService.selectStudentById(user); //重数据库查询用户信息
+        Student student = studentService.selectStudentById(id); //重数据库查询用户信息
         if (student != null) {
             roleNames.add("student");
             permissionNames.add("student");
@@ -78,17 +78,17 @@ public class MyRealm extends AuthorizingRealm{
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        String user = (String) authenticationToken.getPrincipal(); //获取用户名
-        
-        Administrator administrator = administratorService.selectAdministratorByUser(user); //重数据库查询用户信息
+        String id = (String) authenticationToken.getPrincipal(); //获取用户名
+        System.out.println(id + "登陆");
+        Administrator administrator = administratorService.selectAdministratorById(id); //重数据库查询用户信息
         if (administrator != null) {
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(
-                    administrator.getUser(), administrator.getPassword(), getName());
-            SecurityUtils.getSubject().getSession().setAttribute("id", administrator.getUser()); //把当前用户存到session中
+                    administrator.getId(), administrator.getPassword(), getName());
+            SecurityUtils.getSubject().getSession().setAttribute("id", administrator.getId()); //把当前用户存到session中
             SecurityUtils.getSubject().getSession().setAttribute("no", "0");
             return authcInfo;
         }
-        Teacher teacher = teacherService.selectTeacherById(user); //重数据库查询用户信息
+        Teacher teacher = teacherService.selectTeacherById(id); //重数据库查询用户信息
         if (teacher != null) {
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(
                     teacher.getId(), teacher.getPassword(), getName());
@@ -96,7 +96,7 @@ public class MyRealm extends AuthorizingRealm{
             SecurityUtils.getSubject().getSession().setAttribute("no", "1");
             return authcInfo;
         }
-        Student student = studentService.selectStudentById(user); //重数据库查询用户信息
+        Student student = studentService.selectStudentById(id); //重数据库查询用户信息
         if (student != null) {
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(
                     student.getId(), student.getPassword(), getName());
