@@ -9,10 +9,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.niit.log.Log;
+
 @Controller
 @RequestMapping()
 public class LoginController {
     
+    @RequestMapping("error")
+    public String error() throws Exception {
+        throw new Exception("异常测试");
+    }
+    
+    @RequestMapping("admin/console")
+    public String adminList() {
+
+        return "admin/console";
+    }
+    
+    @Log(module = "前台", method = "登陆页面")  
     @RequestMapping("/login")
     public String login(HttpServletRequest request) {
         request.getSession().removeAttribute("msg");

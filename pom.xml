@@ -71,11 +71,6 @@
     </dependency>
     <dependency>
         <groupId>org.springframework</groupId>
-        <artifactId>spring-aop</artifactId>
-        <version>${srping.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework</groupId>
         <artifactId>spring-context-support</artifactId>
         <version>${srping.version}</version>
     </dependency>
@@ -103,6 +98,24 @@
         <version>${srping.version}</version>
     </dependency>
     <!-- spring mvc end -->
+    
+    <!-- spring aop start-->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aop</artifactId>
+        <version>${srping.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjrt</artifactId>
+        <version>1.8.5</version>
+    </dependency>
+    <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjweaver</artifactId>
+        <version>1.8.5</version>
+    </dependency>
+    <!-- spring aop end-->
     
     <!-- mybatis -->
     <dependency>

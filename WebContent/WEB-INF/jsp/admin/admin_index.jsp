@@ -14,7 +14,7 @@
     <div class="layui-logo">管理员后台管理</div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
-      <li class="layui-nav-item"><a href="">控制台</a></li>
+      <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/console.do');">控制台</a></li>
       <li class="layui-nav-item"><a href="">用户管理</a></li>
       <li class="layui-nav-item">
         <a href="javascript:;">其它系统</a>
@@ -68,7 +68,7 @@
   
   <div class="layui-body">
     <!-- 内容主体区域 -->
-    <iframe id="iframe" src=""
+    <iframe id="iframe" src="<%=request.getContextPath() %>/admin/console.do"
       frameborder="0" width="100%" scrolling="no" height="100%">
       <p>您的浏览器不支持  iframe 标签。</p>
     </iframe>

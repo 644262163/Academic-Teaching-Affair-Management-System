@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.dao.LogDao">
+    <!--
+        返回结果映射
+        如果开启驼峰命名转换且命名规范该段代码可以不写
+        因为配置别名 所以type属性使用的是mybatis-conf中的别名
+    -->
+    <resultMap type="com.niit.bean.Log" id="LogResult">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="ip" column="ip"/>
+        <result property="url" column="url"/>
+        <result property="parameter" column="parameter"/>
+        <result property="time" column="time"/>
+        <result property="length" column="length"/>
+        <result property="module" column="module"/>
+        <result property="method" column="method"/>
+        <result property="result" column="result"/>
+        <result property="message" column="message"/>
+    </resultMap>
+    
+    <!--  定义字段集合 -->
+    <sql id="LogColumns">
+        id, user_id, ip, url, parameter, time, length, module, method, result, message
+    </sql>
+    
+    <!-- 接口中具体实现-->
+    
+    <select id="selectLogList" resultMap="LogResult">
+        select 
+        <include refid="LogColumns"/>
+        from log
+        order by id desc
+    </select>
+    
+    <select id="selectLogListByPage" resultMap="LogResult">
+        select 
+        <include refid="LogColumns"/>
+        from log
+        order by id desc
+        limit #{start} ,#{end}
+    </select>
+    
+    <select id="selectTotal" resultType="java.lang.Long">
+        select
+        count(*)
+        from log
+    </select>
+   
+    <insert id="insertLog" parameterType="com.niit.bean.Log">
+        insert into log (
+        user_id, ip, url, parameter, time,
+        length, module, method, result, message
+        )
+        values (
+        #{userId}, #{ip}, #{url}, #{parameter}, #{time},
+        #{length}, #{module}, #{method}, #{result}, #{message}
+        )
+    </insert>
+    
+</mapper>

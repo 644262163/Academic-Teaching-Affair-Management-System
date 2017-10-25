@@ -242,9 +242,9 @@ a {
         <br>
         <a href='javascript:$("#id").val("admin01");$("#password").val("123");'>一键填写管理员账号密码</a>
         <br>
-        <a href='javascript:$("#id").val("s1");$("#password").val("123");'>一键填写老师账号密码</a>
+        <a href='javascript:$("#id").val("t1");$("#password").val("123");'>一键填写老师账号密码</a>
         <br>
-        <a href='javascript:$("#id").val("t1");$("#password").val("123");'>一键填写学生账号密码</a>
+        <a href='javascript:$("#id").val("s1");$("#password").val("123");'>一键填写学生账号密码</a>
     </div>
 </body>
 </html>
