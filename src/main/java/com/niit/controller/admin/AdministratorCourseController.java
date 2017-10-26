@@ -1,12 +1,9 @@
 package com.niit.controller.admin;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,9 +25,8 @@ public class AdministratorCourseController {
     
     @Log(module = "管理员后台", method = "课程列表页面")
     @RequestMapping("/course_list")
-    public String courseList(ModelMap resultMap) {
-        List<Course> list = courseService.selectCourseList();
-        resultMap.addAttribute("list", list);
+    public String courseList() {
+
         return "admin/course_list";
     }
     

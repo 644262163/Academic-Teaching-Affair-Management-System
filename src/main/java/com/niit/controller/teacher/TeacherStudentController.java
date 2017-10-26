@@ -1,12 +1,9 @@
 package com.niit.controller.teacher;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,9 +25,8 @@ public class TeacherStudentController {
     
     @Log(module = "老师后台", method = "学生列表页面")
     @RequestMapping("/student_list")
-    public String studentList(ModelMap resultMap) {
-        List<Student> list = studentService.selectStudentList();
-        resultMap.addAttribute("list", list);
+    public String studentList() {
+
         return "teacher/student_list";
     }
     

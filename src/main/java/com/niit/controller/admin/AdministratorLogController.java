@@ -22,13 +22,6 @@ public class AdministratorLogController {
     @Resource
     private LogService logService;
     
-//    @RequestMapping("/log_list")
-//    public String logList(ModelMap resultMap) {
-//        List<Log> list = logService.selectLogList();
-//        resultMap.addAttribute("list", list);
-//        return "admin/log_list";
-//    }
-    
     @Log(module = "管理员后台", method = "获取日志列表")
     @RequestMapping("/select_log_list")
     public String selectLogList(

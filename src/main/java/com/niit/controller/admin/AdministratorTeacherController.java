@@ -1,12 +1,9 @@
 package com.niit.controller.admin;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,10 +11,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.niit.bean.PageBean;
-import com.niit.bean.Student;
 import com.niit.bean.Teacher;
 import com.niit.log.Log;
-import com.niit.service.StudentService;
 import com.niit.service.TeacherService;
 import com.niit.util.ResponseUtil;
 
@@ -30,9 +25,8 @@ public class AdministratorTeacherController {
     
     @Log(module = "管理员后台", method = "老师列表页面")
     @RequestMapping("/teacher_list")
-    public String teacherList(ModelMap resultMap) {
-        List<Teacher> list = teacherService.selectTeacherList();
-        resultMap.addAttribute("list", list);
+    public String teacherList() {
+
         return "admin/teacher_list";
     }
     

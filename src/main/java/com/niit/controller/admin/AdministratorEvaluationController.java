@@ -1,12 +1,9 @@
 package com.niit.controller.admin;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,9 +25,8 @@ public class AdministratorEvaluationController {
     
     @Log(module = "管理员后台", method = "评价列表页面")
     @RequestMapping("/evaluation_list")
-    public String evaluationList(ModelMap resultMap) {
-        List<Evaluation> list = evaluationService.selectEvaluationList();
-        resultMap.addAttribute("list", list);
+    public String evaluationList() {
+
         return "admin/evaluation_list";
     }
     

@@ -55,7 +55,10 @@
     </bean>  
     
     
-    <bean id="myRelam" class="com.niit.realm.MyRealm"/>
+    <bean id="myRelam" class="com.niit.realm.MyRealm">
+        <!-- 关闭授权缓存域,防止使用Shiro授权时控制台在取得权限的时候总是打印 -->
+        <property name="authorizationCachingEnabled" value="false"/> 
+    </bean>
     <!-- 安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="myRelam"/>
