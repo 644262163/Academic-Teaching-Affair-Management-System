@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.niit.bean.Evaluation;
 import com.niit.bean.PageBean;
+import com.niit.log.Log;
 import com.niit.service.EvaluationService;
 import com.niit.util.ResponseUtil;
 
@@ -25,6 +26,7 @@ public class AdministratorEvaluationController {
     @Resource
     private EvaluationService evaluationService;
     
+    @Log(module = "管理员后台", method = "评价列表页面")
     @RequestMapping("/evaluation_list")
     public String evaluationList(ModelMap resultMap) {
         List<Evaluation> list = evaluationService.selectEvaluationList();
@@ -32,6 +34,7 @@ public class AdministratorEvaluationController {
         return "admin/evaluation_list";
     }
     
+    @Log(module = "管理员后台", method = "获取评价列表")
     @RequestMapping("/select_evaluation_list")
     public String selectEvaluationList(
             @RequestParam(value = "page", required = false) String page,
@@ -60,6 +63,7 @@ public class AdministratorEvaluationController {
         return null;
     }
     
+    @Log(module = "管理员后台", method = "修改评价")
     @RequestMapping("/update_evaluation")
     public String updateEvaluation(Evaluation evaluation) {
         Integer i = evaluationService.updateEvaluation(evaluation);
@@ -67,6 +71,7 @@ public class AdministratorEvaluationController {
         return "admin/evaluation_list";
     }
 
+    @Log(module = "管理员后台", method = "删除评价")
     @RequestMapping(value="/delete_evaluation")
     public String deleteEvaluation(String studentId, String courseId, HttpServletResponse response) throws Exception {
         Integer i = evaluationService.deleteEvaluationById(studentId, courseId);
@@ -81,6 +86,7 @@ public class AdministratorEvaluationController {
         return null;
     }
     
+    @Log(module = "管理员后台", method = "添加评价")
     @RequestMapping("/insert_evaluation")
     public String insertEvaluation(Evaluation evaluation, HttpServletResponse response) throws Exception {
         Integer i = evaluationService.insertEvaluation(evaluation);

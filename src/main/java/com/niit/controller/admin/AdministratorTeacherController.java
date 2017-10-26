@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.niit.bean.PageBean;
 import com.niit.bean.Student;
 import com.niit.bean.Teacher;
+import com.niit.log.Log;
 import com.niit.service.StudentService;
 import com.niit.service.TeacherService;
 import com.niit.util.ResponseUtil;
@@ -27,6 +28,7 @@ public class AdministratorTeacherController {
     @Resource
     private TeacherService teacherService;
     
+    @Log(module = "管理员后台", method = "老师列表页面")
     @RequestMapping("/teacher_list")
     public String teacherList(ModelMap resultMap) {
         List<Teacher> list = teacherService.selectTeacherList();
@@ -34,6 +36,7 @@ public class AdministratorTeacherController {
         return "admin/teacher_list";
     }
     
+    @Log(module = "管理员后台", method = "获取老师列表")
     @RequestMapping("/select_teacher_list")
     public String selectTeacherList(
             @RequestParam(value = "page", required = false) String page,
@@ -62,6 +65,7 @@ public class AdministratorTeacherController {
         return null;
     }
     
+    @Log(module = "管理员后台", method = "修改老师")
     @RequestMapping("/update_teacher")
     public String updateTeacher(Teacher teacher) {
         Integer i = teacherService.updateTeacher(teacher);
@@ -69,6 +73,7 @@ public class AdministratorTeacherController {
         return "admin/teacher_list";
     }
 
+    @Log(module = "管理员后台", method = "删除老师")
     @RequestMapping(value="/delete_teacher")
     public String deleteTeacher(String id, HttpServletResponse response) throws Exception {
         Integer i = teacherService.deleteTeacherById(id);
@@ -83,6 +88,7 @@ public class AdministratorTeacherController {
         return null;
     }
     
+    @Log(module = "管理员后台", method = "添加老师")
     @RequestMapping("/insert_teacher")
     public String insertTeacher(Teacher teacher, HttpServletResponse response) throws Exception {
         Integer i = teacherService.insertTeacher(teacher);

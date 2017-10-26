@@ -39,7 +39,7 @@ public class MyRealm extends AuthorizingRealm{
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String id = (String) principalCollection.getPrimaryPrincipal();
-        System.out.println(id + "访问权限页面");
+
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         // 根据用户名查询当前用户拥有的角色
         Set<String> roleNames = new HashSet<String>();
@@ -79,7 +79,7 @@ public class MyRealm extends AuthorizingRealm{
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String id = (String) authenticationToken.getPrincipal(); //获取用户名
-        System.out.println(id + "登陆");
+
         Administrator administrator = administratorService.selectAdministratorById(id); //重数据库查询用户信息
         if (administrator != null) {
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(

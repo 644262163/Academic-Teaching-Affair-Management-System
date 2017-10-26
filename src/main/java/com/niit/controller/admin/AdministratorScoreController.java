@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.niit.bean.Score;
+import com.niit.log.Log;
 import com.niit.bean.PageBean;
 import com.niit.service.ScoreService;
 import com.niit.util.ResponseUtil;
@@ -25,6 +26,7 @@ public class AdministratorScoreController {
     @Resource
     private ScoreService scoreService;
     
+    @Log(module = "管理员后台", method = "成绩列表页面")
     @RequestMapping("/score_list")
     public String scoreList(ModelMap resultMap) {
         List<Score> list = scoreService.selectScoreList();
@@ -32,6 +34,7 @@ public class AdministratorScoreController {
         return "admin/score_list";
     }
     
+    @Log(module = "管理员后台", method = "获取成绩列表")
     @RequestMapping("/select_score_list")
     public String selectScoreList(
             @RequestParam(value = "page", required = false) String page,
@@ -60,6 +63,7 @@ public class AdministratorScoreController {
         return null;
     }
     
+    @Log(module = "管理员后台", method = "修改成绩")
     @RequestMapping("/update_score")
     public String updateScore(Score score) {
         Integer i = scoreService.updateScore(score);
@@ -67,6 +71,7 @@ public class AdministratorScoreController {
         return "admin/score_list";
     }
 
+    @Log(module = "管理员后台", method = "删除成绩")
     @RequestMapping(value="/delete_score")
     public String deleteScore(String studentId, String courseId, HttpServletResponse response) throws Exception {
         System.out.println(studentId + courseId);
@@ -82,6 +87,7 @@ public class AdministratorScoreController {
         return null;
     }
     
+    @Log(module = "管理员后台", method = "添加成绩")
     @RequestMapping("/insert_score")
     public String insertScore(Score score, HttpServletResponse response) throws Exception {
         Integer i = scoreService.insertScore(score);

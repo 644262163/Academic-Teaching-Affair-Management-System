@@ -1,12 +1,9 @@
 package com.niit.controller.admin;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,6 +12,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.niit.bean.Administrator;
 import com.niit.bean.PageBean;
+import com.niit.log.Log;
 import com.niit.service.AdministratorService;
 import com.niit.util.ResponseUtil;
 
@@ -25,13 +23,14 @@ public class AdministratorController {
     @Resource
     private AdministratorService administratorService;
     
+    @Log(module = "管理员后台", method = "管理员列表页面")
     @RequestMapping("/admin_list")
-    public String adminList(ModelMap resultMap) {
-        List<Administrator> list = administratorService.selectAdministratorList();
-        resultMap.addAttribute("list", list);
+    public String adminList() {
+
         return "admin/admin_list";
     }
     
+    @Log(module = "管理员后台", method = "获取管理员列表")
     @RequestMapping("/select_admin_list")
     public String selectAdminList(
             @RequestParam(value = "page", required = false) String page,
@@ -60,6 +59,7 @@ public class AdministratorController {
         return null;
     }
     
+    @Log(module = "管理员后台", method = "修改管理员")
     @RequestMapping("/update_admin")
     public String updateAdmin(Administrator administrator) {
         Integer i = administratorService.updateAdministrator(administrator);
@@ -67,6 +67,7 @@ public class AdministratorController {
         return "admin/admin_list";
     }
 
+    @Log(module = "管理员后台", method = "删除管理员")
     @RequestMapping(value="/delete_admin")
     public String deleteAdmin(String id, HttpServletResponse response) throws Exception {
         Integer i = administratorService.deleteAdministratorById(id);
@@ -81,6 +82,7 @@ public class AdministratorController {
         return null;
     }
     
+    @Log(module = "管理员后台", method = "添加管理员")
     @RequestMapping("/insert_admin")
     public String insertAdmin(Administrator administrator, HttpServletResponse response) throws Exception {
         Integer i = administratorService.insertAdministrator(administrator);

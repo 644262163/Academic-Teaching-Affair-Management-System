@@ -16,28 +16,128 @@
   <span>控制台：</span>
 </div>
  
-<table class="layui-table" lay-data="{height:471, limit: 10, url:'<%=request.getContextPath() %>/admin/select_log_list.do', page:true, id:'idTest'}" lay-filter="demo">
+<table class="layui-table" lay-data="{height:471, limit: 90, url:'<%=request.getContextPath() %>/admin/select_log_list.do', page:true, id:'idTest'}" lay-filter="demo">
   <thead>
     <tr>
-      <th lay-data="{field:'id', width:50, sort: true, fixed: true}">ID</th>
-      <th lay-data="{field:'userId', width:100, sort: true}">用户ID</th>
-      <th lay-data="{field:'ip', width:100, sort: true}">IP</th>
-      <th lay-data="{field:'url', width:150, sort: true}">URL</th>
-      <th lay-data="{field:'parameter', width:100, sort: true}">参数</th>
-      <th lay-data="{field:'time', width:100, sort: true}">时间</th>
-      <th lay-data="{field:'length', width:100, sort: true}">运行时间（ms）</th>
-      <th lay-data="{field:'module', width:100, sort: true}">模块</th>
-      <th lay-data="{field:'method', width:100, sort: true}">方法</th>
-      <th lay-data="{field:'result', width:100, sort: true}">结果</th>
-      <th lay-data="{field:'message', width:100, sort: true}">信息</th>
+      <th lay-data="{field:'id', width:100, sort: true, fixed: true}">ID</th>
+      <th lay-data="{field:'userId', width:100}">用户ID</th>
+      <th lay-data="{field:'ip', width:150}">IP</th>
+      <th lay-data="{field:'module', width:100}">模块</th>
+      <th lay-data="{field:'method', width:140}">方法</th>
+      <th lay-data="{field:'result', width:100}">结果</th>
+      <th lay-data="{field:'time', width:200}">时间</th>
+      <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>
     </tr>
   </thead>
 </table>
+
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看详情</a>
+</script>
                          
 <script src="<%=request.getContextPath() %>/static/layui/layui.js" charset="utf-8"></script>
 
 <script>
 layui.use('table', function(){
+    var table = layui.table;
+    //监听表格复选框选择
+    table.on('checkbox(demo)', function(obj){
+      console.log(obj)
+    });
+    //监听工具条
+    table.on('tool(demo)', function(obj){
+      var data = obj.data;
+      if(obj.event === 'detail'){
+        //layer.msg('ID：'+ data.id + ' 的查看操作');
+        layer.open({
+          type: 1,
+          skin: 'layui-layer-rim', //加上边框
+          area: ['840px', '420px'], //宽高
+          content: '\
+            <div class="layui-form layui-form-pane">\
+              <div class="layui-form-item">\
+                <label class="layui-form-label">id</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="id" name="id" autocomplete="off" class="layui-input" readonly unselectable="on">\
+                </div>\
+              </div>\
+              <div class="layui-form-item">\
+                <label class="layui-form-label">用户id</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="userId" name="userId" autocomplete="off" class="layui-input" readonly unselectable="on">\
+                </div>\
+              </div>\
+              <div class="layui-form-item">\
+                <label class="layui-form-label">IP</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="ip" name="ip" autocomplete="off" class="layui-input" readonly unselectable="on">\
+                </div>\
+              </div>\
+              <div class="layui-form-item">\
+                <label class="layui-form-label">URL</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="url" name="url" autocomplete="off" class="layui-input" readonly unselectable="on">\
+                </div>\
+              </div>\
+              <div class="layui-form-item">\
+                <label class="layui-form-label">参数</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="parameter" name="parameter" autocomplete="off" class="layui-input" readonly unselectable="on">\
+                </div>\
+              </div>\
+              <div class="layui-form-item">\
+                <label class="layui-form-label">时间</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="time" name="time" autocomplete="off" class="layui-input" readonly unselectable="on">\
+                </div>\
+              </div>\
+              <div class="layui-form-item">\
+                <label class="layui-form-label">运行时间（ms）</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="length" name="length" autocomplete="off" class="layui-input" readonly unselectable="on">\
+                </div>\
+              </div>\
+              <div class="layui-form-item">\
+                <label class="layui-form-label">模块</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="module" name="module" autocomplete="off" class="layui-input" readonly unselectable="on">\
+                </div>\
+              </div>\
+              <div class="layui-form-item">\
+                <label class="layui-form-label">方法</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="method" name="method" autocomplete="off" class="layui-input" readonly unselectable="on">\
+                </div>\
+              </div>\
+              <div class="layui-form-item">\
+                <label class="layui-form-label">结果</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="result" name="result" autocomplete="off" class="layui-input" readonly unselectable="on">\
+                </div>\
+              </div>\
+              <div class="layui-form-item">\
+                <label class="layui-form-label">信息</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="message" name="message" autocomplete="off" class="layui-input" readonly unselectable="on">\
+                </div>\
+              </div>\
+            </div>\
+          '
+        });
+        $("#id").val(data.id);
+        $("#userId").val(data.userId);
+        $("#ip").val(data.ip);
+        $("#url").val(data.url);
+        $("#parameter").val(data.parameter);
+        $("#time").val(data.time);
+        $("#length").val(data.length);
+        $("#module").val(data.module);
+        $("#method").val(data.method);
+        $("#result").val(data.result);
+        $("#message").val(data.message);
+      }
+    });
+    
     $('.demoTable .layui-btn').on('click', function(){
       var type = $(this).data('type');
       active[type] ? active[type].call(this) : '';

@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.niit.bean.PageBean;
 import com.niit.bean.Student;
+import com.niit.log.Log;
 import com.niit.service.StudentService;
 import com.niit.util.ResponseUtil;
 
@@ -25,6 +26,7 @@ public class AdministratorStudentController {
     @Resource
     private StudentService studentService;
     
+    @Log(module = "管理员后台", method = "学生列表页面")
     @RequestMapping("/student_list")
     public String studentList(ModelMap resultMap) {
         List<Student> list = studentService.selectStudentList();
@@ -32,6 +34,7 @@ public class AdministratorStudentController {
         return "admin/student_list";
     }
     
+    @Log(module = "管理员后台", method = "获取学生列表")
     @RequestMapping("/select_student_list")
     public String selectStudentList(
             @RequestParam(value = "page", required = false) String page,
@@ -60,6 +63,7 @@ public class AdministratorStudentController {
         return null;
     }
     
+    @Log(module = "管理员后台", method = "修改学生")
     @RequestMapping("/update_student")
     public String updateStudent(Student student) {
         Integer i = studentService.updateStudent(student);
@@ -67,6 +71,7 @@ public class AdministratorStudentController {
         return "admin/student_list";
     }
 
+    @Log(module = "管理员后台", method = "删除学生")
     @RequestMapping(value="/delete_student")
     public String deleteStudent(String id, HttpServletResponse response) throws Exception {
         Integer i = studentService.deleteStudentById(id);
@@ -81,6 +86,7 @@ public class AdministratorStudentController {
         return null;
     }
     
+    @Log(module = "管理员后台", method = "添加学生")
     @RequestMapping("/insert_student")
     public String insertStudent(Student student, HttpServletResponse response) throws Exception {
         Integer i = studentService.insertStudent(student);

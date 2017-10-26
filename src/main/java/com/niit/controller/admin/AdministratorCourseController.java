@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.niit.bean.Course;
 import com.niit.bean.PageBean;
+import com.niit.log.Log;
 import com.niit.service.CourseService;
 import com.niit.util.ResponseUtil;
 
@@ -25,6 +26,7 @@ public class AdministratorCourseController {
     @Resource
     private CourseService courseService;
     
+    @Log(module = "管理员后台", method = "课程列表页面")
     @RequestMapping("/course_list")
     public String courseList(ModelMap resultMap) {
         List<Course> list = courseService.selectCourseList();
@@ -32,6 +34,7 @@ public class AdministratorCourseController {
         return "admin/course_list";
     }
     
+    @Log(module = "管理员后台", method = "获取课程列表")
     @RequestMapping("/select_course_list")
     public String selectCourseList(
             @RequestParam(value = "page", required = false) String page,
@@ -60,6 +63,7 @@ public class AdministratorCourseController {
         return null;
     }
     
+    @Log(module = "管理员后台", method = "修改课程")
     @RequestMapping("/update_course")
     public String updateCourse(Course course) {
         Integer i = courseService.updateCourse(course);
@@ -67,6 +71,7 @@ public class AdministratorCourseController {
         return "admin/course_list";
     }
 
+    @Log(module = "管理员后台", method = "删除课程")
     @RequestMapping(value="/delete_course")
     public String deleteCourse(String id, HttpServletResponse response) throws Exception {
         Integer i = courseService.deleteCourseById(id);
@@ -81,6 +86,7 @@ public class AdministratorCourseController {
         return null;
     }
     
+    @Log(module = "管理员后台", method = "添加课程")
     @RequestMapping("/insert_course")
     public String insertCourse(Course course, HttpServletResponse response) throws Exception {
         Integer i = courseService.insertCourse(course);

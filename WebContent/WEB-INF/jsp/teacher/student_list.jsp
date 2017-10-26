@@ -57,7 +57,7 @@ layui.use('table', function(){
         skin: 'layui-layer-rim', //加上边框
         area: ['840px', '420px'], //宽高
         content: '\
-          <form class="layui-form layui-form-pane" action="<%=request.getContextPath() %>/admin/update_student.do">\
+          <form class="layui-form layui-form-pane" action="<%=request.getContextPath() %>/teacher/update_student.do">\
             <div class="layui-form-item">\
               <label class="layui-form-label">用户名</label>\
               <div class="layui-input-block">\

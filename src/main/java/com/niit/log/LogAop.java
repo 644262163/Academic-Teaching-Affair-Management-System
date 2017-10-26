@@ -3,6 +3,7 @@ package com.niit.log;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.niit.service.LogService;
+import com.niit.util.IPUtil;
 
 @Aspect
 public class LogAop {
@@ -68,7 +70,7 @@ public class LogAop {
         String userId = request.getRemoteUser();
         
         //获取系统ip
-        String ip = request.getLocalAddr();
+        String ip = IPUtil.getIpAddr(request);
         if("0:0:0:0:0:0:0:1".equals(ip)) {
             ip = "127.0.0.1";
         }
@@ -77,7 +79,10 @@ public class LogAop {
         String url = request.getServletPath();
         
         //获取系统参数
-        String parameter = request.getParameterMap().toString();
+        String parameter = "{";
+        for(Map.Entry<String, String[]> entry: request.getParameterMap().entrySet())
+            parameter += entry.getKey() + ": " + entry.getValue()[0] + ", ";
+        parameter += "}";
         
         //获取系统时间
         Date time = new Date();
