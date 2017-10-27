@@ -21,7 +21,6 @@
         <dl class="layui-nav-child">
           <dd><a href="">课程管理</a></dd>
           <dd><a href="">成绩管理</a></dd>
-          <dd><a href="">评价管理</a></dd>
         </dl>
       </li>
     </ul>
@@ -51,15 +50,14 @@
           </dl>
         </li>
         <li class="layui-nav-item">
-          <a href="javascript:;">课程管理</a>
+          <a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/course_list.do');">课程管理</a>
           <dl class="layui-nav-child">
             <dd><a href="javascript:;">列表一</a></dd>
             <dd><a href="javascript:;">列表二</a></dd>
             <dd><a href="">超链接</a></dd>
           </dl>
         </li>
-        <li class="layui-nav-item"><a href="">成绩管理</a></li>
-        <li class="layui-nav-item"><a href="">评价管理</a></li>
+        <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/score_list.do');">成绩管理</a></li>
       </ul>
     </div>
   </div>
