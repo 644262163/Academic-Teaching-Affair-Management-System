@@ -62,10 +62,20 @@ public class AdministratorEvaluationController {
     
     @Log(module = "管理员后台", method = "修改评价")
     @RequestMapping("/update_evaluation")
-    public String updateEvaluation(Evaluation evaluation) {
+    public String updateEvaluation(Evaluation evaluation, HttpServletResponse response) throws Exception {
         Integer i = evaluationService.updateEvaluation(evaluation);
         
-        return "admin/evaluation_list";
+        if(i > 0) {
+            //使用阿里巴巴的fastJson创建JSONObject
+            JSONObject result = new JSONObject();
+            //将序列化结果放入json对象中
+            result.put("success", true);
+            
+            //使用自定义工具类向response中写入数据
+            ResponseUtil.write(response, result);
+        }
+        
+        return null;
     }
 
     @Log(module = "管理员后台", method = "删除评价")
@@ -73,13 +83,16 @@ public class AdministratorEvaluationController {
     public String deleteEvaluation(String studentId, String courseId, HttpServletResponse response) throws Exception {
         Integer i = evaluationService.deleteEvaluationById(studentId, courseId);
         
-        //使用阿里巴巴的fastJson创建JSONObject
-        JSONObject result = new JSONObject();
-        //将序列化结果放入json对象中
-        result.put("success", true);
+        if(i > 0) {
+            //使用阿里巴巴的fastJson创建JSONObject
+            JSONObject result = new JSONObject();
+            //将序列化结果放入json对象中
+            result.put("success", true);
+            
+            //使用自定义工具类向response中写入数据
+            ResponseUtil.write(response, result);
+        }
         
-        //使用自定义工具类向response中写入数据
-        ResponseUtil.write(response, result);
         return null;
     }
     
@@ -88,7 +101,17 @@ public class AdministratorEvaluationController {
     public String insertEvaluation(Evaluation evaluation, HttpServletResponse response) throws Exception {
         Integer i = evaluationService.insertEvaluation(evaluation);
         
-        return "admin/evaluation_list";
+        if(i > 0) {
+            //使用阿里巴巴的fastJson创建JSONObject
+            JSONObject result = new JSONObject();
+            //将序列化结果放入json对象中
+            result.put("success", true);
+            
+            //使用自定义工具类向response中写入数据
+            ResponseUtil.write(response, result);
+        }
+        
+        return null;
     }
 
 }

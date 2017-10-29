@@ -62,10 +62,20 @@ public class AdministratorScoreController {
     
     @Log(module = "管理员后台", method = "修改成绩")
     @RequestMapping("/update_score")
-    public String updateScore(Score score) {
+    public String updateScore(Score score, HttpServletResponse response) throws Exception {
         Integer i = scoreService.updateScore(score);
         
-        return "admin/score_list";
+        if(i > 0) {
+            //使用阿里巴巴的fastJson创建JSONObject
+            JSONObject result = new JSONObject();
+            //将序列化结果放入json对象中
+            result.put("success", true);
+            
+            //使用自定义工具类向response中写入数据
+            ResponseUtil.write(response, result);
+        }
+        
+        return null;
     }
 
     @Log(module = "管理员后台", method = "删除成绩")
@@ -74,13 +84,16 @@ public class AdministratorScoreController {
         System.out.println(studentId + courseId);
         Integer i = scoreService.deleteScoreById(studentId, courseId);
         
-        //使用阿里巴巴的fastJson创建JSONObject
-        JSONObject result = new JSONObject();
-        //将序列化结果放入json对象中
-        result.put("success", true);
+        if(i > 0) {
+            //使用阿里巴巴的fastJson创建JSONObject
+            JSONObject result = new JSONObject();
+            //将序列化结果放入json对象中
+            result.put("success", true);
+            
+            //使用自定义工具类向response中写入数据
+            ResponseUtil.write(response, result);
+        }
         
-        //使用自定义工具类向response中写入数据
-        ResponseUtil.write(response, result);
         return null;
     }
     
@@ -89,7 +102,17 @@ public class AdministratorScoreController {
     public String insertScore(Score score, HttpServletResponse response) throws Exception {
         Integer i = scoreService.insertScore(score);
         
-        return "admin/score_list";
+        if(i > 0) {
+            //使用阿里巴巴的fastJson创建JSONObject
+            JSONObject result = new JSONObject();
+            //将序列化结果放入json对象中
+            result.put("success", true);
+            
+            //使用自定义工具类向response中写入数据
+            ResponseUtil.write(response, result);
+        }
+        
+        return null;
     }
 
 }

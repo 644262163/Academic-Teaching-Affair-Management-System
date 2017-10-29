@@ -62,10 +62,20 @@ public class AdministratorController {
     
     @Log(module = "管理员后台", method = "修改管理员")
     @RequestMapping("/update_admin")
-    public String updateAdmin(Administrator administrator) {
+    public String updateAdmin(Administrator administrator, HttpServletResponse response) throws Exception {
         Integer i = administratorService.updateAdministrator(administrator);
         
-        return "admin/admin_list";
+        if(i > 0) {
+            //使用阿里巴巴的fastJson创建JSONObject
+            JSONObject result = new JSONObject();
+            //将序列化结果放入json对象中
+            result.put("success", true);
+            
+            //使用自定义工具类向response中写入数据
+            ResponseUtil.write(response, result);
+        }
+        
+        return null;
     }
 
     @Log(module = "管理员后台", method = "删除管理员")
@@ -73,13 +83,16 @@ public class AdministratorController {
     public String deleteAdmin(String id, HttpServletResponse response) throws Exception {
         Integer i = administratorService.deleteAdministratorById(id);
         
-        //使用阿里巴巴的fastJson创建JSONObject
-        JSONObject result = new JSONObject();
-        //将序列化结果放入json对象中
-        result.put("success", true);
+        if(i > 0) {
+            //使用阿里巴巴的fastJson创建JSONObject
+            JSONObject result = new JSONObject();
+            //将序列化结果放入json对象中
+            result.put("success", true);
+            
+            //使用自定义工具类向response中写入数据
+            ResponseUtil.write(response, result);
+        }
         
-        //使用自定义工具类向response中写入数据
-        ResponseUtil.write(response, result);
         return null;
     }
     
@@ -88,7 +101,17 @@ public class AdministratorController {
     public String insertAdmin(Administrator administrator, HttpServletResponse response) throws Exception {
         Integer i = administratorService.insertAdministrator(administrator);
         
-        return "admin/admin_list";
+        if(i > 0) {
+            //使用阿里巴巴的fastJson创建JSONObject
+            JSONObject result = new JSONObject();
+            //将序列化结果放入json对象中
+            result.put("success", true);
+            
+            //使用自定义工具类向response中写入数据
+            ResponseUtil.write(response, result);
+        }
+        
+        return null;
     }
 
 }
