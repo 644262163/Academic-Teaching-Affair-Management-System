@@ -37,13 +37,41 @@
         select 
         <include refid="StudentColumns"/>
         from student
+        <where>
+            <if test="student.id!=null and student.id!=''">
+                and id like concat('%', #{student.id}, '%')
+            </if>
+            <if test="student.password!=null and student.password!=''">
+                and password like concat('%', #{student.password}, '%')
+            </if>
+            <if test="student.name!=null and student.name!=''">
+                and name like concat('%', #{student.name}, '%')
+            </if>
+            <if test="student.clazz!=null and student.clazz!=''">
+                and clazz like concat('%', #{student.clazz}, '%')
+            </if>
+        </where>
         limit #{start} ,#{end}
     </select>
     
-    <select id="selectTotal" resultType="java.lang.Long">
+    <select id="selectTotal" parameterType="com.niit.bean.Student" resultType="java.lang.Long">
         select
         count(*)
         from student
+        <where>
+            <if test="id!=null and id!=''">
+                and id like concat('%', #{id}, '%')
+            </if>
+            <if test="password!=null and password!=''">
+                and password like concat('%', #{password}, '%')
+            </if>
+            <if test="name!=null and name!=''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="clazz!=null and clazz!=''">
+                and clazz like concat('%', #{clazz}, '%')
+            </if>
+        </where>
     </select>
     
     

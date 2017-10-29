@@ -33,6 +33,7 @@ public class AdministratorScoreController {
     @Log(module = "管理员后台", method = "获取成绩列表")
     @RequestMapping("/select_score_list")
     public String selectScoreList(
+            Score score,
             @RequestParam(value = "page", required = false) String page,
             @RequestParam(value = "limit", required = false) String limit,
             HttpServletResponse response) throws Exception {
@@ -42,7 +43,7 @@ public class AdministratorScoreController {
             Integer.parseInt(page),
             Integer.parseInt(limit));
         //拿到分页结果已经记录总数的page
-        pageBean = scoreService.selectScoreListByPage(pageBean);
+        pageBean = scoreService.selectScoreListByPage(score, pageBean);
 
         //使用阿里巴巴的fastJson创建JSONObject
         JSONObject result = new JSONObject();

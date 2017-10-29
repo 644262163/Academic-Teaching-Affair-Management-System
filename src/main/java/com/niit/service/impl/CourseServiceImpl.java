@@ -32,12 +32,12 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public PageBean<Course> selectCourseListByPage(PageBean<Course> pageBean) {
+    public PageBean<Course> selectCourseListByPage(Course course, PageBean<Course> pageBean) {
         // TODO 自动生成的方法存根
         //查询分页结果
-        pageBean.setResult(courseDao.selectCourseListByPage(pageBean.getStart(), pageBean.getEnd()));
+        pageBean.setResult(courseDao.selectCourseListByPage(course, pageBean.getStart(), pageBean.getEnd()));
         //查询记录总数
-        pageBean.setTotal(courseDao.selectTotal());
+        pageBean.setTotal(courseDao.selectTotal(course));
         return pageBean;
     }
 

@@ -32,12 +32,12 @@ public class AdministratorServiceImpl implements AdministratorService{
     }
 
     @Override
-    public PageBean<Administrator> selectAdministratorListByPage(PageBean<Administrator> pageBean) {
+    public PageBean<Administrator> selectAdministratorListByPage(Administrator administrator, PageBean<Administrator> pageBean) {
         // TODO 自动生成的方法存根
         //查询分页结果
-        pageBean.setResult(administratorDao.selectAdministratorListByPage(pageBean.getStart(), pageBean.getEnd()));
+        pageBean.setResult(administratorDao.selectAdministratorListByPage(administrator, pageBean.getStart(), pageBean.getEnd()));
         //查询记录总数
-        pageBean.setTotal(administratorDao.selectTotal());
+        pageBean.setTotal(administratorDao.selectTotal(administrator));
         return pageBean;
     }
 

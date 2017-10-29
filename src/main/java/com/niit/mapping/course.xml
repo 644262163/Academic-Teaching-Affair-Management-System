@@ -35,13 +35,29 @@
         select 
         <include refid="CourseColumns"/>
         from course
+        <where>
+            <if test="course.id!=null and course.id!=''">
+                and id like concat('%', #{course.id}, '%')
+            </if>
+            <if test="course.name!=null and course.name!=''">
+                and name like concat('%', #{course.name}, '%')
+            </if>
+        </where>
         limit #{start} ,#{end}
     </select>
     
-    <select id="selectTotal" resultType="java.lang.Long">
+    <select id="selectTotal" parameterType="com.niit.bean.Course" resultType="java.lang.Long">
         select
         count(*)
         from course
+        <where>
+            <if test="id!=null and id!=''">
+                and id like concat('%', #{id}, '%')
+            </if>
+            <if test="name!=null and name!=''">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
     </select>
     
 

@@ -25,12 +25,12 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public PageBean<Log> selectLogListByPage(PageBean<Log> pageBean) {
+    public PageBean<Log> selectLogListByPage(Log log, PageBean<Log> pageBean) {
         // TODO 自动生成的方法存根
         //查询分页结果
-        pageBean.setResult(logDao.selectLogListByPage(pageBean.getStart(), pageBean.getEnd()));
+        pageBean.setResult(logDao.selectLogListByPage(log, pageBean.getStart(), pageBean.getEnd()));
         //查询记录总数
-        pageBean.setTotal(logDao.selectTotal());
+        pageBean.setTotal(logDao.selectTotal(log));
         return pageBean;
     }
 

@@ -14,6 +14,26 @@
  
 <div class="demoTable">
   <span>控制台：</span>
+  <div class="layui-inline">
+    <label class="layui-form-label">用户ID</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_userId" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-inline">
+    <label>IP</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_ip" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-inline">
+    <label>结果</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_result" class="layui-input">
+    </div>
+  </div>
+  <button class="layui-btn" data-type="searchLog">搜索列表</button>
+  <button class="layui-btn" data-type="refreshLog">还原默认</button>
 </div>
  
 <table class="layui-table" lay-data="{height:471, limit: 90, url:'<%=request.getContextPath() %>/admin/select_log_list.do', page:true, id:'idTest'}" lay-filter="demo">
@@ -137,6 +157,25 @@ layui.use('table', function(){
         $("#message").val(data.message);
       }
     });
+    
+    var $ = layui.$, active = {
+      refreshLog: function(){
+        table.reload('idTest', {
+          url: '<%=request.getContextPath() %>/admin/select_log_list.do'
+          ,where: {} //设定异步数据接口的额外参数
+        });
+      },
+      searchLog: function(){
+        table.reload('idTest', {
+          url: '<%=request.getContextPath() %>/admin/select_log_list.do'
+          ,where: {
+              userId: $("#s_userId").val(),
+              ip: $("#s_ip").val(),
+              result: $("#s_result").val()
+          } //设定异步数据接口的额外参数
+        });
+      }
+    };
     
     $('.demoTable .layui-btn').on('click', function(){
       var type = $(this).data('type');

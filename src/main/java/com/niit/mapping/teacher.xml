@@ -36,13 +36,35 @@
         select 
         <include refid="TeacherColumns"/>
         from teacher
+        <where>
+            <if test="teacher.id!=null and teacher.id!=''">
+                and id like concat('%', #{teacher.id}, '%')
+            </if>
+            <if test="teacher.password!=null and teacher.password!=''">
+                and password like concat('%', #{teacher.password}, '%')
+            </if>
+            <if test="teacher.name!=null and teacher.name!=''">
+                and name like concat('%', #{teacher.name}, '%')
+            </if>
+        </where>
         limit #{start} ,#{end}
     </select>
     
-    <select id="selectTotal" resultType="java.lang.Long">
+    <select id="selectTotal" parameterType="com.niit.bean.Teacher" resultType="java.lang.Long">
         select
         count(*)
         from teacher
+        <where>
+            <if test="id!=null and id!=''">
+                and id like concat('%', #{id}, '%')
+            </if>
+            <if test="password!=null and password!=''">
+                and password like concat('%', #{password}, '%')
+            </if>
+            <if test="name!=null and name!=''">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
     </select>
     
     

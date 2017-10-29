@@ -43,13 +43,35 @@
         select 
         <include refid="ScoreColumns"/>
         from score
+        <where>
+            <if test="score.studentId!=null and score.studentId!=''">
+                and student_id like concat('%', #{score.studentId}, '%')
+            </if>
+            <if test="score.courseId!=null and score.courseId!=''">
+                and course_id like concat('%', #{score.courseId}, '%')
+            </if>
+            <if test="score.score!=null and score.score!=''">
+                and score like concat('%', #{score.score}, '%')
+            </if>
+        </where>
         limit #{start} ,#{end}
     </select>
     
-    <select id="selectTotal" resultType="java.lang.Long">
+    <select id="selectTotal" parameterType="com.niit.bean.Score" resultType="java.lang.Long">
         select
         count(*)
         from score
+        <where>
+            <if test="studentId!=null and studentId!=''">
+                and student_id like concat('%', #{studentId}, '%')
+            </if>
+            <if test="courseId!=null and courseId!=''">
+                and course_id like concat('%', #{courseId}, '%')
+            </if>
+            <if test="score!=null and score!=''">
+                and score like concat('%', #{score}, '%')
+            </if>
+        </where>
     </select>
     
 

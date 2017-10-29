@@ -33,6 +33,7 @@ public class AdministratorEvaluationController {
     @Log(module = "管理员后台", method = "获取评价列表")
     @RequestMapping("/select_evaluation_list")
     public String selectEvaluationList(
+            Evaluation evaluation,
             @RequestParam(value = "page", required = false) String page,
             @RequestParam(value = "limit", required = false) String limit,
             HttpServletResponse response) throws Exception {
@@ -42,7 +43,7 @@ public class AdministratorEvaluationController {
             Integer.parseInt(page),
             Integer.parseInt(limit));
         //拿到分页结果已经记录总数的page
-        pageBean = evaluationService.selectEvaluationListByPage(pageBean);
+        pageBean = evaluationService.selectEvaluationListByPage(evaluation, pageBean);
 
         //使用阿里巴巴的fastJson创建JSONObject
         JSONObject result = new JSONObject();

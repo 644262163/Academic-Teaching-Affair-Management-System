@@ -15,6 +15,26 @@
 <div class="demoTable">
   <span>学生用户：</span>
   <button class="layui-btn" data-type="insertStudent">添加学生</button>
+  <div class="layui-inline">
+    <label class="layui-form-label">ID</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_id" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-inline">
+    <label>姓名</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_name" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-inline">
+    <label>班级</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_clazz" class="layui-input">
+    </div>
+  </div>
+  <button class="layui-btn" data-type="searchStudent">搜索列表</button>
+  <button class="layui-btn" data-type="refreshStudent">还原默认</button>
 </div>
  
 <table class="layui-table" lay-data="{height:471, limit: 10, url:'<%=request.getContextPath() %>/admin/select_student_list.do', page:true, id:'idTest'}" lay-filter="demo">
@@ -159,6 +179,22 @@ layui.use('table', function(){
             <input type="submit" class="layui-btn" value="添加信息" />\
           </form>\
         '
+      });
+    },
+    refreshStudent: function(){
+      table.reload('idTest', {
+        url: '<%=request.getContextPath() %>/admin/select_student_list.do'
+        ,where: {} //设定异步数据接口的额外参数
+      });
+    },
+    searchStudent: function(){
+      table.reload('idTest', {
+        url: '<%=request.getContextPath() %>/admin/select_student_list.do'
+        ,where: {
+            id: $("#s_id").val(),
+            name: $("#s_name").val(),
+            clazz: $("#s_clazz").val()
+        } //设定异步数据接口的额外参数
       });
     }
   };

@@ -9,7 +9,7 @@ public interface EvaluationService {
     public Evaluation selectEvaluationByStudentId(String studentId);
     public Evaluation selectEvaluationByCourseId(String courseId);
     public List<Evaluation> selectEvaluationList();
-    public PageBean<Evaluation> selectEvaluationListByPage(PageBean<Evaluation> pageBean);
+    public PageBean<Evaluation> selectEvaluationListByPage(Evaluation evaluation, PageBean<Evaluation> pageBean);
     
     public Integer updateEvaluation(Evaluation evaluation);
     

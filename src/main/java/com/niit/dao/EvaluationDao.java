@@ -10,8 +10,8 @@ public interface EvaluationDao {
     public Evaluation selectEvaluationByStudentId(String studentId);
     public Evaluation selectEvaluationByCourseId(String courseId);
     public List<Evaluation> selectEvaluationList();
-    public List<Evaluation> selectEvaluationListByPage(@Param("start") Integer start, @Param("end") Integer end);
-    public Long selectTotal();
+    public List<Evaluation> selectEvaluationListByPage(@Param("evaluation") Evaluation evaluation, @Param("start") Integer start, @Param("end") Integer end);
+    public Long selectTotal(Evaluation evaluation);
     
     public Integer updateEvaluation(Evaluation evaluation);
     

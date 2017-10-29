@@ -9,8 +9,8 @@ import com.niit.bean.Teacher;
 public interface TeacherDao {
     public Teacher selectTeacherById(String id);
     public List<Teacher> selectTeacherList();
-    public List<Teacher> selectTeacherListByPage(@Param("start") Integer start, @Param("end") Integer end);
-    public Long selectTotal();
+    public List<Teacher> selectTeacherListByPage(@Param("teacher") Teacher teacher, @Param("start") Integer start, @Param("end") Integer end);
+    public Long selectTotal(Teacher teacher);
     
     public Integer updateTeacher(Teacher teacher);
     

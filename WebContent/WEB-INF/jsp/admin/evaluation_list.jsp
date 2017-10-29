@@ -15,6 +15,26 @@
 <div class="demoTable">
   <span>评价列表：</span>
   <button class="layui-btn" data-type="insertEvaluation">添加评价</button>
+  <div class="layui-inline">
+    <label class="layui-form-label">学生ID</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_studentId" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-inline">
+    <label>课程ID</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_courseId" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-inline">
+    <label>分数</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_score" class="layui-input">
+    </div>
+  </div>
+  <button class="layui-btn" data-type="searchEvaluation">搜索列表</button>
+  <button class="layui-btn" data-type="refreshEvaluation">还原默认</button>
 </div>
  
 <table class="layui-table" lay-data="{height:471, limit: 10, url:'<%=request.getContextPath() %>/admin/select_evaluation_list.do', page:true, id:'idTest'}" lay-filter="demo">
@@ -145,6 +165,22 @@ layui.use('table', function(){
             <input type="submit" class="layui-btn" value="添加信息" />\
           </form>\
         '
+      });
+    },
+    refreshEvaluation: function(){
+      table.reload('idTest', {
+        url: '<%=request.getContextPath() %>/admin/select_evaluation_list.do'
+        ,where: {} //设定异步数据接口的额外参数
+      });
+    },
+    searchEvaluation: function(){
+      table.reload('idTest', {
+        url: '<%=request.getContextPath() %>/admin/select_evaluation_list.do'
+        ,where: {
+            studentId: $("#s_studentId").val(),
+            courseId: $("#s_courseId").val(),
+            score: $("#s_score").val()
+        } //设定异步数据接口的额外参数
       });
     }
   };

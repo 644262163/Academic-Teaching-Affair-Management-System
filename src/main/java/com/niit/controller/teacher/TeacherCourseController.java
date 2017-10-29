@@ -33,6 +33,7 @@ public class TeacherCourseController {
     @Log(module = "老师后台", method = "获取课程列表")
     @RequestMapping("/select_course_list")
     public String selectCourseList(
+            Course course,
             @RequestParam(value = "page", required = false) String page,
             @RequestParam(value = "limit", required = false) String limit,
             HttpServletResponse response) throws Exception {
@@ -42,7 +43,7 @@ public class TeacherCourseController {
             Integer.parseInt(page),
             Integer.parseInt(limit));
         //拿到分页结果已经记录总数的page
-        pageBean = courseService.selectCourseListByPage(pageBean);
+        pageBean = courseService.selectCourseListByPage(course, pageBean);
 
         //使用阿里巴巴的fastJson创建JSONObject
         JSONObject result = new JSONObject();

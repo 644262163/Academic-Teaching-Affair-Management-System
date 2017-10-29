@@ -32,12 +32,12 @@ public class TeacherServiceImpl implements TeacherService{
     }
 
     @Override
-    public PageBean<Teacher> selectTeacherListByPage(PageBean<Teacher> pageBean) {
+    public PageBean<Teacher> selectTeacherListByPage(Teacher teacher, PageBean<Teacher> pageBean) {
         // TODO 自动生成的方法存根
         //查询分页结果
-        pageBean.setResult(teacherDao.selectTeacherListByPage(pageBean.getStart(), pageBean.getEnd()));
+        pageBean.setResult(teacherDao.selectTeacherListByPage(teacher, pageBean.getStart(), pageBean.getEnd()));
         //查询记录总数
-        pageBean.setTotal(teacherDao.selectTotal());
+        pageBean.setTotal(teacherDao.selectTotal(teacher));
         return pageBean;
     }
 

@@ -15,6 +15,14 @@
 <div class="demoTable">
   <span>管理员用户：</span>
   <button class="layui-btn" data-type="insertAdmin">添加管理员</button>
+  <div class="layui-inline">
+    <label class="layui-form-label">ID</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_id" class="layui-input">
+    </div>
+  </div>
+  <button class="layui-btn" data-type="searchAdmin">搜索列表</button>
+  <button class="layui-btn" data-type="refreshAdmin">还原默认</button>
 </div>
  
 <table class="layui-table" lay-data="{height:471, limit: 10, url:'<%=request.getContextPath() %>/admin/select_admin_list.do', page:true, id:'idTest'}" lay-filter="demo">
@@ -131,6 +139,20 @@ layui.use('table', function(){
             <input type="submit" class="layui-btn" value="添加信息" />\
           </form>\
         '
+      });
+    },
+    refreshAdmin: function(){
+      table.reload('idTest', {
+        url: '<%=request.getContextPath() %>/admin/select_admin_list.do'
+        ,where: {} //设定异步数据接口的额外参数
+      });
+    },
+    searchAdmin: function(){
+      table.reload('idTest', {
+        url: '<%=request.getContextPath() %>/admin/select_admin_list.do'
+        ,where: {
+            id: $("#s_id").val()
+        } //设定异步数据接口的额外参数
       });
     }
   };

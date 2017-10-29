@@ -9,8 +9,8 @@ import com.niit.bean.Student;
 public interface StudentDao {
     public Student selectStudentById(String id);
     public List<Student> selectStudentList();
-    public List<Student> selectStudentListByPage(@Param("start") Integer start, @Param("end") Integer end);
-    public Long selectTotal();
+    public List<Student> selectStudentListByPage(@Param("student") Student student, @Param("start") Integer start, @Param("end") Integer end);
+    public Long selectTotal(Student student);
     
     public Integer updateStudent(Student student);
     

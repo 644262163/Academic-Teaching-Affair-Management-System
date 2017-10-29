@@ -15,6 +15,26 @@
 <div class="demoTable">
   <span>分数列表：</span>
   <button class="layui-btn" data-type="insertScore">添加分数</button>
+  <div class="layui-inline">
+    <label class="layui-form-label">学生ID</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_studentId" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-inline">
+    <label>课程ID</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_courseId" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-inline">
+    <label>分数</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_score" class="layui-input">
+    </div>
+  </div>
+  <button class="layui-btn" data-type="searchScore">搜索列表</button>
+  <button class="layui-btn" data-type="refreshScore">还原默认</button>
 </div>
  
 <table class="layui-table" lay-data="{height:471, limit: 10, url:'<%=request.getContextPath() %>/admin/select_score_list.do', page:true, id:'idTest'}" lay-filter="demo">
@@ -146,7 +166,23 @@ layui.use('table', function(){
           </form>\
         '
       });
-    }
+    },
+    refreshScore: function(){
+        table.reload('idTest', {
+          url: '<%=request.getContextPath() %>/admin/select_score_list.do'
+          ,where: {} //设定异步数据接口的额外参数
+        });
+      },
+      searchScore: function(){
+        table.reload('idTest', {
+          url: '<%=request.getContextPath() %>/admin/select_score_list.do'
+          ,where: {
+              studentId: $("#s_studentId").val(),
+              courseId: $("#s_courseId").val(),
+              score: $("#s_score").val()
+          } //设定异步数据接口的额外参数
+        });
+      }
   };
   
   $('.demoTable .layui-btn').on('click', function(){

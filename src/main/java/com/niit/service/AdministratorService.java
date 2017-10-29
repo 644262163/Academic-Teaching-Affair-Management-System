@@ -8,7 +8,7 @@ import com.niit.bean.PageBean;
 public interface AdministratorService {
     public Administrator selectAdministratorById(String id);
     public List<Administrator> selectAdministratorList();
-    public PageBean<Administrator> selectAdministratorListByPage(PageBean<Administrator> pageBean);
+    public PageBean<Administrator> selectAdministratorListByPage(Administrator administrator, PageBean<Administrator> pageBean);
     
     public Integer updateAdministrator(Administrator administrator);
     

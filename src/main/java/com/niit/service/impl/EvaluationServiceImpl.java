@@ -39,12 +39,12 @@ public class EvaluationServiceImpl implements EvaluationService{
     }
 
     @Override
-    public PageBean<Evaluation> selectEvaluationListByPage(PageBean<Evaluation> pageBean) {
+    public PageBean<Evaluation> selectEvaluationListByPage(Evaluation evaluation, PageBean<Evaluation> pageBean) {
         // TODO 自动生成的方法存根
         //查询分页结果
-        pageBean.setResult(evaluationDao.selectEvaluationListByPage(pageBean.getStart(), pageBean.getEnd()));
+        pageBean.setResult(evaluationDao.selectEvaluationListByPage(evaluation, pageBean.getStart(), pageBean.getEnd()));
         //查询记录总数
-        pageBean.setTotal(evaluationDao.selectTotal());
+        pageBean.setTotal(evaluationDao.selectTotal(evaluation));
         return pageBean;
     }
 

@@ -43,13 +43,35 @@
         select 
         <include refid="EvaluationColumns"/>
         from evaluation
+        <where>
+            <if test="evaluation.studentId!=null and evaluation.studentId!=''">
+                and student_id like concat('%', #{evaluation.studentId}, '%')
+            </if>
+            <if test="evaluation.courseId!=null and evaluation.courseId!=''">
+                and course_id like concat('%', #{evaluation.courseId}, '%')
+            </if>
+            <if test="evaluation.score!=null and evaluation.score!=''">
+                and score like concat('%', #{evaluation.score}, '%')
+            </if>
+        </where>
         limit #{start} ,#{end}
     </select>
     
-    <select id="selectTotal" resultType="java.lang.Long">
+    <select id="selectTotal" parameterType="com.niit.bean.Evaluation" resultType="java.lang.Long">
         select
         count(*)
         from evaluation
+        <where>
+            <if test="studentId!=null and studentId!=''">
+                and student_id like concat('%', #{studentId}, '%')
+            </if>
+            <if test="courseId!=null and courseId!=''">
+                and course_id like concat('%', #{courseId}, '%')
+            </if>
+            <if test="score!=null and score!=''">
+                and score like concat('%', #{score}, '%')
+            </if>
+        </where>
     </select>
     
 

@@ -9,7 +9,7 @@ public interface ScoreService {
     public Score selectScoreByStudentId(String studentId);
     public Score selectScoreByCourseId(String courseId);
     public List<Score> selectScoreList();
-    public PageBean<Score> selectScoreListByPage(PageBean<Score> pageBean);
+    public PageBean<Score> selectScoreListByPage(Score score, PageBean<Score> pageBean);
     
     public Integer updateScore(Score score);
     

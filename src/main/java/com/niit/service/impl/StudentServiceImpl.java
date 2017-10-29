@@ -32,12 +32,12 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public PageBean<Student> selectStudentListByPage(PageBean<Student> pageBean) {
+    public PageBean<Student> selectStudentListByPage(Student student, PageBean<Student> pageBean) {
         // TODO 自动生成的方法存根
         //查询分页结果
-        pageBean.setResult(studentDao.selectStudentListByPage(pageBean.getStart(), pageBean.getEnd()));
+        pageBean.setResult(studentDao.selectStudentListByPage(student, pageBean.getStart(), pageBean.getEnd()));
         //查询记录总数
-        pageBean.setTotal(studentDao.selectTotal());
+        pageBean.setTotal(studentDao.selectTotal(student));
         return pageBean;
     }
 

@@ -15,13 +15,20 @@
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
       <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/console.do');">控制台</a></li>
-      <li class="layui-nav-item"><a href="">用户管理</a></li>
+      <li class="layui-nav-item">
+        <a href="javascript:;">用户管理</a>
+        <dl class="layui-nav-child">
+          <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/admin_list.do');">管理员</a></dd>
+          <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/teacher_list.do');">老师</a></dd>
+          <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/student_list.do');">学生</a></dd>
+        </dl>
+      </li>
       <li class="layui-nav-item">
         <a href="javascript:;">其它系统</a>
         <dl class="layui-nav-child">
-          <dd><a href="">课程管理</a></dd>
-          <dd><a href="">成绩管理</a></dd>
-          <dd><a href="">评价管理</a></dd>
+          <dd><a href="javascript:javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/course_list.do');">课程管理</a></dd>
+          <dd><a href="javascript:javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/score_list.do');">成绩管理</a></dd>
+          <dd><a href="javascript:javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/evaluation_list.do');">评价管理</a></dd>
         </dl>
       </li>
     </ul>
@@ -45,21 +52,14 @@
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item layui-nav-itemed">
-          <a class="" href="javascript:$('#iframe').attr('src','');">用户管理</a>
+          <a class="" href="javascript:;">用户管理</a>
           <dl class="layui-nav-child">
             <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/admin_list.do');">管理员</a></dd>
             <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/teacher_list.do');">老师</a></dd>
             <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/student_list.do');">学生</a></dd>
           </dl>
         </li>
-        <li class="layui-nav-item">
-          <a href="javascript:javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/course_list.do');">课程管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="javascript:;">列表一</a></dd>
-            <dd><a href="javascript:;">列表二</a></dd>
-            <dd><a href="">超链接</a></dd>
-          </dl>
-        </li>
+        <li class="layui-nav-item"><a href="javascript:javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/course_list.do');">课程管理</a></li>
         <li class="layui-nav-item"><a href="javascript:javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/score_list.do');">成绩管理</a></li>
         <li class="layui-nav-item"><a href="javascript:javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/evaluation_list.do');">评价管理</a></li>
       </ul>

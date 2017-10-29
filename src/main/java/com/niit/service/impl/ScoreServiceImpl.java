@@ -39,12 +39,12 @@ public class ScoreServiceImpl implements ScoreService{
     }
 
     @Override
-    public PageBean<Score> selectScoreListByPage(PageBean<Score> pageBean) {
+    public PageBean<Score> selectScoreListByPage(Score score, PageBean<Score> pageBean) {
         // TODO 自动生成的方法存根
         //查询分页结果
-        pageBean.setResult(scoreDao.selectScoreListByPage(pageBean.getStart(), pageBean.getEnd()));
+        pageBean.setResult(scoreDao.selectScoreListByPage(score, pageBean.getStart(), pageBean.getEnd()));
         //查询记录总数
-        pageBean.setTotal(scoreDao.selectTotal());
+        pageBean.setTotal(scoreDao.selectTotal(score));
         return pageBean;
     }
 

@@ -35,13 +35,29 @@
         select 
         <include refid="AdministratorColumns"/>
         from administrator
+        <where>
+            <if test="administrator.id!=null and administrator.id!=''">
+                and id like concat('%', #{administrator.id}, '%')
+            </if>
+            <if test="administrator.password!=null and administrator.password!=''">
+                and password like concat('%', #{administrator.password}, '%')
+            </if>
+        </where>
         limit #{start} ,#{end}
     </select>
     
-    <select id="selectTotal" resultType="java.lang.Long">
+    <select id="selectTotal" parameterType="com.niit.bean.Administrator" resultType="java.lang.Long">
         select
         count(*)
         from administrator
+        <where>
+            <if test="id!=null and id!=''">
+                and id like concat('%', #{id}, '%')
+            </if>
+            <if test="password!=null and password!=''">
+                and password like concat('%', #{password}, '%')
+            </if>
+        </where>
     </select>
     
 
