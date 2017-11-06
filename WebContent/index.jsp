@@ -9,7 +9,7 @@
 <body>
 hello
 <a href="<%=request.getContextPath() %>/login.do" >登陆页面</a>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<a href='javascript:while(true)alert("无法删除");'>一键删除数据库</a>
+<a href='http://101.200.61.255:8080/ClassManageSys'>首页</a>
+
 </body>
 </html>
