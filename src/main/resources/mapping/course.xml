@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.dao.CourseDao">
+    <!--
+        返回结果映射
+        如果开启驼峰命名转换且命名规范该段代码可以不写
+        因为配置别名 所以type属性使用的是mybatis-conf中的别名
+    -->
+    <resultMap type="com.niit.bean.Course" id="CourseResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+    
+    <!--  定义字段集合 -->
+    <sql id="CourseColumns">
+        id, name
+    </sql>
+    
+    <!-- 接口中selectCourseById 具体实现-->
+    <select id="selectCourseById" resultMap="CourseResult">
+        select 
+        <include refid="CourseColumns"/>
+        from course
+        where id = #{id}
+    </select>
+    
+    <select id="selectCourseList" resultMap="CourseResult">
+        select 
+        <include refid="CourseColumns"/>
+        from course
+    </select>
+    
+    <select id="selectCourseListByPage" resultMap="CourseResult">
+        select 
+        <include refid="CourseColumns"/>
+        from course
+        <where>
+            <if test="course.id!=null and course.id!=''">
+                and id like concat('%', #{course.id}, '%')
+            </if>
+            <if test="course.name!=null and course.name!=''">
+                and name like concat('%', #{course.name}, '%')
+            </if>
+        </where>
+        limit #{start} ,#{end}
+    </select>
+    
+    <select id="selectTotal" parameterType="com.niit.bean.Course" resultType="java.lang.Long">
+        select
+        count(*)
+        from course
+        <where>
+            <if test="id!=null and id!=''">
+                and id like concat('%', #{id}, '%')
+            </if>
+            <if test="name!=null and name!=''">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+    
+
+    <update id="updateCourse" parameterType="com.niit.bean.Course">
+        update course
+        <set>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <delete id="deleteCourseById">
+        delete
+        from course
+        where id=#{id}
+    </delete>
+    
+    <insert id="insertCourse" parameterType="com.niit.bean.Course">
+        insert into course
+        values (
+        #{id},#{name}
+        )
+    </insert>
+    
+</mapper>

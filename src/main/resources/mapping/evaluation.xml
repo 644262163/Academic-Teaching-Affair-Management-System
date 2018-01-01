@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.dao.EvaluationDao">
+    <!--
+        返回结果映射
+        如果开启驼峰命名转换且命名规范该段代码可以不写
+        因为配置别名 所以type属性使用的是mybatis-conf中的别名
+    -->
+    <resultMap type="com.niit.bean.Evaluation" id="EvaluationResult">
+        <result property="studentId" column="student_id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="score" column="score"/>
+        <result property="term" column="term"/>
+    </resultMap>
+    
+    <!--  定义字段集合 -->
+    <sql id="EvaluationColumns">
+        student_id, course_id, score, term
+    </sql>
+    
+    <!-- 接口中具体实现-->
+    <select id="selectEvaluationByStudentId" resultMap="EvaluationResult">
+        select 
+        <include refid="EvaluationColumns"/>
+        from evaluation
+        where student_id = #{studentId}
+    </select>
+    
+    <select id="selectEvaluationByCourseId" resultMap="EvaluationResult">
+        select 
+        <include refid="EvaluationColumns"/>
+        from evaluation
+        where course_id = #{courseId}
+    </select>
+    
+    <select id="selectEvaluationList" resultMap="EvaluationResult">
+        select 
+        <include refid="EvaluationColumns"/>
+        from evaluation
+    </select>
+    
+    <select id="selectEvaluationListByPage" resultMap="EvaluationResult">
+        select 
+        <include refid="EvaluationColumns"/>
+        from evaluation
+        <where>
+            <if test="evaluation.studentId!=null and evaluation.studentId!=''">
+                and student_id like concat('%', #{evaluation.studentId}, '%')
+            </if>
+            <if test="evaluation.courseId!=null and evaluation.courseId!=''">
+                and course_id like concat('%', #{evaluation.courseId}, '%')
+            </if>
+            <if test="evaluation.score!=null and evaluation.score!=''">
+                and score like concat('%', #{evaluation.score}, '%')
+            </if>
+            <if test="evaluation.term!=null and evaluation.term!=''">
+                and term like concat('%', #{evaluation.term}, '%')
+            </if>
+        </where>
+        limit #{start} ,#{end}
+    </select>
+    
+    <select id="selectTotal" parameterType="com.niit.bean.Evaluation" resultType="java.lang.Long">
+        select
+        count(*)
+        from evaluation
+        <where>
+            <if test="studentId!=null and studentId!=''">
+                and student_id like concat('%', #{studentId}, '%')
+            </if>
+            <if test="courseId!=null and courseId!=''">
+                and course_id like concat('%', #{courseId}, '%')
+            </if>
+            <if test="score!=null and score!=''">
+                and score like concat('%', #{score}, '%')
+            </if>
+            <if test="term!=null and term!=''">
+                and term like concat('%', #{term}, '%')
+            </if>
+        </where>
+    </select>
+    
+
+    <update id="updateEvaluation" parameterType="com.niit.bean.Evaluation">
+        update evaluation
+        <set>
+            <if test="score!=null and score!=''">
+                score=#{score},
+            </if>
+            <if test="term!=null and term!=''">
+                term=#{term},
+            </if>
+        </set>
+        where student_id=#{studentId} and course_id=#{courseId}
+    </update>
+    
+    <delete id="deleteEvaluationById">
+        delete
+        from evaluation
+        where student_id=#{studentId} and course_id=#{courseId}
+    </delete>
+    
+    <insert id="insertEvaluation" parameterType="com.niit.bean.Evaluation">
+        insert into evaluation
+        values (
+        #{studentId},#{courseId},#{score},#{term}
+        )
+    </insert>
+    
+</mapper>

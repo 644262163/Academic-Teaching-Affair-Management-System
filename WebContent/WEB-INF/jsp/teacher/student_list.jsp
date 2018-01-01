@@ -10,10 +10,30 @@
   <link rel="stylesheet" href="<%=request.getContextPath() %>/static/layui/css/layui.css"  media="all">
   <script src="<%=request.getContextPath() %>/static/jquery-easyui-1.3.5/jquery.min.js"></script>
 </head>
-<body style="margin: 15px;">  
- 
+<body style="margin: 15px;">
+
 <div class="demoTable">
   <span>学生用户：</span>
+  <div class="layui-inline">
+    <label class="layui-form-label">ID</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_id" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-inline">
+    <label>姓名</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_name" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-inline">
+    <label>班级</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_clazz" class="layui-input">
+    </div>
+  </div>
+  <button class="layui-btn" data-type="searchStudent">搜索列表</button>
+  <button class="layui-btn" data-type="refreshStudent">还原默认</button>
 </div>
  
 <table class="layui-table" lay-data="{height:471, limit: 10, url:'<%=request.getContextPath() %>/teacher/select_student_list.do', page:true, id:'idTest'}" lay-filter="demo">
@@ -39,6 +59,42 @@
 <script src="<%=request.getContextPath() %>/static/layui/layui.js" charset="utf-8"></script>
 
 <script>
+    var updateObj, updateIndex;
+    function updateStudent(){
+        var load = layer.load();
+        $.ajax({
+            url:'<%=request.getContextPath() %>/teacher/update_student.do',
+            type:'GET',
+            async:false,    //是否异步
+            data:{
+                id:$("#id").val(),
+                password:$("#password").val(),
+                name:$("#name").val(),
+                clazz:$("#clazz").val()
+            },
+            timeout:5000,    //超时时间
+            dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            success:function(result){
+                if(result.success){
+                    layer.msg('修改成功', {icon: 1});
+                    updateObj.update({
+                        id:$("#id").val(),
+                        password:$("#password").val(),
+                        name:$("#name").val(),
+                        clazz:$("#clazz").val()
+                    });
+                } else{
+                    layer.msg('修改失败', {icon: 2});
+                }
+            },
+            error:function(xhr,textStatus){
+                layer.msg('修改失败', {icon: 2});
+            }
+        });
+        layer.close(updateIndex);
+        layer.close(load);
+    }
+
 layui.use('table', function(){
   var table = layui.table;
   //监听表格复选框选择
@@ -52,12 +108,13 @@ layui.use('table', function(){
       layer.msg('ID：'+ data.id + ' 的查看操作');
     } else if(obj.event === 'edit'){
       //layer.alert('编辑行：<br>'+ JSON.stringify(data));
-      layer.open({
+        updateObj = obj;
+        updateIndex = layer.open({
         type: 1,
         skin: 'layui-layer-rim', //加上边框
         area: ['840px', '420px'], //宽高
         content: '\
-          <form class="layui-form layui-form-pane" action="<%=request.getContextPath() %>/teacher/update_student.do">\
+          <div class="layui-form layui-form-pane">\
             <div class="layui-form-item">\
               <label class="layui-form-label">用户名</label>\
               <div class="layui-input-block">\
@@ -82,8 +139,8 @@ layui.use('table', function(){
                   <input type="text" id="clazz" name="clazz" autocomplete="off" placeholder="请输入班级" class="layui-input">\
                 </div>\
               </div>\
-            <input type="submit" class="layui-btn" value="修改信息" />\
-          </form>\
+              <button class="layui-btn" onclick="updateStudent()">修改信息</button>\
+          </div>\
         '
       });
       $("#id").val(data.id);
@@ -92,6 +149,25 @@ layui.use('table', function(){
       $("#clazz").val(data.clazz);
     }
   });
+
+    var $ = layui.$, active = {
+        refreshStudent: function(){
+            table.reload('idTest', {
+                url: '<%=request.getContextPath() %>/teacher/select_student_list.do'
+                ,where: {} //设定异步数据接口的额外参数
+            });
+        },
+        searchStudent: function(){
+            table.reload('idTest', {
+                url: '<%=request.getContextPath() %>/teacher/select_student_list.do'
+                ,where: {
+                    id: $("#s_id").val(),
+                    name: $("#s_name").val(),
+                    clazz: $("#s_clazz").val()
+                } //设定异步数据接口的额外参数
+            });
+        }
+    };
   
   $('.demoTable .layui-btn').on('click', function(){
     var type = $(this).data('type');

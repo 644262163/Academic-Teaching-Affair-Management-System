@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.dao.ScoreDao">
+    <!--
+        返回结果映射
+        如果开启驼峰命名转换且命名规范该段代码可以不写
+        因为配置别名 所以type属性使用的是mybatis-conf中的别名
+    -->
+    <resultMap type="com.niit.bean.Score" id="ScoreResult">
+        <result property="studentId" column="student_id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="score" column="score"/>
+        <result property="term" column="term"/>
+    </resultMap>
+    
+    <!--  定义字段集合 -->
+    <sql id="ScoreColumns">
+        student_id, course_id, score, term
+    </sql>
+    
+    <!-- 接口中具体实现-->
+    <select id="selectScoreByStudentId" resultMap="ScoreResult">
+        select 
+        <include refid="ScoreColumns"/>
+        from score
+        where student_id = #{studentId}
+    </select>
+    
+    <select id="selectScoreByCourseId" resultMap="ScoreResult">
+        select 
+        <include refid="ScoreColumns"/>
+        from score
+        where course_id = #{courseId}
+    </select>
+    
+    <select id="selectScoreList" resultMap="ScoreResult">
+        select 
+        <include refid="ScoreColumns"/>
+        from score
+    </select>
+    
+    <select id="selectScoreListByPage" resultMap="ScoreResult">
+        select 
+        <include refid="ScoreColumns"/>
+        from score
+        <where>
+            <if test="score.studentId!=null and score.studentId!=''">
+                and student_id like concat('%', #{score.studentId}, '%')
+            </if>
+            <if test="score.courseId!=null and score.courseId!=''">
+                and course_id like concat('%', #{score.courseId}, '%')
+            </if>
+            <if test="score.score!=null and score.score!=''">
+                and score like concat('%', #{score.score}, '%')
+            </if>
+            <if test="score.term!=null and score.term!=''">
+                and term like concat('%', #{score.term}, '%')
+            </if>
+        </where>
+        limit #{start} ,#{end}
+    </select>
+    
+    <select id="selectTotal" parameterType="com.niit.bean.Score" resultType="java.lang.Long">
+        select
+        count(*)
+        from score
+        <where>
+            <if test="studentId!=null and studentId!=''">
+                and student_id like concat('%', #{studentId}, '%')
+            </if>
+            <if test="courseId!=null and courseId!=''">
+                and course_id like concat('%', #{courseId}, '%')
+            </if>
+            <if test="score!=null and score!=''">
+                and score like concat('%', #{score}, '%')
+            </if>
+            <if test="term!=null and term!=''">
+                and term like concat('%', #{term}, '%')
+            </if>
+        </where>
+    </select>
+    
+
+    <update id="updateScore" parameterType="com.niit.bean.Score">
+        update score
+        <set>
+            <if test="score!=null and score!=''">
+                score=#{score},
+            </if>
+            <if test="term!=null and term!=''">
+                term=#{term},
+            </if>
+        </set>
+        where student_id=#{studentId} and course_id=#{courseId}
+    </update>
+    
+    <delete id="deleteScoreById">
+        delete
+        from score
+        where student_id=#{studentId} and course_id=#{courseId}
+    </delete>
+    
+    <insert id="insertScore" parameterType="com.niit.bean.Score">
+        insert into score
+        values (
+        #{studentId},#{courseId},#{score},#{term}
+        )
+    </insert>
+    
+</mapper>

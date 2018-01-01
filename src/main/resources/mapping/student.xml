@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.dao.StudentDao">
+    <!--
+        返回结果映射
+        如果开启驼峰命名转换且命名规范该段代码可以不写
+        因为配置别名 所以type属性使用的是mybatis-conf中的别名
+    -->
+    <resultMap type="com.niit.bean.Student" id="StudentResult">
+        <id property="id" column="id"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="clazz" column="clazz"/>
+    </resultMap>
+    
+    <!--  定义字段集合 -->
+    <sql id="StudentColumns">
+        id, password, name, clazz
+    </sql>
+    
+    <!-- 接口中selectStudentById 具体实现-->
+    <select id="selectStudentById" resultType="com.niit.bean.Student">
+        select
+        <include refid="StudentColumns"/>
+        from student
+        where id = #{id}
+    </select>
+    
+    <select id="selectStudentList" resultMap="StudentResult">
+        select 
+        <include refid="StudentColumns"/>
+        from student
+    </select>
+    
+    <select id="selectStudentListByPage" resultMap="StudentResult">
+        select 
+        <include refid="StudentColumns"/>
+        from student
+        <where>
+            <if test="student.id!=null and student.id!=''">
+                and id like concat('%', #{student.id}, '%')
+            </if>
+            <if test="student.password!=null and student.password!=''">
+                and password like concat('%', #{student.password}, '%')
+            </if>
+            <if test="student.name!=null and student.name!=''">
+                and name like concat('%', #{student.name}, '%')
+            </if>
+            <if test="student.clazz!=null and student.clazz!=''">
+                and clazz like concat('%', #{student.clazz}, '%')
+            </if>
+        </where>
+        limit #{start} ,#{end}
+    </select>
+    
+    <select id="selectTotal" parameterType="com.niit.bean.Student" resultType="java.lang.Long">
+        select
+        count(*)
+        from student
+        <where>
+            <if test="id!=null and id!=''">
+                and id like concat('%', #{id}, '%')
+            </if>
+            <if test="password!=null and password!=''">
+                and password like concat('%', #{password}, '%')
+            </if>
+            <if test="name!=null and name!=''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="clazz!=null and clazz!=''">
+                and clazz like concat('%', #{clazz}, '%')
+            </if>
+        </where>
+    </select>
+    
+    
+    <update id="updateStudent" parameterType="com.niit.bean.Student">
+        update student
+        <set>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="clazz!=null and clazz!=''">
+                clazz=#{clazz},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <delete id="deleteStudentById">
+        delete
+        from student
+        where id=#{id}
+    </delete>
+    
+    <insert id="insertStudent" parameterType="com.niit.bean.Student">
+        insert into student
+        values (
+        #{id},#{password},#{name},#{clazz}
+        )
+    </insert>
+    
+</mapper>

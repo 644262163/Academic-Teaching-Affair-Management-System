@@ -4,6 +4,7 @@ public class Evaluation {
     private String studentId;
     private String courseId;
     private String score;
+    private String term;
     
     public String getStudentId() {
         return studentId;
@@ -22,6 +23,12 @@ public class Evaluation {
     }
     public void setScore(String score) {
         this.score = score;
+    }
+    public String getTerm() {
+        return term;
+    }
+    public void setTerm(String term) {
+        this.term = term;
     }
     
 }

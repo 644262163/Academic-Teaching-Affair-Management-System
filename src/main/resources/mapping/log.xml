@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.dao.LogDao">
+    <!--
+        返回结果映射
+        如果开启驼峰命名转换且命名规范该段代码可以不写
+        因为配置别名 所以type属性使用的是mybatis-conf中的别名
+    -->
+    <resultMap type="com.niit.bean.Log" id="LogResult">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="ip" column="ip"/>
+        <result property="url" column="url"/>
+        <result property="parameter" column="parameter"/>
+        <result property="time" column="time"/>
+        <result property="length" column="length"/>
+        <result property="module" column="module"/>
+        <result property="method" column="method"/>
+        <result property="result" column="result"/>
+        <result property="message" column="message"/>
+    </resultMap>
+    
+    <!--  定义字段集合 -->
+    <sql id="LogColumns">
+        id, user_id, ip, url, parameter, time, length, module, method, result, message
+    </sql>
+    
+    <!-- 接口中具体实现-->
+    
+    <select id="selectLogList" resultMap="LogResult">
+        select 
+        <include refid="LogColumns"/>
+        from log
+        order by id desc
+    </select>
+    
+    <select id="selectLogListByPage" resultMap="LogResult">
+        select 
+        <include refid="LogColumns"/>
+        from log
+        <where>
+            <if test="log.id!=null and log.id!=''">
+                and id like concat('%', #{log.id}, '%')
+            </if>
+            <if test="log.userId!=null and log.userId!=''">
+                and user_id like concat('%', #{log.userId}, '%')
+            </if>
+            <if test="log.ip!=null and log.ip!=''">
+                and ip like concat('%', #{log.ip}, '%')
+            </if>
+            <if test="log.url!=null and log.url!=''">
+                and url like concat('%', #{log.url}, '%')
+            </if>
+            <if test="log.parameter!=null and log.parameter!=''">
+                and parameter like concat('%', #{log.parameter}, '%')
+            </if>
+            <if test="log.time!=null and log.time!=''">
+                and time like concat('%', #{log.time}, '%')
+            </if>
+            <if test="log.length!=null and log.length!=''">
+                and length like concat('%', #{log.length}, '%')
+            </if>
+            <if test="log.module!=null and log.module!=''">
+                and module like concat('%', #{log.module}, '%')
+            </if>
+            <if test="log.method!=null and log.method!=''">
+                and method like concat('%', #{log.method}, '%')
+            </if>
+            <if test="log.result!=null and log.result!=''">
+                and result like concat('%', #{log.result}, '%')
+            </if>
+            <if test="log.message!=null and log.message!=''">
+                and message like concat('%', #{log.message}, '%')
+            </if>
+        </where>
+        order by id desc
+        limit #{start} ,#{end}
+    </select>
+    
+    <select id="selectTotal" parameterType="com.niit.bean.Log" resultType="java.lang.Long">
+        select
+        count(*)
+        from log
+        <where>
+            <if test="id!=null and id!=''">
+                and id like concat('%', #{id}, '%')
+            </if>
+            <if test="userId!=null and userId!=''">
+                and user_id like concat('%', #{userId}, '%')
+            </if>
+            <if test="ip!=null and ip!=''">
+                and ip like concat('%', #{ip}, '%')
+            </if>
+            <if test="url!=null and url!=''">
+                and url like concat('%', #{url}, '%')
+            </if>
+            <if test="parameter!=null and parameter!=''">
+                and parameter like concat('%', #{parameter}, '%')
+            </if>
+            <if test="time!=null and time!=''">
+                and time like concat('%', #{time}, '%')
+            </if>
+            <if test="length!=null and length!=''">
+                and length like concat('%', #{length}, '%')
+            </if>
+            <if test="module!=null and module!=''">
+                and module like concat('%', #{module}, '%')
+            </if>
+            <if test="method!=null and method!=''">
+                and method like concat('%', #{method}, '%')
+            </if>
+            <if test="result!=null and result!=''">
+                and result like concat('%', #{result}, '%')
+            </if>
+            <if test="message!=null and message!=''">
+                and message like concat('%', #{message}, '%')
+            </if>
+        </where>
+    </select>
+   
+    <insert id="insertLog" parameterType="com.niit.bean.Log">
+        insert into log (
+        user_id, ip, url, parameter, time,
+        length, module, method, result, message
+        )
+        values (
+        #{userId}, #{ip}, #{url}, #{parameter}, #{time},
+        #{length}, #{module}, #{method}, #{result}, #{message}
+        )
+    </insert>
+    
+</mapper>

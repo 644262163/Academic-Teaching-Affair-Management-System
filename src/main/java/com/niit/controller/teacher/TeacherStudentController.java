@@ -62,10 +62,20 @@ public class TeacherStudentController {
     
     @Log(module = "老师后台", method = "修改学生")
     @RequestMapping("/update_student")
-    public String updateStudent(Student student) {
+    public String updateStudent(Student student, HttpServletResponse response) throws Exception {
         Integer i = studentService.updateStudent(student);
-        
-        return "teacher/student_list";
+
+        if(i > 0) {
+            //使用阿里巴巴的fastJson创建JSONObject
+            JSONObject result = new JSONObject();
+            //将序列化结果放入json对象中
+            result.put("success", true);
+
+            //使用自定义工具类向response中写入数据
+            ResponseUtil.write(response, result);
+        }
+
+        return null;
     }
     
 }

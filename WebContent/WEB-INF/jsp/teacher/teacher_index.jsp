@@ -14,8 +14,8 @@
     <div class="layui-logo">老师后台管理</div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
-      <li class="layui-nav-item"><a href="">控制台</a></li>
-      <li class="layui-nav-item"><a href="">用户管理</a></li>
+      <li class="layui-nav-item"><a href="">首页</a></li>
+      <li class="layui-nav-item"><a href="">学生管理</a></li>
       <li class="layui-nav-item">
         <a href="javascript:;">其它系统</a>
         <dl class="layui-nav-child">
@@ -49,14 +49,7 @@
             <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/student_list.do');">学生</a></dd>
           </dl>
         </li>
-        <li class="layui-nav-item">
-          <a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/course_list.do');">课程管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="javascript:;">列表一</a></dd>
-            <dd><a href="javascript:;">列表二</a></dd>
-            <dd><a href="">超链接</a></dd>
-          </dl>
-        </li>
+        <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/course_list.do');">课程管理</a></li>
         <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/score_list.do');">成绩管理</a></li>
       </ul>
     </div>

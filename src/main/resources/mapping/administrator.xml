@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.dao.AdministratorDao">
+    <!--
+        返回结果映射
+        如果开启驼峰命名转换且命名规范该段代码可以不写
+        因为配置别名 所以type属性使用的是mybatis-conf中的别名
+    -->
+    <resultMap type="com.niit.bean.Administrator" id="AdministratorResult">
+        <id property="id" column="id"/>
+        <result property="password" column="password"/>
+    </resultMap>
+    
+    <!--  定义字段集合 -->
+    <sql id="AdministratorColumns">
+        id, password
+    </sql>
+    
+    <!-- 接口中selectAdministratorById 具体实现-->
+    <select id="selectAdministratorById" resultMap="AdministratorResult">
+        select 
+        <include refid="AdministratorColumns"/>
+        from administrator
+        where id = #{id}
+    </select>
+    
+    <select id="selectAdministratorList" resultMap="AdministratorResult">
+        select 
+        <include refid="AdministratorColumns"/>
+        from administrator
+    </select>
+    
+    <select id="selectAdministratorListByPage" resultMap="AdministratorResult">
+        select 
+        <include refid="AdministratorColumns"/>
+        from administrator
+        <where>
+            <if test="administrator.id!=null and administrator.id!=''">
+                and id like concat('%', #{administrator.id}, '%')
+            </if>
+            <if test="administrator.password!=null and administrator.password!=''">
+                and password like concat('%', #{administrator.password}, '%')
+            </if>
+        </where>
+        limit #{start} ,#{end}
+    </select>
+    
+    <select id="selectTotal" parameterType="com.niit.bean.Administrator" resultType="java.lang.Long">
+        select
+        count(*)
+        from administrator
+        <where>
+            <if test="id!=null and id!=''">
+                and id like concat('%', #{id}, '%')
+            </if>
+            <if test="password!=null and password!=''">
+                and password like concat('%', #{password}, '%')
+            </if>
+        </where>
+    </select>
+    
+
+    <update id="updateAdministrator" parameterType="com.niit.bean.Administrator">
+        update administrator
+        <set>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <delete id="deleteAdministratorById">
+        delete
+        from administrator
+        where id=#{id}
+    </delete>
+    
+    <insert id="insertAdministrator" parameterType="com.niit.bean.Administrator">
+        insert into administrator
+        values (
+        #{id},#{password}
+        )
+    </insert>
+    
+</mapper>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.dao.StudentCourseDao">
+    <!--
+        返回结果映射
+        如果开启驼峰命名转换且命名规范该段代码可以不写
+        因为配置别名 所以type属性使用的是mybatis-conf中的别名
+    -->
+    <resultMap type="com.niit.bean.StudentCourse" id="StudentCourseResult">
+        <id property="id" column="id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="term" column="term"/>
+        <result property="information" column="information"/>
+    </resultMap>
+
+    <!--  定义字段集合 -->
+    <sql id="StudentCourseColumns">
+        id, student_id, course_id, term, information
+    </sql>
+
+    <select id="selectStudentCourseList" resultMap="StudentCourseResult">
+        select
+        <include refid="StudentCourseColumns"/>
+        from student_course
+    </select>
+
+    <select id="selectStudentCourseListByPage" resultMap="StudentCourseResult">
+        select
+        <include refid="StudentCourseColumns"/>
+        from student_course
+        <where>
+            <if test="studentCourse.id!=null and studentCourse.id!=''">
+                and id like concat('%', #{studentCourse.id}, '%')
+            </if>
+            <if test="studentCourse.studentId!=null and studentCourse.studentId!=''">
+                and student_id like concat('%', #{studentCourse.studentId}, '%')
+            </if>
+            <if test="studentCourse.courseId!=null and studentCourse.courseId!=''">
+                and course_id like concat('%', #{studentCourse.courseId}, '%')
+            </if>
+            <if test="studentCourse.term!=null and studentCourse.term!=''">
+                and term like concat('%', #{studentCourse.term}, '%')
+            </if>
+            <if test="studentCourse.information!=null and studentCourse.information!=''">
+                and information like concat('%', #{studentCourse.information}, '%')
+            </if>
+        </where>
+        limit #{start} ,#{end}
+    </select>
+
+    <select id="selectTotal" parameterType="com.niit.bean.StudentCourse" resultType="java.lang.Long">
+        select
+        count(*)
+        from student_course
+        <where>
+            <if test="id!=null and id!=''">
+                and id like concat('%', #{id}, '%')
+            </if>
+            <if test="studentId!=null and studentId!=''">
+                and student_id like concat('%', #{studentId}, '%')
+            </if>
+            <if test="courseId!=null and courseId!=''">
+                and course_id like concat('%', #{courseId}, '%')
+            </if>
+            <if test="term!=null and term!=''">
+                and term like concat('%', #{term}, '%')
+            </if>
+            <if test="information!=null and information!=''">
+                and information like concat('%', #{information}, '%')
+            </if>
+        </where>
+    </select>
+
+
+    <update id="updateStudentCourse" parameterType="com.niit.bean.StudentCourse">
+        update student_course
+        <set>
+            <if test="studentId!=null and studentId!=''">
+                student_id=#{studentId},
+            </if>
+            <if test="courseId!=null and courseId!=''">
+                course_id=#{courseId},
+            </if>
+            <if test="term!=null and term!=''">
+                term=#{term},
+            </if>
+            <if test="information!=null and information!=''">
+                information=#{information},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteStudentCourseById">
+        delete
+        from student_course
+        where id=#{id}
+    </delete>
+
+    <insert id="insertStudentCourse" parameterType="com.niit.bean.StudentCourse">
+        insert into student_course
+        values (
+        #{id},#{studentId},#{courseId},#{term},#{information}
+        )
+    </insert>
+
+</mapper>

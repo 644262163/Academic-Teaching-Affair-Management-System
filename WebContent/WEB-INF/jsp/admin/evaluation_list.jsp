@@ -16,7 +16,7 @@
   <span>评价列表：</span>
   <button class="layui-btn" data-type="insertEvaluation">添加评价</button>
   <div class="layui-inline">
-    <label class="layui-form-label">学生ID</label>
+    <label>学生ID</label>
     <div class="layui-input-inline">
       <input type="text" id="s_studentId" class="layui-input">
     </div>
@@ -33,6 +33,12 @@
       <input type="text" id="s_score" class="layui-input">
     </div>
   </div>
+  <div class="layui-inline">
+    <label>学期</label>
+    <div class="layui-input-inline">
+      <input type="text" id="s_term" class="layui-input">
+    </div>
+  </div>
   <button class="layui-btn" data-type="searchEvaluation">搜索列表</button>
   <button class="layui-btn" data-type="refreshEvaluation">还原默认</button>
 </div>
@@ -43,6 +49,7 @@
       <th lay-data="{field:'studentId', width:250, sort: true}">学生ID</th>
       <th lay-data="{field:'courseId', width:250, sort: true}">课程ID</th>
       <th lay-data="{field:'score', width:250, sort: true}">分数</th>
+      <th lay-data="{field:'term', width:250, sort: true}">学期</th>
       <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>
     </tr>
   </thead>
@@ -69,7 +76,8 @@ function updateEvaluation(){
     data:{
       studentId:$("#studentId").val(),
       courseId:$("#courseId").val(),
-      score:$("#score").val()
+      score:$("#score").val(),
+        term:$("#term").val()
     },
     timeout:5000,    //超时时间
     dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
@@ -79,7 +87,8 @@ function updateEvaluation(){
         updateObj.update({
           studentId:$("#studentId").val(),
           courseId:$("#courseId").val(),
-          score:$("#score").val()
+          score:$("#score").val(),
+            term:$("#term").val()
         });
       } else{
         layer.msg('修改失败', {icon: 2});
@@ -103,7 +112,8 @@ function insertEvaluation(){
     data:{
       studentId:$("#studentId").val(),
       courseId:$("#courseId").val(),
-      score:$("#score").val()
+      score:$("#score").val(),
+        term:$("#term").val()
     },
     timeout:5000,    //超时时间
     dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
@@ -193,6 +203,12 @@ layui.use('table', function(){
                   <input type="text" id="score" name="score" autocomplete="off" placeholder="请输入分数" class="layui-input">\
                 </div>\
               </div>\
+            <div class="layui-form-item">\
+                <label class="layui-form-label">学期</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="term" name="term" autocomplete="off" placeholder="请输入学期" class="layui-input">\
+                </div>\
+              </div>\
               <button class="layui-btn" onclick="updateEvaluation()">修改信息</button>\
           </div>\
         '
@@ -200,6 +216,7 @@ layui.use('table', function(){
       $("#studentId").val(data.studentId);
       $("#courseId").val(data.courseId);
       $("#score").val(data.score);
+        $("#term").val(data.term);
     }
   });
   
@@ -229,6 +246,12 @@ layui.use('table', function(){
                   <input type="text" id="score" name="score" autocomplete="off" placeholder="请输入分数" class="layui-input">\
                 </div>\
               </div>\
+            <div class="layui-form-item">\
+                <label class="layui-form-label">学期</label>\
+                <div class="layui-input-block">\
+                  <input type="text" id="term" name="term" autocomplete="off" placeholder="请输入学期" class="layui-input">\
+                </div>\
+              </div>\
               <button class="layui-btn" onclick="insertEvaluation()">添加信息</button>\
           </div>\
         '
@@ -246,7 +269,8 @@ layui.use('table', function(){
         ,where: {
             studentId: $("#s_studentId").val(),
             courseId: $("#s_courseId").val(),
-            score: $("#s_score").val()
+            score: $("#s_score").val(),
+              term:$("#s_term").val()
         } //设定异步数据接口的额外参数
       });
     }

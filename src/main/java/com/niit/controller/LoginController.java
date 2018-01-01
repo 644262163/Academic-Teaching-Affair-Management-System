@@ -15,19 +15,6 @@ import com.niit.log.Log;
 @RequestMapping()
 public class LoginController {
     
-    @Log(module = "前台", method = "异常页面") 
-    @RequestMapping("error")
-    public String error() throws Exception {
-        throw new Exception("异常测试");
-    }
-    
-    @Log(module = "管理员后台", method = "控制台页面")
-    @RequestMapping("admin/console")
-    public String adminList() {
-
-        return "admin/console";
-    }
-    
     @Log(module = "前台", method = "登陆页面")  
     @RequestMapping("/login")
     public String login(HttpServletRequest request) {

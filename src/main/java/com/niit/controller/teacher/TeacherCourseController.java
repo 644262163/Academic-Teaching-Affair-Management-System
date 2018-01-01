@@ -62,24 +62,37 @@ public class TeacherCourseController {
     
     @Log(module = "老师后台", method = "修改课程")
     @RequestMapping("/update_course")
-    public String updateCourse(Course course) {
+    public String updateCourse(Course course, HttpServletResponse response) throws Exception {
         Integer i = courseService.updateCourse(course);
-        
-        return "teacher/course_list";
+
+        if(i > 0) {
+            //使用阿里巴巴的fastJson创建JSONObject
+            JSONObject result = new JSONObject();
+            //将序列化结果放入json对象中
+            result.put("success", true);
+
+            //使用自定义工具类向response中写入数据
+            ResponseUtil.write(response, result);
+        }
+
+        return null;
     }
 
     @Log(module = "老师后台", method = "删除课程")
     @RequestMapping(value="/delete_course")
     public String deleteCourse(String id, HttpServletResponse response) throws Exception {
         Integer i = courseService.deleteCourseById(id);
-        
-        //使用阿里巴巴的fastJson创建JSONObject
-        JSONObject result = new JSONObject();
-        //将序列化结果放入json对象中
-        result.put("success", true);
-        
-        //使用自定义工具类向response中写入数据
-        ResponseUtil.write(response, result);
+
+        if(i > 0) {
+            //使用阿里巴巴的fastJson创建JSONObject
+            JSONObject result = new JSONObject();
+            //将序列化结果放入json对象中
+            result.put("success", true);
+
+            //使用自定义工具类向response中写入数据
+            ResponseUtil.write(response, result);
+        }
+
         return null;
     }
     
@@ -87,8 +100,18 @@ public class TeacherCourseController {
     @RequestMapping("/insert_course")
     public String insertCourse(Course course, HttpServletResponse response) throws Exception {
         Integer i = courseService.insertCourse(course);
-        
-        return "teacher/course_list";
+
+        if(i > 0) {
+            //使用阿里巴巴的fastJson创建JSONObject
+            JSONObject result = new JSONObject();
+            //将序列化结果放入json对象中
+            result.put("success", true);
+
+            //使用自定义工具类向response中写入数据
+            ResponseUtil.write(response, result);
+        }
+
+        return null;
     }
 
 }

@@ -24,9 +24,16 @@
         </dl>
       </li>
       <li class="layui-nav-item">
+        <a href="javascript:;">课程管理</a>
+        <dl class="layui-nav-child">
+          <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/course_list.do');">课程列表</a></dd>
+          <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/teacher_course_list.do');">老师课程列表</a></dd>
+          <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/student_course_list.do');">学生课程列表</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item">
         <a href="javascript:;">其它系统</a>
         <dl class="layui-nav-child">
-          <dd><a href="javascript:javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/course_list.do');">课程管理</a></dd>
           <dd><a href="javascript:javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/score_list.do');">成绩管理</a></dd>
           <dd><a href="javascript:javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/evaluation_list.do');">评价管理</a></dd>
         </dl>
@@ -59,7 +66,14 @@
             <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/student_list.do');">学生</a></dd>
           </dl>
         </li>
-        <li class="layui-nav-item"><a href="javascript:javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/course_list.do');">课程管理</a></li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a class="" href="javascript:;">课程管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/course_list.do');">课程列表</a></dd>
+            <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/teacher_course_list.do');">老师课程列表</a></dd>
+            <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/student_course_list.do');">学生课程列表</a></dd>
+          </dl>
+        </li>
         <li class="layui-nav-item"><a href="javascript:javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/score_list.do');">成绩管理</a></li>
         <li class="layui-nav-item"><a href="javascript:javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/evaluation_list.do');">评价管理</a></li>
       </ul>

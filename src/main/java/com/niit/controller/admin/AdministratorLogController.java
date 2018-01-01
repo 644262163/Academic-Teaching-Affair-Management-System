@@ -21,6 +21,13 @@ public class AdministratorLogController {
     
     @Resource
     private LogService logService;
+
+    @Log(module = "管理员后台", method = "控制台页面")
+    @RequestMapping("/console")
+    public String adminList() {
+
+        return "admin/console";
+    }
     
     @Log(module = "管理员后台", method = "获取日志列表")
     @RequestMapping("/select_log_list")
