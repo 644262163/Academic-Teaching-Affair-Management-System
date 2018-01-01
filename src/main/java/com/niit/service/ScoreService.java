@@ -1,6 +1,7 @@
 package com.niit.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.niit.bean.PageBean;
 import com.niit.bean.Score;
@@ -16,4 +17,6 @@ public interface ScoreService {
     public Integer deleteScoreById(String studentId, String courseId);
     
     public Integer insertScore(Score score);
+
+    public PageBean<Map<String, Object>> selectStudentScoreList(Score score, PageBean<Map<String, Object>> pageBean);
 }

@@ -28,7 +28,7 @@
     </div>
   </div>
   <div class="layui-inline">
-    <label>分数</label>
+    <label>评价</label>
     <div class="layui-input-inline">
       <input type="text" id="s_score" class="layui-input">
     </div>
@@ -48,7 +48,7 @@
     <tr>
       <th lay-data="{field:'studentId', width:250, sort: true}">学生ID</th>
       <th lay-data="{field:'courseId', width:250, sort: true}">课程ID</th>
-      <th lay-data="{field:'score', width:250, sort: true}">分数</th>
+      <th lay-data="{field:'score', width:250, sort: true}">评价</th>
       <th lay-data="{field:'term', width:250, sort: true}">学期</th>
       <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>
     </tr>
@@ -198,9 +198,9 @@ layui.use('table', function(){
               </div>\
             </div>\
             <div class="layui-form-item">\
-                <label class="layui-form-label">分数</label>\
+                <label class="layui-form-label">评价</label>\
                 <div class="layui-input-block">\
-                  <input type="text" id="score" name="score" autocomplete="off" placeholder="请输入分数" class="layui-input">\
+                  <input type="text" id="score" name="score" autocomplete="off" placeholder="请输入评价" class="layui-input">\
                 </div>\
               </div>\
             <div class="layui-form-item">\
@@ -241,9 +241,9 @@ layui.use('table', function(){
               </div>\
             </div>\
             <div class="layui-form-item">\
-                <label class="layui-form-label">分数</label>\
+                <label class="layui-form-label">评价</label>\
                 <div class="layui-input-block">\
-                  <input type="text" id="score" name="score" autocomplete="off" placeholder="请输入分数" class="layui-input">\
+                  <input type="text" id="score" name="score" autocomplete="off" placeholder="请输入评价" class="layui-input">\
                 </div>\
               </div>\
             <div class="layui-form-item">\

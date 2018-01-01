@@ -1,9 +1,14 @@
 package com.niit.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.niit.dao.CourseDao;
+import com.niit.dao.StudentDao;
 import org.springframework.stereotype.Service;
 
 import com.niit.bean.PageBean;
@@ -16,6 +21,10 @@ public class EvaluationServiceImpl implements EvaluationService{
 
     @Resource
     private EvaluationDao evaluationDao;
+    @Resource
+    private StudentDao studentDao;
+    @Resource
+    private CourseDao courseDao;
     
     @Override
     public Evaluation selectEvaluationByStudentId(String studentId) {
@@ -67,6 +76,26 @@ public class EvaluationServiceImpl implements EvaluationService{
         // TODO 自动生成的方法存根
         Integer i = evaluationDao.insertEvaluation(evaluation);
         return i;
+    }
+
+    @Override
+    public PageBean<Map<String, Object>> selectEvaluationList(Evaluation evaluation, PageBean<Map<String, Object>> pageBean) {
+        List<Map<String, Object>> resultList = new ArrayList<>();
+        List<Evaluation> list = evaluationDao.selectEvaluationListByPage(evaluation, pageBean.getStart(), pageBean.getEnd());
+        for(Evaluation o: list) {
+            Map<String, Object> objs = new HashMap<String, Object>();
+            objs.put("studentId", o.getStudentId());
+            objs.put("courseId", o.getCourseId());
+            objs.put("term", o.getTerm());
+            objs.put("score", o.getScore());
+            objs.put("studentName", studentDao.selectStudentById(o.getStudentId()).getName());
+            objs.put("courseName", courseDao.selectCourseById(o.getCourseId()).getName());
+            resultList.add(objs);
+        }
+        pageBean.setResult(resultList);
+        //查询记录总数
+        pageBean.setTotal(evaluationDao.selectTotal(evaluation));
+        return pageBean;
     }
 
 }

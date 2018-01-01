@@ -12,6 +12,12 @@
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header">
     <div class="layui-logo">学生后台管理</div>
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a href="javascript:;">首页</a></li>
+      <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/student/course_list.do');">课程管理</a></li>
+      <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/student/score_list.do');">成绩管理</a></li>
+      <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/student/evaluation_list.do');">评价管理</a></li>
+    </ul>
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
@@ -29,7 +35,12 @@
   
   <div class="layui-side layui-bg-black">
     <div class="layui-side-scroll">
-      
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/student/course_list.do');">课程管理</a></li>
+        <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/student/score_list.do');">成绩管理</a></li>
+        <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/student/evaluation_list.do');">评价管理</a></li>
+      </ul>
     </div>
   </div>
   

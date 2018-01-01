@@ -1,6 +1,7 @@
 package com.niit.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.niit.bean.Evaluation;
 import com.niit.bean.PageBean;
@@ -16,4 +17,6 @@ public interface EvaluationService {
     public Integer deleteEvaluationById(String studentId, String courseId);
     
     public Integer insertEvaluation(Evaluation evaluation);
+
+    public PageBean<Map<String, Object>> selectEvaluationList(Evaluation evaluation, PageBean<Map<String, Object>> pageBean);
 }
