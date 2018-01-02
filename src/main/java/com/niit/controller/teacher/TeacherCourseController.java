@@ -3,6 +3,8 @@ package com.niit.controller.teacher;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
+import com.niit.bean.TeacherCourse;
+import com.niit.service.TeacherCourseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,18 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.niit.bean.Course;
 import com.niit.bean.PageBean;
 import com.niit.log.Log;
-import com.niit.service.CourseService;
 import com.niit.util.ResponseUtil;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/teacher")
 public class TeacherCourseController {
     
     @Resource
-    private CourseService courseService;
+    private TeacherCourseService teacherCourseService;
     
     @Log(module = "老师后台", method = "课程列表页面")
     @RequestMapping("/course_list")
@@ -33,17 +35,17 @@ public class TeacherCourseController {
     @Log(module = "老师后台", method = "获取课程列表")
     @RequestMapping("/select_course_list")
     public String selectCourseList(
-            Course course,
+            TeacherCourse teacherCourse,
             @RequestParam(value = "page", required = false) String page,
             @RequestParam(value = "limit", required = false) String limit,
             HttpServletResponse response) throws Exception {
         
         //定义分页
-        PageBean<Course> pageBean = new PageBean<Course>(
+        PageBean<Map<String, Object>> pageBean = new PageBean<Map<String, Object>>(
             Integer.parseInt(page),
             Integer.parseInt(limit));
         //拿到分页结果已经记录总数的page
-        pageBean = courseService.selectCourseListByPage(course, pageBean);
+        pageBean = teacherCourseService.selectTeacherCourseList(teacherCourse, pageBean);
 
         //使用阿里巴巴的fastJson创建JSONObject
         JSONObject result = new JSONObject();
@@ -57,60 +59,6 @@ public class TeacherCourseController {
 
         //使用自定义工具类向response中写入数据
         ResponseUtil.write(response, result);
-        return null;
-    }
-    
-    @Log(module = "老师后台", method = "修改课程")
-    @RequestMapping("/update_course")
-    public String updateCourse(Course course, HttpServletResponse response) throws Exception {
-        Integer i = courseService.updateCourse(course);
-
-        if(i > 0) {
-            //使用阿里巴巴的fastJson创建JSONObject
-            JSONObject result = new JSONObject();
-            //将序列化结果放入json对象中
-            result.put("success", true);
-
-            //使用自定义工具类向response中写入数据
-            ResponseUtil.write(response, result);
-        }
-
-        return null;
-    }
-
-    @Log(module = "老师后台", method = "删除课程")
-    @RequestMapping(value="/delete_course")
-    public String deleteCourse(String id, HttpServletResponse response) throws Exception {
-        Integer i = courseService.deleteCourseById(id);
-
-        if(i > 0) {
-            //使用阿里巴巴的fastJson创建JSONObject
-            JSONObject result = new JSONObject();
-            //将序列化结果放入json对象中
-            result.put("success", true);
-
-            //使用自定义工具类向response中写入数据
-            ResponseUtil.write(response, result);
-        }
-
-        return null;
-    }
-    
-    @Log(module = "老师后台", method = "添加课程")
-    @RequestMapping("/insert_course")
-    public String insertCourse(Course course, HttpServletResponse response) throws Exception {
-        Integer i = courseService.insertCourse(course);
-
-        if(i > 0) {
-            //使用阿里巴巴的fastJson创建JSONObject
-            JSONObject result = new JSONObject();
-            //将序列化结果放入json对象中
-            result.put("success", true);
-
-            //使用自定义工具类向response中写入数据
-            ResponseUtil.write(response, result);
-        }
-
         return null;
     }
 

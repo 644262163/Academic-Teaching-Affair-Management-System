@@ -18,5 +18,6 @@ public interface ScoreService {
     
     public Integer insertScore(Score score);
 
-    public PageBean<Map<String, Object>> selectStudentScoreList(Score score, PageBean<Map<String, Object>> pageBean);
+    public PageBean<Map<String, Object>> selectScoreListByStudent(Score score, PageBean<Map<String, Object>> pageBean);
+    public PageBean<Map<String, Object>> selectScoreListByTeacher(String teacherId, Score score, PageBean<Map<String, Object>> pageBean);
 }

@@ -15,14 +15,9 @@
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
       <li class="layui-nav-item"><a href="">首页</a></li>
-      <li class="layui-nav-item"><a href="">学生管理</a></li>
-      <li class="layui-nav-item">
-        <a href="javascript:;">其它系统</a>
-        <dl class="layui-nav-child">
-          <dd><a href="">课程管理</a></dd>
-          <dd><a href="">成绩管理</a></dd>
-        </dl>
-      </li>
+      <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/course_list.do');">课程管理</a></li>
+      <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/score_list.do');">成绩管理</a></li>
+      <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/evaluation_list.do');">评价管理</a></li>
     </ul>
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
@@ -43,14 +38,9 @@
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-        <li class="layui-nav-item layui-nav-itemed">
-          <a class="" href="javascript:$('#iframe').attr('src','');">用户管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/student_list.do');">学生</a></dd>
-          </dl>
-        </li>
         <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/course_list.do');">课程管理</a></li>
         <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/score_list.do');">成绩管理</a></li>
+        <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/evaluation_list.do');">评价管理</a></li>
       </ul>
     </div>
   </div>

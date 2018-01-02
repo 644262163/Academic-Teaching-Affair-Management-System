@@ -18,5 +18,6 @@ public interface EvaluationService {
     
     public Integer insertEvaluation(Evaluation evaluation);
 
-    public PageBean<Map<String, Object>> selectEvaluationList(Evaluation evaluation, PageBean<Map<String, Object>> pageBean);
+    public PageBean<Map<String, Object>> selectEvaluationListByStudent(Evaluation evaluation, PageBean<Map<String, Object>> pageBean);
+    public PageBean<Map<String, Object>> selectEvaluationListByTeacher(String teacherId, Evaluation evaluation, PageBean<Map<String, Object>> pageBean);
 }

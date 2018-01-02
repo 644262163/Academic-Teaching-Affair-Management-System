@@ -1,19 +1,15 @@
 package com.niit.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Resource;
 
-import com.niit.dao.CourseDao;
-import com.niit.dao.StudentDao;
+import com.niit.bean.TeacherCourse;
+import com.niit.dao.*;
 import org.springframework.stereotype.Service;
 
 import com.niit.bean.PageBean;
 import com.niit.bean.Evaluation;
-import com.niit.dao.EvaluationDao;
 import com.niit.service.EvaluationService;
 
 @Service("evaluationService")
@@ -24,7 +20,11 @@ public class EvaluationServiceImpl implements EvaluationService{
     @Resource
     private StudentDao studentDao;
     @Resource
+    private TeacherDao teacherDao;
+    @Resource
     private CourseDao courseDao;
+    @Resource
+    private TeacherCourseDao teacherCourseDao;
     
     @Override
     public Evaluation selectEvaluationByStudentId(String studentId) {
@@ -79,7 +79,7 @@ public class EvaluationServiceImpl implements EvaluationService{
     }
 
     @Override
-    public PageBean<Map<String, Object>> selectEvaluationList(Evaluation evaluation, PageBean<Map<String, Object>> pageBean) {
+    public PageBean<Map<String, Object>> selectEvaluationListByStudent(Evaluation evaluation, PageBean<Map<String, Object>> pageBean) {
         List<Map<String, Object>> resultList = new ArrayList<>();
         List<Evaluation> list = evaluationDao.selectEvaluationListByPage(evaluation, pageBean.getStart(), pageBean.getEnd());
         for(Evaluation o: list) {
@@ -91,6 +91,35 @@ public class EvaluationServiceImpl implements EvaluationService{
             objs.put("studentName", studentDao.selectStudentById(o.getStudentId()).getName());
             objs.put("courseName", courseDao.selectCourseById(o.getCourseId()).getName());
             resultList.add(objs);
+        }
+        pageBean.setResult(resultList);
+        //查询记录总数
+        pageBean.setTotal(evaluationDao.selectTotal(evaluation));
+        return pageBean;
+    }
+
+    @Override
+    public PageBean<Map<String, Object>> selectEvaluationListByTeacher(String teacherId, Evaluation evaluation, PageBean<Map<String, Object>> pageBean) {
+        List<Map<String, Object>> resultList = new ArrayList<>();
+        List<TeacherCourse> list = teacherCourseDao.selectTeacherCourseListByTeacherId(teacherId);
+        Set<String> set = new HashSet<String>();
+        for(TeacherCourse o: list) {
+            if(set.contains(o.getCourseId())) continue;
+            set.add(o.getCourseId());
+            evaluation.setCourseId(o.getCourseId());
+            List<Evaluation> scoreList = evaluationDao.selectEvaluationListByPage(evaluation, pageBean.getStart(), pageBean.getEnd());
+            for(Evaluation s: scoreList) {
+                Map<String, Object> objs = new HashMap<String, Object>();
+                objs.put("studentId", s.getStudentId());
+                objs.put("courseId", s.getCourseId());
+                objs.put("term", s.getTerm());
+                objs.put("score", s.getScore());
+                objs.put("studentName", studentDao.selectStudentById(s.getStudentId()).getName());
+                objs.put("courseName", courseDao.selectCourseById(o.getCourseId()).getName());
+                objs.put("teacherId", teacherId);
+                objs.put("teacherName", teacherDao.selectTeacherById(teacherId).getName());
+                resultList.add(objs);
+            }
         }
         pageBean.setResult(resultList);
         //查询记录总数

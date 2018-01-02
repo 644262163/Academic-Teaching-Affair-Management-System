@@ -43,7 +43,7 @@ public class StudentScoreController {
             Integer.parseInt(page),
             Integer.parseInt(limit));
         //拿到分页结果已经记录总数的page
-        pageBean = scoreService.selectStudentScoreList(score, pageBean);
+        pageBean = scoreService.selectScoreListByStudent(score, pageBean);
 
         //使用阿里巴巴的fastJson创建JSONObject
         JSONObject result = new JSONObject();

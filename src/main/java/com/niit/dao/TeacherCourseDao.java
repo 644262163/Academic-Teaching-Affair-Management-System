@@ -15,4 +15,6 @@ public interface TeacherCourseDao {
     public Integer deleteTeacherCourseById(String id);
 
     public Integer insertTeacherCourse(TeacherCourse teacherCourse);
+
+    public List<TeacherCourse> selectTeacherCourseListByTeacherId(String teacherId);
 }
