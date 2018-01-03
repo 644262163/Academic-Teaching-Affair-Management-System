@@ -14,6 +14,7 @@
     <div class="layui-logo">管理员后台管理</div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/welcome.do');">首页</a></li>
       <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/console.do');">控制台</a></li>
       <li class="layui-nav-item">
         <a href="javascript:;">用户管理</a>
@@ -45,8 +46,7 @@
           ${id }
         </a>
         <dl class="layui-nav-child">
-          <dd><a href="">基本资料</a></dd>
-          <dd><a href="">修改密码</a></dd>
+          <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/admin/modify_password.do');">修改密码</a></dd>
         </dl>
       </li>
       <li class="layui-nav-item"><a href="<%=request.getContextPath() %>/logout.do">退出</a></li>
@@ -81,7 +81,7 @@
   
   <div class="layui-body">
     <!-- 内容主体区域 -->
-    <iframe id="iframe" src="<%=request.getContextPath() %>/admin/console.do"
+    <iframe id="iframe" src="<%=request.getContextPath() %>/admin/welcome.do"
       frameborder="0" width="100%" scrolling="no" height="100%">
       <p>您的浏览器不支持  iframe 标签。</p>
     </iframe>

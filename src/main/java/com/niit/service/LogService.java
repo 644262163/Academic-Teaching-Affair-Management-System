@@ -7,6 +7,7 @@ import com.niit.bean.PageBean;
 
 public interface LogService {
     public List<Log> selectLogList();
+    public List<Log> selectLogListByLog(Log log);
     public PageBean<Log> selectLogListByPage(Log log, PageBean<Log> pageBean);
     
     public Integer insertLog(Log log);

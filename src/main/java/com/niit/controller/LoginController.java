@@ -1,7 +1,11 @@
 package com.niit.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.niit.service.LogService;
+import com.niit.util.IPUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -11,9 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.niit.log.Log;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping()
 public class LoginController {
+
+    @Resource
+    private LogService logService;
     
     @Log(module = "前台", method = "登陆页面")  
     @RequestMapping("/login")
@@ -38,17 +47,20 @@ public class LoginController {
     
     @Log(module = "后台", method = "登陆")
     @RequestMapping("/index")
-    public String index(ModelMap resultMap, String id, String password, HttpServletRequest request) {
+    public String index(ModelMap resultMap, String id, String password, HttpServletRequest request, HttpServletResponse response)  throws Throwable {
         Subject subject = SecurityUtils.getSubject();
         String no = (String) subject.getSession().getAttribute("no");
         if(no != null && (id == null || "".equals(id))) {
             switch (no) {
             case "0":
-                return "admin/admin_index";
+                response.sendRedirect("admin/admin_index.do");
+                break;
             case "1":
-                return "teacher/teacher_index";
+                response.sendRedirect("teacher/teacher_index.do");
+                break;
             case "2":
-                return "student/student_index";
+                response.sendRedirect("student/student_index.do");
+                break;
             default:
             }
         }
@@ -58,15 +70,45 @@ public class LoginController {
             no = (String) subject.getSession().getAttribute("no");
             switch (no) {
             case "0":
-                return "admin/admin_index";
+                response.sendRedirect("admin/admin_index.do");
+                break;
             case "1":
-                return "teacher/teacher_index";
+                response.sendRedirect("teacher/teacher_index.do");
+                break;
             case "2":
-                return "student/student_index";
+                response.sendRedirect("student/student_index.do");
+                break;
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            com.niit.bean.Log log = new com.niit.bean.Log(
+                    id,
+                    "0:0:0:0:0:0:0:1".equals(IPUtil.getIpAddr(request)) ? "127.0.0.1" : IPUtil.getIpAddr(request),
+                    request.getServletPath(),
+                    "",
+                    new Date(),
+                    0L,
+                    "后台",
+                    "登陆成功",
+                    "success",
+                    "");
+            Integer i = logService.insertLog(log);
         }
+
+        com.niit.bean.Log log = new com.niit.bean.Log(
+                id,
+                "0:0:0:0:0:0:0:1".equals(IPUtil.getIpAddr(request)) ? "127.0.0.1" : IPUtil.getIpAddr(request),
+                request.getServletPath(),
+                "",
+                new Date(),
+                0L,
+                "后台",
+                "登陆失败",
+                "success",
+                "");
+        Integer i = logService.insertLog(log);
+
         request.getSession().setAttribute("msg", "账号或密码错误！");
         return "login";
     }

@@ -34,6 +34,48 @@
         from log
         order by id desc
     </select>
+
+    <select id="selectLogListByLog" parameterType="com.niit.bean.Log" resultMap="LogResult">
+        select
+        <include refid="LogColumns"/>
+        from log
+        <where>
+            <if test="id!=null and id!=''">
+                and id like concat('%', #{id}, '%')
+            </if>
+            <if test="userId!=null and userId!=''">
+                and user_id like concat('%', #{userId}, '%')
+            </if>
+            <if test="ip!=null and ip!=''">
+                and ip like concat('%', #{ip}, '%')
+            </if>
+            <if test="url!=null and url!=''">
+                and url like concat('%', #{url}, '%')
+            </if>
+            <if test="parameter!=null and parameter!=''">
+                and parameter like concat('%', #{parameter}, '%')
+            </if>
+            <if test="time!=null and time!=''">
+                and time like concat('%', #{time}, '%')
+            </if>
+            <if test="length!=null and length!=''">
+                and length like concat('%', #{length}, '%')
+            </if>
+            <if test="module!=null and module!=''">
+                and module like concat('%', #{module}, '%')
+            </if>
+            <if test="method!=null and method!=''">
+                and method like concat('%', #{method}, '%')
+            </if>
+            <if test="result!=null and result!=''">
+                and result like concat('%', #{result}, '%')
+            </if>
+            <if test="message!=null and message!=''">
+                and message like concat('%', #{message}, '%')
+            </if>
+        </where>
+        order by id desc
+    </select>
     
     <select id="selectLogListByPage" resultMap="LogResult">
         select 

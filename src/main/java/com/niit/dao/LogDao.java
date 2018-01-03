@@ -8,6 +8,7 @@ import com.niit.bean.Log;
 
 public interface LogDao {
     public List<Log> selectLogList();
+    public List<Log> selectLogListByLog(Log log);
     public List<Log> selectLogListByPage(@Param("log") Log log, @Param("start") Integer start, @Param("end") Integer end);
     public Long selectTotal(Log log);
     

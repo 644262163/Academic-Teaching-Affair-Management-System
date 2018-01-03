@@ -14,7 +14,7 @@
     <div class="layui-logo">老师后台管理</div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
-      <li class="layui-nav-item"><a href="">首页</a></li>
+      <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/welcome.do');">首页</a></li>
       <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/course_list.do');">课程管理</a></li>
       <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/score_list.do');">成绩管理</a></li>
       <li class="layui-nav-item"><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/evaluation_list.do');">评价管理</a></li>
@@ -22,12 +22,10 @@
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
-          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
           ${id }
         </a>
         <dl class="layui-nav-child">
-          <dd><a href="">基本资料</a></dd>
-          <dd><a href="">修改密码</a></dd>
+          <dd><a href="javascript:$('#iframe').attr('src','<%=request.getContextPath() %>/teacher/modify_password.do');">修改密码</a></dd>
         </dl>
       </li>
       <li class="layui-nav-item"><a href="<%=request.getContextPath() %>/logout.do">退出</a></li>
@@ -47,7 +45,7 @@
   
   <div class="layui-body">
     <!-- 内容主体区域 -->
-    <iframe id="iframe" src=""
+    <iframe id="iframe" src="<%=request.getContextPath() %>/teacher/welcome.do"
       frameborder="0" width="100%" scrolling="no" height="100%">
       <p>您的浏览器不支持  iframe 标签。</p>
     </iframe>
