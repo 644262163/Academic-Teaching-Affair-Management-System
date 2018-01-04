@@ -231,7 +231,7 @@
 <body>
 
 <script src="<%=request.getContextPath() %>/static/login/jquery-1.7.2.min.js" type="text/javascript"></script>
-<div class="d1"><img src="js/123.jpg" width="100%" height="100%"/></div>
+<div class="d1"><img src="<%=request.getContextPath() %>/static/login/123.jpg" width="100%" height="100%"/></div>
 
 <div class="logo_box">
     <h3>教务系统</h3>
