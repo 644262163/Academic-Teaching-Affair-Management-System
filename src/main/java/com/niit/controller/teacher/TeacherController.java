@@ -97,7 +97,7 @@ public class TeacherController {
             time.put("y", c.get(Calendar.YEAR));
             time.put("M", c.get(Calendar.MONTH));
             time.put("d", c.get(Calendar.DAY_OF_MONTH));
-            time.put("H", c.get(Calendar.HOUR));
+            time.put("H", c.get(Calendar.HOUR_OF_DAY));
             time.put("m", c.get(Calendar.MINUTE));
             time.put("s", c.get(Calendar.SECOND));
             result.put("time", time);
