@@ -1,7 +1,7 @@
 # Academic-Teaching-Affair-Management-System
 NIIT项目：教务管理系统
 
-技术要求：spring + spring MVC + Mybatis + bootstrap + mysql
+技术要求：spring + spring MVC + Mybatis + mysql + layui
 
 需求分析：
 
