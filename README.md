@@ -1,5 +1,16 @@
 # Academic-Teaching-Affair-Management-System
-NIIT项目：教务管理系统
+
+## 启动方式
+
+[安装docker-compose](https://docs.docker.com/compose/install/)
+
+执行指令
+
+    docker-compose up
+
+访问 http://127.0.0.1:8080/Academic-Teaching-Affair-Management-System
+
+## NIIT项目：教务管理系统
 
 技术要求：spring + spring MVC + Mybatis + mysql + layui
 
