@@ -6,13 +6,13 @@ import java.util.Map;
 
 public class PageBean<T> {
 
-    private int currPage;   //µ±Ç°Ò³Êı
-    private int pageSize;   //Ã¿Ò³ÏÔÊ¾µÄ¸öÊı
-    private long total;      //×Ü¼ÇÂ¼Êı
+    private int currPage;   //å½“å‰é¡µæ•°
+    private int pageSize;   //æ¯é¡µæ˜¾ç¤ºçš„ä¸ªæ•°
+    private long total;      //æ€»è®°å½•æ•°
     private int start;
     private int end;
-    private List<T> result; //·ÖÒ³²éÑ¯µÄ½á¹û
-    private Map<String,Object> map = new HashMap<String,Object>();   //²éÑ¯Ìõ¼ş
+    private List<T> result; //åˆ†é¡µæŸ¥è¯¢çš„ç»“æœ
+    private Map<String,Object> map = new HashMap<String,Object>();   //æŸ¥è¯¢æ¡ä»¶
 
     PageBean(){}
 

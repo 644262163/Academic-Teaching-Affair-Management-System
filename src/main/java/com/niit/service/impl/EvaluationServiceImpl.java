@@ -28,52 +28,52 @@ public class EvaluationServiceImpl implements EvaluationService{
     
     @Override
     public Evaluation selectEvaluationByStudentId(String studentId) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Evaluation evaluation = evaluationDao.selectEvaluationByStudentId(studentId);
         return evaluation;
     }
 
     @Override
     public Evaluation selectEvaluationByCourseId(String courseId) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Evaluation evaluation = evaluationDao.selectEvaluationByCourseId(courseId);
         return evaluation;
     }
 
     @Override
     public List<Evaluation> selectEvaluationList() {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         List<Evaluation> list = evaluationDao.selectEvaluationList();
         return list;
     }
 
     @Override
     public PageBean<Evaluation> selectEvaluationListByPage(Evaluation evaluation, PageBean<Evaluation> pageBean) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-        //²éÑ¯·ÖÒ³½á¹û
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
+        //æŸ¥è¯¢åˆ†é¡µç»“æœ
         pageBean.setResult(evaluationDao.selectEvaluationListByPage(evaluation, pageBean.getStart(), pageBean.getEnd()));
-        //²éÑ¯¼ÇÂ¼×ÜÊı
+        //æŸ¥è¯¢è®°å½•æ€»æ•°
         pageBean.setTotal(evaluationDao.selectTotal(evaluation));
         return pageBean;
     }
 
     @Override
     public Integer updateEvaluation(Evaluation evaluation) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = evaluationDao.updateEvaluation(evaluation);
         return i;
     }
 
     @Override
     public Integer deleteEvaluationById(String studentId, String courseId) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = evaluationDao.deleteEvaluationById(studentId, courseId);
         return i;
     }
 
     @Override
     public Integer insertEvaluation(Evaluation evaluation) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = evaluationDao.insertEvaluation(evaluation);
         return i;
     }
@@ -93,7 +93,7 @@ public class EvaluationServiceImpl implements EvaluationService{
             resultList.add(objs);
         }
         pageBean.setResult(resultList);
-        //²éÑ¯¼ÇÂ¼×ÜÊı
+        //æŸ¥è¯¢è®°å½•æ€»æ•°
         pageBean.setTotal(evaluationDao.selectTotal(evaluation));
         return pageBean;
     }
@@ -122,7 +122,7 @@ public class EvaluationServiceImpl implements EvaluationService{
             }
         }
         pageBean.setResult(resultList);
-        //²éÑ¯¼ÇÂ¼×ÜÊı
+        //æŸ¥è¯¢è®°å½•æ€»æ•°
         pageBean.setTotal(evaluationDao.selectTotal(evaluation));
         return pageBean;
     }

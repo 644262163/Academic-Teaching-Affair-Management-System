@@ -6,9 +6,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
  
-@Retention(RetentionPolicy.RUNTIME) //×¢½â»áÔÚclassÖĞ´æÔÚ£¬ÔËĞĞÊ±¿ÉÍ¨¹ı·´Éä»ñÈ¡  
-@Target({ ElementType.METHOD }) //Ä¿±êÊÇ·½·¨ 
-@Documented //ÎÄµµÉú³ÉÊ±£¬¸Ã×¢½â½«±»°üº¬ÔÚjavadocÖĞ£¬¿ÉÈ¥µô 
+@Retention(RetentionPolicy.RUNTIME) //æ³¨è§£ä¼šåœ¨classä¸­å­˜åœ¨ï¼Œè¿è¡Œæ—¶å¯é€šè¿‡åå°„è·å–  
+@Target({ ElementType.METHOD }) //ç›®æ ‡æ˜¯æ–¹æ³• 
+@Documented //æ–‡æ¡£ç”Ÿæˆæ—¶ï¼Œè¯¥æ³¨è§£å°†è¢«åŒ…å«åœ¨javadocä¸­ï¼Œå¯å»æ‰ 
 public @interface Log {
     String module() default "";
     String method() default "";

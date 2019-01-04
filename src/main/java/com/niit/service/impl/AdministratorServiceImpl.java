@@ -19,45 +19,45 @@ public class AdministratorServiceImpl implements AdministratorService{
     
     @Override
     public Administrator selectAdministratorById(String id) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Administrator administrator = administratorDao.selectAdministratorById(id);
         return administrator;
     }
 
     @Override
     public List<Administrator> selectAdministratorList() {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         List<Administrator> list = administratorDao.selectAdministratorList();
         return list;
     }
 
     @Override
     public PageBean<Administrator> selectAdministratorListByPage(Administrator administrator, PageBean<Administrator> pageBean) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-        //²éÑ¯·ÖÒ³½á¹û
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
+        //æŸ¥è¯¢åˆ†é¡µç»“æœ
         pageBean.setResult(administratorDao.selectAdministratorListByPage(administrator, pageBean.getStart(), pageBean.getEnd()));
-        //²éÑ¯¼ÇÂ¼×ÜÊı
+        //æŸ¥è¯¢è®°å½•æ€»æ•°
         pageBean.setTotal(administratorDao.selectTotal(administrator));
         return pageBean;
     }
 
     @Override
     public Integer updateAdministrator(Administrator administrator) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = administratorDao.updateAdministrator(administrator);
         return i;
     }
 
     @Override
     public Integer deleteAdministratorById(String id) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = administratorDao.deleteAdministratorById(id);
         return i;
     }
 
     @Override
     public Integer insertAdministrator(Administrator administrator) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = administratorDao.insertAdministrator(administrator);
         return i;
     }

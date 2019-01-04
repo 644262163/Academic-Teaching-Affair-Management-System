@@ -23,14 +23,14 @@ public class AdministratorTeacherController {
     @Resource
     private TeacherService teacherService;
     
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "ÀÏÊ¦ÁĞ±íÒ³Ãæ")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "è€å¸ˆåˆ—è¡¨é¡µé¢")
     @RequestMapping("/teacher_list")
     public String teacherList() {
 
         return "admin/teacher_list";
     }
     
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "»ñÈ¡ÀÏÊ¦ÁĞ±í")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "è·å–è€å¸ˆåˆ—è¡¨")
     @RequestMapping("/select_teacher_list")
     public String selectTeacherList(
             Teacher teacher,
@@ -38,76 +38,76 @@ public class AdministratorTeacherController {
             @RequestParam(value = "limit", required = false) String limit,
             HttpServletResponse response) throws Exception {
         
-        //¶¨Òå·ÖÒ³
+        //å®šä¹‰åˆ†é¡µ
         PageBean<Teacher> pageBean = new PageBean<Teacher>(
             Integer.parseInt(page),
             Integer.parseInt(limit));
-        //ÄÃµ½·ÖÒ³½á¹ûÒÑ¾­¼ÇÂ¼×ÜÊıµÄpage
+        //æ‹¿åˆ°åˆ†é¡µç»“æœå·²ç»è®°å½•æ€»æ•°çš„page
         pageBean = teacherService.selectTeacherListByPage(teacher, pageBean);
 
-        //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+        //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
         JSONObject result = new JSONObject();
-        //Í¨¹ıfastJsonĞòÁĞ»¯listÎªjsonArray
+        //é€šè¿‡fastJsonåºåˆ—åŒ–listä¸ºjsonArray
         String jsonArray = JSON.toJSONString(pageBean.getResult());
         JSONArray array = JSONArray.parseArray(jsonArray);
-        //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+        //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
         result.put("data", array);
         result.put("count", pageBean.getTotal());
         result.put("code", 0);
 
-        //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+        //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
         ResponseUtil.write(response, result);
         return null;
     }
     
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "ĞŞ¸ÄÀÏÊ¦")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "ä¿®æ”¹è€å¸ˆ")
     @RequestMapping("/update_teacher")
     public String updateTeacher(Teacher teacher, HttpServletResponse response) throws Exception {
         Integer i = teacherService.updateTeacher(teacher);
         
         if(i > 0) {
-            //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+            //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
             JSONObject result = new JSONObject();
-            //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+            //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
             result.put("success", true);
             
-            //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+            //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
             ResponseUtil.write(response, result);
         }
         
         return null;
     }
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "É¾³ıÀÏÊ¦")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "åˆ é™¤è€å¸ˆ")
     @RequestMapping(value="/delete_teacher")
     public String deleteTeacher(String id, HttpServletResponse response) throws Exception {
         Integer i = teacherService.deleteTeacherById(id);
         
         if(i > 0) {
-            //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+            //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
             JSONObject result = new JSONObject();
-            //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+            //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
             result.put("success", true);
             
-            //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+            //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
             ResponseUtil.write(response, result);
         }
         
         return null;
     }
     
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "Ìí¼ÓÀÏÊ¦")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "æ·»åŠ è€å¸ˆ")
     @RequestMapping("/insert_teacher")
     public String insertTeacher(Teacher teacher, HttpServletResponse response) throws Exception {
         Integer i = teacherService.insertTeacher(teacher);
         
         if(i > 0) {
-            //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+            //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
             JSONObject result = new JSONObject();
-            //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+            //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
             result.put("success", true);
             
-            //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+            //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
             ResponseUtil.write(response, result);
         }
         

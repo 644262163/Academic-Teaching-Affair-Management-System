@@ -19,45 +19,45 @@ public class TeacherServiceImpl implements TeacherService{
     
     @Override
     public Teacher selectTeacherById(String id) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Teacher teacher = teacherDao.selectTeacherById(id);
         return teacher;
     }
 
     @Override
     public List<Teacher> selectTeacherList() {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         List<Teacher> list = teacherDao.selectTeacherList();
         return list;
     }
 
     @Override
     public PageBean<Teacher> selectTeacherListByPage(Teacher teacher, PageBean<Teacher> pageBean) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-        //²éÑ¯·ÖÒ³½á¹û
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
+        //æŸ¥è¯¢åˆ†é¡µç»“æœ
         pageBean.setResult(teacherDao.selectTeacherListByPage(teacher, pageBean.getStart(), pageBean.getEnd()));
-        //²éÑ¯¼ÇÂ¼×ÜÊı
+        //æŸ¥è¯¢è®°å½•æ€»æ•°
         pageBean.setTotal(teacherDao.selectTotal(teacher));
         return pageBean;
     }
 
     @Override
     public Integer updateTeacher(Teacher teacher) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = teacherDao.updateTeacher(teacher);
         return i;
     }
 
     @Override
     public Integer deleteTeacherById(String id) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = teacherDao.deleteTeacherById(id);
         return i;
     }
 
     @Override
     public Integer insertTeacher(Teacher teacher) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = teacherDao.insertTeacher(teacher);
         return i;
     }

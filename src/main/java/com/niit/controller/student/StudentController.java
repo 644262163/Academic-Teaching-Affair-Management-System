@@ -25,21 +25,21 @@ public class StudentController {
     @Resource
     private StudentService studentService;
 
-    @Log(module = "Ñ§ÉúºóÌ¨", method = "Ñ§ÉúºóÌ¨")
+    @Log(module = "å­¦ç”Ÿåå°", method = "å­¦ç”Ÿåå°")
     @RequestMapping("/student_index")
     public String studentIndex() {
 
         return "student/student_index";
     }
 
-    @Log(module = "Ñ§ÉúºóÌ¨", method = "ĞŞ¸ÄÃÜÂëÒ³Ãæ")
+    @Log(module = "å­¦ç”Ÿåå°", method = "ä¿®æ”¹å¯†ç é¡µé¢")
     @RequestMapping("/modify_password")
     public String modifyPassword() {
 
         return "student/modify_password";
     }
 
-    @Log(module = "Ñ§ÉúºóÌ¨", method = "ĞŞ¸ÄÃÜÂë")
+    @Log(module = "å­¦ç”Ÿåå°", method = "ä¿®æ”¹å¯†ç ")
     @RequestMapping("/update_password")
     public String updatePassword(
             @RequestParam(value = "studentId", required = false) String studentId,
@@ -52,12 +52,12 @@ public class StudentController {
             student.setPassword(newPassword);
             studentService.updateStudent(student);
 
-            //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+            //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
             JSONObject result = new JSONObject();
-            //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+            //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
             result.put("success", true);
 
-            //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+            //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
             ResponseUtil.write(response, result);
         }
 
@@ -65,14 +65,14 @@ public class StudentController {
     }
 
 
-    @Log(module = "Ñ§ÉúºóÌ¨", method = "»¶Ó­Ò³Ãæ")
+    @Log(module = "å­¦ç”Ÿåå°", method = "æ¬¢è¿é¡µé¢")
     @RequestMapping("/welcome")
     public String welcome() {
 
         return "student/welcome";
     }
 
-    @Log(module = "Ñ§ÉúºóÌ¨", method = "»ñÈ¡»¶Ó­Êı¾İ")
+    @Log(module = "å­¦ç”Ÿåå°", method = "è·å–æ¬¢è¿æ•°æ®")
     @RequestMapping("/select_welcome")
     public String selectWelcome(
             @RequestParam(value = "studentId", required = false) String studentId,
@@ -81,12 +81,12 @@ public class StudentController {
         Student student = studentService.selectStudentById(studentId);
         com.niit.bean.Log log = new com.niit.bean.Log();
         log.setUserId(studentId);
-        log.setMethod("µÇÂ½³É¹¦");
+        log.setMethod("ç™»é™†æˆåŠŸ");
         List<com.niit.bean.Log> list = logService.selectLogListByLog(log);
 
-        //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+        //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
         JSONObject result = new JSONObject();
-        //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+        //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
         result.put("name", student.getName());
         result.put("cnt", list.size());
         if(list.size() > 1) {
@@ -104,7 +104,7 @@ public class StudentController {
             result.put("time", time);
         }
 
-        //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+        //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
         ResponseUtil.write(response, result);
         return null;
     }

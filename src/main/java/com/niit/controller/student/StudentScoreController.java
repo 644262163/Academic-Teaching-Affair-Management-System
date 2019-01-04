@@ -23,14 +23,14 @@ public class StudentScoreController {
     @Resource
     private ScoreService scoreService;
     
-    @Log(module = "Ñ§ÉúºóÌ¨", method = "³É¼¨ÁĞ±íÒ³Ãæ")
+    @Log(module = "å­¦ç”Ÿåå°", method = "æˆç»©åˆ—è¡¨é¡µé¢")
     @RequestMapping("/score_list")
     public String scoreList() {
 
         return "student/score_list";
     }
     
-    @Log(module = "Ñ§ÉúºóÌ¨", method = "»ñÈ¡³É¼¨ÁĞ±í")
+    @Log(module = "å­¦ç”Ÿåå°", method = "è·å–æˆç»©åˆ—è¡¨")
     @RequestMapping("/select_score_list")
     public String selectScoreList(
             Score score,
@@ -38,24 +38,24 @@ public class StudentScoreController {
             @RequestParam(value = "limit", required = false) String limit,
             HttpServletResponse response) throws Exception {
         
-        //¶¨Òå·ÖÒ³
+        //å®šä¹‰åˆ†é¡µ
         PageBean<Map<String, Object>> pageBean = new PageBean<Map<String, Object>>(
             Integer.parseInt(page),
             Integer.parseInt(limit));
-        //ÄÃµ½·ÖÒ³½á¹ûÒÑ¾­¼ÇÂ¼×ÜÊıµÄpage
+        //æ‹¿åˆ°åˆ†é¡µç»“æœå·²ç»è®°å½•æ€»æ•°çš„page
         pageBean = scoreService.selectScoreListByStudent(score, pageBean);
 
-        //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+        //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
         JSONObject result = new JSONObject();
-        //Í¨¹ıfastJsonĞòÁĞ»¯listÎªjsonArray
+        //é€šè¿‡fastJsonåºåˆ—åŒ–listä¸ºjsonArray
         String jsonArray = JSON.toJSONString(pageBean.getResult());
         JSONArray array = JSONArray.parseArray(jsonArray);
-        //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+        //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
         result.put("data", array);
         result.put("count", pageBean.getTotal());
         result.put("code", 0);
 
-        //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+        //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
         ResponseUtil.write(response, result);
         return null;
     }

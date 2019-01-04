@@ -6,12 +6,12 @@ import org.apache.commons.lang.StringUtils;
 
 public class IPUtil {
     /**
-    * »ñÈ¡·ÃÎÊÕßIP
+    * è·å–è®¿é—®è€…IP
     * 
-    * ÔÚÒ»°ãÇé¿öÏÂÊ¹ÓÃRequest.getRemoteAddr()¼´¿É£¬µ«ÊÇ¾­¹ınginxµÈ·´Ïò´úÀíÈí¼şºó£¬Õâ¸ö·½·¨»áÊ§Ğ§¡£
+    * åœ¨ä¸€èˆ¬æƒ…å†µä¸‹ä½¿ç”¨Request.getRemoteAddr()å³å¯ï¼Œä½†æ˜¯ç»è¿‡nginxç­‰åå‘ä»£ç†è½¯ä»¶åï¼Œè¿™ä¸ªæ–¹æ³•ä¼šå¤±æ•ˆã€‚
     * 
-    * ±¾·½·¨ÏÈ´ÓHeaderÖĞ»ñÈ¡X-Real-IP£¬Èç¹û²»´æÔÚÔÙ´ÓX-Forwarded-For»ñµÃµÚÒ»¸öIP(ÓÃ,·Ö¸î)£¬
-    * Èç¹û»¹²»´æÔÚÔòµ÷ÓÃRequest .getRemoteAddr()¡£
+    * æœ¬æ–¹æ³•å…ˆä»Headerä¸­è·å–X-Real-IPï¼Œå¦‚æœä¸å­˜åœ¨å†ä»X-Forwarded-Forè·å¾—ç¬¬ä¸€ä¸ªIP(ç”¨,åˆ†å‰²)ï¼Œ
+    * å¦‚æœè¿˜ä¸å­˜åœ¨åˆ™è°ƒç”¨Request .getRemoteAddr()ã€‚
     * 
     * @param request
     * @return
@@ -23,7 +23,7 @@ public class IPUtil {
         }
         ip = request.getHeader("X-Forwarded-For");
         if (!StringUtils.isBlank(ip) && !"unknown".equalsIgnoreCase(ip)) {
-            // ¶à´Î·´Ïò´úÀíºó»áÓĞ¶à¸öIPÖµ£¬µÚÒ»¸öÎªÕæÊµIP¡£
+            // å¤šæ¬¡åå‘ä»£ç†åä¼šæœ‰å¤šä¸ªIPå€¼ï¼Œç¬¬ä¸€ä¸ªä¸ºçœŸå®IPã€‚
             int index = ip.indexOf(',');
             if (index != -1) {
                 return ip.substring(0, index);

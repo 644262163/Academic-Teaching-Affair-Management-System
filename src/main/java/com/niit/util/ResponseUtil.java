@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 public class ResponseUtil {
     /**
-     * 向response对象写入数据
+     * 鍚憆esponse瀵硅薄鍐欏叆鏁版嵁
      * @param response
      * @param obj
      * @throws Exception

@@ -18,7 +18,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>    
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>    
     <!-- 编译时的编码 -->    
-    <maven.compiler.encoding>UTF-8</maven.compiler.encoding> 
+    <maven.compiler.encoding>GBK</maven.compiler.encoding>
   </properties>
   
   <!-- 用到的jar包 -->
@@ -316,6 +316,13 @@
         <artifactId>mail</artifactId>
         <version>1.4.7</version>
     </dependency>
+
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>3.0.1</version>
+          <scope>provided</scope>
+      </dependency>
     
   </dependencies>
   <build>
@@ -340,6 +347,28 @@
           </dependency>
         </dependencies>
       </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.0.0</version>
+            <configuration>
+                <webResources>
+                    <resource>
+                        <directory>WebContent</directory>
+                    </resource>
+                </webResources>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.3.2</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+                <encoding>UTF-8</encoding>
+            </configuration>
+        </plugin>
     </plugins>
   </build>
 </project>

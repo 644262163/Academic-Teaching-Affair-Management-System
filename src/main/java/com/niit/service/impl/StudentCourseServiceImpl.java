@@ -34,9 +34,9 @@ public class StudentCourseServiceImpl implements StudentCourseService{
 
     @Override
     public PageBean<StudentCourse> selectStudentCourseListByPage(StudentCourse studentCourse, PageBean<StudentCourse> pageBean) {
-        //查询分页结果
+        //鏌ヨ鍒嗛〉缁撴灉
         pageBean.setResult(studentCourseDao.selectStudentCourseListByPage(studentCourse, pageBean.getStart(), pageBean.getEnd()));
-        //查询记录总数
+        //鏌ヨ璁板綍鎬绘暟
         pageBean.setTotal(studentCourseDao.selectTotal(studentCourse));
         return pageBean;
     }
@@ -75,7 +75,7 @@ public class StudentCourseServiceImpl implements StudentCourseService{
             resultList.add(objs);
         }
         pageBean.setResult(resultList);
-        //查询记录总数
+        //鏌ヨ璁板綍鎬绘暟
         pageBean.setTotal(studentCourseDao.selectTotal(studentCourse));
         return pageBean;
     }

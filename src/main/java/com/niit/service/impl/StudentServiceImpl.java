@@ -19,45 +19,45 @@ public class StudentServiceImpl implements StudentService{
     
     @Override
     public Student selectStudentById(String id) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Student student = studentDao.selectStudentById(id);
         return student;
     }
 
     @Override
     public List<Student> selectStudentList() {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         List<Student> list = studentDao.selectStudentList();
         return list;
     }
 
     @Override
     public PageBean<Student> selectStudentListByPage(Student student, PageBean<Student> pageBean) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-        //²éÑ¯·ÖÒ³½á¹û
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
+        //æŸ¥è¯¢åˆ†é¡µç»“æœ
         pageBean.setResult(studentDao.selectStudentListByPage(student, pageBean.getStart(), pageBean.getEnd()));
-        //²éÑ¯¼ÇÂ¼×ÜÊı
+        //æŸ¥è¯¢è®°å½•æ€»æ•°
         pageBean.setTotal(studentDao.selectTotal(student));
         return pageBean;
     }
 
     @Override
     public Integer updateStudent(Student student) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = studentDao.updateStudent(student);
         return i;
     }
 
     @Override
     public Integer deleteStudentById(String id) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = studentDao.deleteStudentById(id);
         return i;
     }
 
     @Override
     public Integer insertStudent(Student student) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = studentDao.insertStudent(student);
         return i;
     }

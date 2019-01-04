@@ -19,45 +19,45 @@ public class CourseServiceImpl implements CourseService{
     
     @Override
     public Course selectCourseById(String id) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Course course = courseDao.selectCourseById(id);
         return course;
     }
 
     @Override
     public List<Course> selectCourseList() {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         List<Course> list = courseDao.selectCourseList();
         return list;
     }
 
     @Override
     public PageBean<Course> selectCourseListByPage(Course course, PageBean<Course> pageBean) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-        //²éÑ¯·ÖÒ³½á¹û
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
+        //æŸ¥è¯¢åˆ†é¡µç»“æœ
         pageBean.setResult(courseDao.selectCourseListByPage(course, pageBean.getStart(), pageBean.getEnd()));
-        //²éÑ¯¼ÇÂ¼×ÜÊı
+        //æŸ¥è¯¢è®°å½•æ€»æ•°
         pageBean.setTotal(courseDao.selectTotal(course));
         return pageBean;
     }
 
     @Override
     public Integer updateCourse(Course course) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = courseDao.updateCourse(course);
         return i;
     }
 
     @Override
     public Integer deleteCourseById(String id) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = courseDao.deleteCourseById(id);
         return i;
     }
 
     @Override
     public Integer insertCourse(Course course) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = courseDao.insertCourse(course);
         return i;
     }

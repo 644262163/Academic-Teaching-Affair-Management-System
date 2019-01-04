@@ -28,21 +28,21 @@ public class AdministratorController {
     @Resource
     private AdministratorService administratorService;
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "¹ÜÀíÔ±ºóÌ¨")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "ç®¡ç†å‘˜åå°")
     @RequestMapping("/admin_index")
     public String adminIndex() {
 
         return "admin/admin_index";
     }
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "¹ÜÀíÔ±ÁĞ±íÒ³Ãæ")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "ç®¡ç†å‘˜åˆ—è¡¨é¡µé¢")
     @RequestMapping("/admin_list")
     public String adminList() {
 
         return "admin/admin_list";
     }
     
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "»ñÈ¡¹ÜÀíÔ±ÁĞ±í")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "è·å–ç®¡ç†å‘˜åˆ—è¡¨")
     @RequestMapping("/select_admin_list")
     public String selectAdminList(
             Administrator administrator,
@@ -50,90 +50,90 @@ public class AdministratorController {
             @RequestParam(value = "limit", required = false) String limit,
             HttpServletResponse response) throws Exception {
         
-        //¶¨Òå·ÖÒ³
+        //å®šä¹‰åˆ†é¡µ
         PageBean<Administrator> pageBean = new PageBean<Administrator>(
             Integer.parseInt(page),
             Integer.parseInt(limit));
-        //ÄÃµ½·ÖÒ³½á¹ûÒÑ¾­¼ÇÂ¼×ÜÊıµÄpage
+        //æ‹¿åˆ°åˆ†é¡µç»“æœå·²ç»è®°å½•æ€»æ•°çš„page
         pageBean = administratorService.selectAdministratorListByPage(administrator, pageBean);
 
-        //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+        //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
         JSONObject result = new JSONObject();
-        //Í¨¹ıfastJsonĞòÁĞ»¯listÎªjsonArray
+        //é€šè¿‡fastJsonåºåˆ—åŒ–listä¸ºjsonArray
         String jsonArray = JSON.toJSONString(pageBean.getResult());
         JSONArray array = JSONArray.parseArray(jsonArray);
-        //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+        //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
         result.put("data", array);
         result.put("count", pageBean.getTotal());
         result.put("code", 0);
 
-        //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+        //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
         ResponseUtil.write(response, result);
         return null;
     }
     
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "ĞŞ¸Ä¹ÜÀíÔ±")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "ä¿®æ”¹ç®¡ç†å‘˜")
     @RequestMapping("/update_admin")
     public String updateAdmin(Administrator administrator, HttpServletResponse response) throws Exception {
         Integer i = administratorService.updateAdministrator(administrator);
         
         if(i > 0) {
-            //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+            //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
             JSONObject result = new JSONObject();
-            //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+            //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
             result.put("success", true);
             
-            //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+            //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
             ResponseUtil.write(response, result);
         }
         
         return null;
     }
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "É¾³ı¹ÜÀíÔ±")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "åˆ é™¤ç®¡ç†å‘˜")
     @RequestMapping(value="/delete_admin")
     public String deleteAdmin(String id, HttpServletResponse response) throws Exception {
         Integer i = administratorService.deleteAdministratorById(id);
         
         if(i > 0) {
-            //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+            //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
             JSONObject result = new JSONObject();
-            //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+            //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
             result.put("success", true);
             
-            //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+            //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
             ResponseUtil.write(response, result);
         }
         
         return null;
     }
     
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "Ìí¼Ó¹ÜÀíÔ±")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "æ·»åŠ ç®¡ç†å‘˜")
     @RequestMapping("/insert_admin")
     public String insertAdmin(Administrator administrator, HttpServletResponse response) throws Exception {
         Integer i = administratorService.insertAdministrator(administrator);
         
         if(i > 0) {
-            //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+            //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
             JSONObject result = new JSONObject();
-            //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+            //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
             result.put("success", true);
             
-            //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+            //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
             ResponseUtil.write(response, result);
         }
         
         return null;
     }
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "ĞŞ¸ÄÃÜÂëÒ³Ãæ")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "ä¿®æ”¹å¯†ç é¡µé¢")
     @RequestMapping("/modify_password")
     public String modifyPassword() {
 
         return "admin/modify_password";
     }
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "ĞŞ¸ÄÃÜÂë")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "ä¿®æ”¹å¯†ç ")
     @RequestMapping("/update_password")
     public String updatePassword(
             @RequestParam(value = "administratorId", required = false) String administratorId,
@@ -146,26 +146,26 @@ public class AdministratorController {
             administrator.setPassword(newPassword);
             administratorService.updateAdministrator(administrator);
 
-            //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+            //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
             JSONObject result = new JSONObject();
-            //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+            //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
             result.put("success", true);
 
-            //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+            //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
             ResponseUtil.write(response, result);
         }
 
         return null;
     }
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "»¶Ó­Ò³Ãæ")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "æ¬¢è¿é¡µé¢")
     @RequestMapping("/welcome")
     public String welcome() {
 
         return "admin/welcome";
     }
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "»ñÈ¡»¶Ó­Êı¾İ")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "è·å–æ¬¢è¿æ•°æ®")
     @RequestMapping("/select_welcome")
     public String selectWelcome(
             @RequestParam(value = "administratorId", required = false) String administratorId,
@@ -174,12 +174,12 @@ public class AdministratorController {
         Administrator administrator = administratorService.selectAdministratorById(administratorId);
         com.niit.bean.Log log = new com.niit.bean.Log();
         log.setUserId(administratorId);
-        log.setMethod("µÇÂ½³É¹¦");
+        log.setMethod("ç™»é™†æˆåŠŸ");
         List<com.niit.bean.Log> list = logService.selectLogListByLog(log);
 
-        //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+        //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
         JSONObject result = new JSONObject();
-        //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+        //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
         result.put("name", administrator.getId());
         result.put("cnt", list.size());
         if(list.size() > 1) {
@@ -197,7 +197,7 @@ public class AdministratorController {
             result.put("time", time);
         }
 
-        //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+        //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
         ResponseUtil.write(response, result);
         return null;
     }

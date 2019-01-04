@@ -24,14 +24,14 @@ public class LoginController {
     @Resource
     private LogService logService;
     
-    @Log(module = "前台", method = "登陆页面")  
+    @Log(module = "鍓嶅彴", method = "鐧婚檰椤甸潰")  
     @RequestMapping("/login")
     public String login(HttpServletRequest request) {
         request.getSession().removeAttribute("msg");
         return "login";
     }
     
-    @Log(module = "后台", method = "登出")
+    @Log(module = "鍚庡彴", method = "鐧诲嚭")
     @RequestMapping("/logout")
     public String logout() {
         Subject subject = SecurityUtils.getSubject();
@@ -45,7 +45,7 @@ public class LoginController {
         return "redirect:/index.jsp";
     }
     
-    @Log(module = "后台", method = "登陆")
+    @Log(module = "鍚庡彴", method = "鐧婚檰")
     @RequestMapping("/index")
     public String index(ModelMap resultMap, String id, String password, HttpServletRequest request, HttpServletResponse response)  throws Throwable {
         Subject subject = SecurityUtils.getSubject();
@@ -89,8 +89,8 @@ public class LoginController {
                     "",
                     new Date(),
                     0L,
-                    "后台",
-                    "登陆成功",
+                    "鍚庡彴",
+                    "鐧婚檰鎴愬姛",
                     "success",
                     "");
             Integer i = logService.insertLog(log);
@@ -103,13 +103,13 @@ public class LoginController {
                 "",
                 new Date(),
                 0L,
-                "后台",
-                "登陆失败",
+                "鍚庡彴",
+                "鐧婚檰澶辫触",
                 "success",
                 "");
         Integer i = logService.insertLog(log);
 
-        request.getSession().setAttribute("msg", "账号或密码错误！");
+        request.getSession().setAttribute("msg", "璐﹀彿鎴栧瘑鐮侀敊璇紒");
         return "login";
     }
     

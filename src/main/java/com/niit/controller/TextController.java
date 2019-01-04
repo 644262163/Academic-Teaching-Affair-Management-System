@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class TextController {
 
-    @Log(module = "前台", method = "异常页面")
+    @Log(module = "鍓嶅彴", method = "寮傚父椤甸潰")
     @RequestMapping("error")
     public String error() throws Exception {
-        throw new Exception("异常测试");
+        throw new Exception("寮傚父娴嬭瘯");
     }
 
 }

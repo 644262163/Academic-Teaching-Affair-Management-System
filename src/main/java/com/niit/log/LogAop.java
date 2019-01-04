@@ -31,80 +31,80 @@ public class LogAop {
     @Resource
     private LogService logService;
     
-    //ÅäÖÃ½ÓÈëµã,Èç¹û²»ÖªµÀÔõÃ´ÅäÖÃ,¿ÉÒÔ°Ù¶ÈÒ»ÏÂ¹æÔò
+    //é…ç½®æ¥å…¥ç‚¹,å¦‚æœä¸çŸ¥é“æ€ä¹ˆé…ç½®,å¯ä»¥ç™¾åº¦ä¸€ä¸‹è§„åˆ™
     @Pointcut("execution(* com.niit.controller..*.*(..))") 
-    private void log() {} //¶¨ÒåÒ»¸öÇĞÈëµã
+    private void log() {} //å®šä¹‰ä¸€ä¸ªåˆ‡å…¥ç‚¹
     
-    //Ç°ÖÃÍ¨Öª£¬ÔÚ·½·¨Ç°Í¨Öª
+    //å‰ç½®é€šçŸ¥ï¼Œåœ¨æ–¹æ³•å‰é€šçŸ¥
     @Before("log()")
     public void doAccessCheck(JoinPoint joinPoint) {
-        //System.out.println("Ç°ÖÃÍ¨Öª-----------------------------------");
+        //System.out.println("å‰ç½®é€šçŸ¥-----------------------------------");
     }
     
-    //ºóÖÃÍ¨Öª£¬ÔÚ·½·¨Ö´ĞĞºóÍ¨Öª
+    //åç½®é€šçŸ¥ï¼Œåœ¨æ–¹æ³•æ‰§è¡Œåé€šçŸ¥
     @After("log()")
     public void after(JoinPoint joinPoint) {
-        //System.out.println("ºóÖÃÍ¨Öª-----------------------------------");
+        //System.out.println("åç½®é€šçŸ¥-----------------------------------");
     }
     
-    //·µ»ØÍ¨Öª£¬ÔÚ·½·¨·µ»Ø½á¹ûÖ®ºóÍ¨Öª
+    //è¿”å›é€šçŸ¥ï¼Œåœ¨æ–¹æ³•è¿”å›ç»“æœä¹‹åé€šçŸ¥
     @AfterReturning("log()")  
     public void doAfter(JoinPoint joinPoint) {  
-        //System.out.println("·µ»ØÍ¨Öª-----------------------------------");  
+        //System.out.println("è¿”å›é€šçŸ¥-----------------------------------");  
     }
     
-    //Òì³£Í¨Öª£¬ÔÚ·½·¨Å×³öÒì³£Ö®ºóÍ¨Öª
+    //å¼‚å¸¸é€šçŸ¥ï¼Œåœ¨æ–¹æ³•æŠ›å‡ºå¼‚å¸¸ä¹‹åé€šçŸ¥
     @AfterThrowing(pointcut = "log()", throwing = "e")
     public void doAfterThrow(JoinPoint joinPoint, Throwable e) {
-        //System.out.println("Òì³£Í¨Öª-----------------------------------");
+        //System.out.println("å¼‚å¸¸é€šçŸ¥-----------------------------------");
     }
     
-    //»·ÈÆÍ¨Öª£¬Î§ÈÆ×Å·½·¨Ö´ĞĞ
+    //ç¯ç»•é€šçŸ¥ï¼Œå›´ç»•ç€æ–¹æ³•æ‰§è¡Œ
     @Around("log()")
     public Object doBasicProfiling(ProceedingJoinPoint pjp) throws Throwable {
-        //System.out.println("½øÈë»·ÈÆÍ¨Öª-----------------------------------");
+        //System.out.println("è¿›å…¥ç¯ç»•é€šçŸ¥-----------------------------------");
         
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         
-        //»ñÈ¡µÇÂ¼ÓÃ»§id
+        //è·å–ç™»å½•ç”¨æˆ·id
         String userId = request.getRemoteUser();
         
-        //»ñÈ¡ÏµÍ³ip
+        //è·å–ç³»ç»Ÿip
         String ip = IPUtil.getIpAddr(request);
         if("0:0:0:0:0:0:0:1".equals(ip)) {
             ip = "127.0.0.1";
         }
         
-        //»ñÈ¡ÏµÍ³url
+        //è·å–ç³»ç»Ÿurl
         String url = request.getServletPath();
         
-        //»ñÈ¡ÏµÍ³²ÎÊı
+        //è·å–ç³»ç»Ÿå‚æ•°
         String parameter = "{";
         for(Map.Entry<String, String[]> entry: request.getParameterMap().entrySet())
             parameter += entry.getKey() + ": " + entry.getValue()[0] + ", ";
         parameter += "}";
         
-        //»ñÈ¡ÏµÍ³Ê±¼ä
+        //è·å–ç³»ç»Ÿæ—¶é—´
         Date time = new Date();
         
-        //·½·¨Í¨ÖªÇ°»ñÈ¡Ê±¼ä
+        //æ–¹æ³•é€šçŸ¥å‰è·å–æ—¶é—´
         long start = System.currentTimeMillis();
         
-        // À¹½ØµÄÊµÌåÀà£¬¾ÍÊÇµ±Ç°ÕıÔÚÖ´ĞĞµÄcontroller
+        // æ‹¦æˆªçš„å®ä½“ç±»ï¼Œå°±æ˜¯å½“å‰æ­£åœ¨æ‰§è¡Œçš„controller
         Object target = pjp.getTarget();
-        // À¹½ØµÄ·½·¨Ãû³Æ¡£µ±Ç°ÕıÔÚÖ´ĞĞµÄ·½·¨
+        // æ‹¦æˆªçš„æ–¹æ³•åç§°ã€‚å½“å‰æ­£åœ¨æ‰§è¡Œçš„æ–¹æ³•
         String methodName = pjp.getSignature().getName();
-        // À¹½ØµÄ·½·¨²ÎÊı
+        // æ‹¦æˆªçš„æ–¹æ³•å‚æ•°
         Object[] args = pjp.getArgs();
-        // À¹½ØµÄ·Å²ÎÊıÀàĞÍ
+        // æ‹¦æˆªçš„æ”¾å‚æ•°ç±»å‹
         Signature sig = pjp.getSignature();
         MethodSignature msig = null;
         if (!(sig instanceof MethodSignature)) {
-            throw new IllegalArgumentException("¸Ã×¢½âÖ»ÄÜÓÃÓÚ·½·¨");
+            throw new IllegalArgumentException("è¯¥æ³¨è§£åªèƒ½ç”¨äºæ–¹æ³•");
         }
         msig = (MethodSignature) sig;
         Class[] parameterTypes = msig.getMethod().getParameterTypes();
-        // »ñµÃ±»À¹½ØµÄ·½·¨
+        // è·å¾—è¢«æ‹¦æˆªçš„æ–¹æ³•
         Method method = null;
         try {
             method = target.getClass().getMethod(methodName, parameterTypes);
@@ -115,7 +115,7 @@ public class LogAop {
         }
         String mod = null, met = null;
         if (null != method) {
-            // ÅĞ¶ÏÊÇ·ñ°üº¬×Ô¶¨ÒåµÄ×¢½â£¬ËµÃ÷Ò»ÏÂÕâÀïµÄLog¾ÍÊÇÎÒ×Ô¼º×Ô¶¨ÒåµÄ×¢½â
+            // åˆ¤æ–­æ˜¯å¦åŒ…å«è‡ªå®šä¹‰çš„æ³¨è§£ï¼Œè¯´æ˜ä¸€ä¸‹è¿™é‡Œçš„Logå°±æ˜¯æˆ‘è‡ªå·±è‡ªå®šä¹‰çš„æ³¨è§£
             if (method.isAnnotationPresent(Log.class)) {
                 Log log = method.getAnnotation(Log.class);
                 mod = log.module();
@@ -123,7 +123,7 @@ public class LogAop {
             }
         }
         
-        //Ö´ĞĞ¸Ã·½·¨
+        //æ‰§è¡Œè¯¥æ–¹æ³•
         String result = null, message = null;
         Object object = null;
         try {
@@ -134,19 +134,19 @@ public class LogAop {
             message = e.getMessage();
         }
         
-        //·½·¨Í¨ÖªÇ°»ñÈ¡Ê±¼ä
+        //æ–¹æ³•é€šçŸ¥å‰è·å–æ—¶é—´
         long end = System.currentTimeMillis();
         
-        //½«¼ÆËãºÃµÄÊ±¼ä
+        //å°†è®¡ç®—å¥½çš„æ—¶é—´
         Long length = end - start;
         
-        //±£´æÔÚÊµÌåÖĞ
+        //ä¿å­˜åœ¨å®ä½“ä¸­
         com.niit.bean.Log log = new com.niit.bean.Log(userId, ip, url, parameter, time, length, mod, met, result, message);
         
-        //±£´æ½øÊı¾İ¿â
+        //ä¿å­˜è¿›æ•°æ®åº“
         Integer i = logService.insertLog(log);
         
-        //System.out.println("ÍË³ö·½·¨-----------------------------------");
+        //System.out.println("é€€å‡ºæ–¹æ³•-----------------------------------");
         return object;
     }
 }

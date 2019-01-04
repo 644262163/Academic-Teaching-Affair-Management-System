@@ -23,14 +23,14 @@ public class StudentEvaluationController {
     @Resource
     private EvaluationService evaluationService;
     
-    @Log(module = "Ñ§ÉúºóÌ¨", method = "ÆÀ¼ÛÁĞ±íÒ³Ãæ")
+    @Log(module = "å­¦ç”Ÿåå°", method = "è¯„ä»·åˆ—è¡¨é¡µé¢")
     @RequestMapping("/evaluation_list")
     public String evaluationList() {
 
         return "student/evaluation_list";
     }
     
-    @Log(module = "Ñ§ÉúºóÌ¨", method = "»ñÈ¡ÆÀ¼ÛÁĞ±í")
+    @Log(module = "å­¦ç”Ÿåå°", method = "è·å–è¯„ä»·åˆ—è¡¨")
     @RequestMapping("/select_evaluation_list")
     public String selectEvaluationList(
             Evaluation evaluation,
@@ -38,40 +38,40 @@ public class StudentEvaluationController {
             @RequestParam(value = "limit", required = false) String limit,
             HttpServletResponse response) throws Exception {
         
-        //¶¨Òå·ÖÒ³
+        //å®šä¹‰åˆ†é¡µ
         PageBean<Map<String, Object>> pageBean = new PageBean<Map<String, Object>>(
             Integer.parseInt(page),
             Integer.parseInt(limit));
-        //ÄÃµ½·ÖÒ³½á¹ûÒÑ¾­¼ÇÂ¼×ÜÊıµÄpage
+        //æ‹¿åˆ°åˆ†é¡µç»“æœå·²ç»è®°å½•æ€»æ•°çš„page
         pageBean = evaluationService.selectEvaluationListByStudent(evaluation, pageBean);
 
-        //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+        //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
         JSONObject result = new JSONObject();
-        //Í¨¹ıfastJsonĞòÁĞ»¯listÎªjsonArray
+        //é€šè¿‡fastJsonåºåˆ—åŒ–listä¸ºjsonArray
         String jsonArray = JSON.toJSONString(pageBean.getResult());
         JSONArray array = JSONArray.parseArray(jsonArray);
-        //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+        //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
         result.put("data", array);
         result.put("count", pageBean.getTotal());
         result.put("code", 0);
 
-        //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+        //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
         ResponseUtil.write(response, result);
         return null;
     }
     
-    @Log(module = "Ñ§ÉúºóÌ¨", method = "ĞŞ¸ÄÆÀ¼Û")
+    @Log(module = "å­¦ç”Ÿåå°", method = "ä¿®æ”¹è¯„ä»·")
     @RequestMapping("/update_evaluation")
     public String updateEvaluation(Evaluation evaluation, HttpServletResponse response) throws Exception {
         Integer i = evaluationService.updateEvaluation(evaluation);
         
         if(i > 0) {
-            //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+            //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
             JSONObject result = new JSONObject();
-            //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+            //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
             result.put("success", true);
             
-            //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+            //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
             ResponseUtil.write(response, result);
         }
         

@@ -22,14 +22,14 @@ public class AdministratorLogController {
     @Resource
     private LogService logService;
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "¿ØÖÆÌ¨Ò³Ãæ")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "æ§åˆ¶å°é¡µé¢")
     @RequestMapping("/console")
     public String adminList() {
 
         return "admin/console";
     }
     
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "»ñÈ¡ÈÕÖ¾ÁĞ±í")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "è·å–æ—¥å¿—åˆ—è¡¨")
     @RequestMapping("/select_log_list")
     public String selectLogList(
             com.niit.bean.Log log,
@@ -37,24 +37,24 @@ public class AdministratorLogController {
             @RequestParam(value = "limit", required = false) String limit,
             HttpServletResponse response) throws Exception {
         
-        //¶¨Òå·ÖÒ³
+        //å®šä¹‰åˆ†é¡µ
         PageBean<com.niit.bean.Log> pageBean = new PageBean<com.niit.bean.Log>(
             Integer.parseInt(page),
             Integer.parseInt(limit));
-        //ÄÃµ½·ÖÒ³½á¹ûÒÑ¾­¼ÇÂ¼×ÜÊıµÄpage
+        //æ‹¿åˆ°åˆ†é¡µç»“æœå·²ç»è®°å½•æ€»æ•°çš„page
         pageBean = logService.selectLogListByPage(log, pageBean);
         
-        //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+        //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
         JSONObject result = new JSONObject();
-        //Í¨¹ıfastJsonĞòÁĞ»¯listÎªjsonArray
+        //é€šè¿‡fastJsonåºåˆ—åŒ–listä¸ºjsonArray
         String jsonArray = JSON.toJSONStringWithDateFormat(pageBean.getResult(), "yyyy-MM-dd HH:mm:ss");
         JSONArray array = JSONArray.parseArray(jsonArray);
-        //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+        //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
         result.put("data", array);
         result.put("count", pageBean.getTotal());
         result.put("code", 0);
 
-        //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+        //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
         ResponseUtil.write(response, result);
         return null;
     }

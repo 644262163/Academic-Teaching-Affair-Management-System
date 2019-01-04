@@ -23,14 +23,14 @@ public class AdministratorTeacherCourseController {
     @Resource
     private TeacherCourseService teacherCourseService;
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "ÀÏÊ¦¿Î³ÌÁĞ±íÒ³Ãæ")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "è€å¸ˆè¯¾ç¨‹åˆ—è¡¨é¡µé¢")
     @RequestMapping("/teacher_course_list")
     public String teacherCourseList() {
 
         return "admin/teacher_course_list";
     }
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "»ñÈ¡ÀÏÊ¦¿Î³ÌÁĞ±í")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "è·å–è€å¸ˆè¯¾ç¨‹åˆ—è¡¨")
     @RequestMapping("/select_teacher_course_list")
     public String selectTeacherCourseList(
             TeacherCourse teacherCourse,
@@ -38,76 +38,76 @@ public class AdministratorTeacherCourseController {
             @RequestParam(value = "limit", required = false) String limit,
             HttpServletResponse response) throws Exception {
 
-        //¶¨Òå·ÖÒ³
+        //å®šä¹‰åˆ†é¡µ
         PageBean<TeacherCourse> pageBean = new PageBean<TeacherCourse>(
                 Integer.parseInt(page),
                 Integer.parseInt(limit));
-        //ÄÃµ½·ÖÒ³½á¹ûÒÑ¾­¼ÇÂ¼×ÜÊıµÄpage
+        //æ‹¿åˆ°åˆ†é¡µç»“æœå·²ç»è®°å½•æ€»æ•°çš„page
         pageBean = teacherCourseService.selectTeacherCourseListByPage(teacherCourse, pageBean);
 
-        //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+        //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
         JSONObject result = new JSONObject();
-        //Í¨¹ıfastJsonĞòÁĞ»¯listÎªjsonArray
+        //é€šè¿‡fastJsonåºåˆ—åŒ–listä¸ºjsonArray
         String jsonArray = JSON.toJSONString(pageBean.getResult());
         JSONArray array = JSONArray.parseArray(jsonArray);
-        //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+        //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
         result.put("data", array);
         result.put("count", pageBean.getTotal());
         result.put("code", 0);
 
-        //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+        //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
         ResponseUtil.write(response, result);
         return null;
     }
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "ĞŞ¸ÄÀÏÊ¦¿Î³Ì")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "ä¿®æ”¹è€å¸ˆè¯¾ç¨‹")
     @RequestMapping("/update_teacher_course")
     public String updateTeacherCourse(TeacherCourse teacherCourse, HttpServletResponse response) throws Exception {
         Integer i = teacherCourseService.updateTeacherCourse(teacherCourse);
 
         if(i > 0) {
-            //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+            //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
             JSONObject result = new JSONObject();
-            //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+            //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
             result.put("success", true);
 
-            //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+            //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
             ResponseUtil.write(response, result);
         }
 
         return null;
     }
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "É¾³ıÀÏÊ¦¿Î³Ì")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "åˆ é™¤è€å¸ˆè¯¾ç¨‹")
     @RequestMapping(value="/delete_teacher_course")
     public String deleteTeacherCourse(String id, HttpServletResponse response) throws Exception {
         Integer i = teacherCourseService.deleteTeacherCourseById(id);
 
         if(i > 0) {
-            //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+            //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
             JSONObject result = new JSONObject();
-            //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+            //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
             result.put("success", true);
 
-            //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+            //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
             ResponseUtil.write(response, result);
         }
 
         return null;
     }
 
-    @Log(module = "¹ÜÀíÔ±ºóÌ¨", method = "Ìí¼ÓÀÏÊ¦¿Î³Ì")
+    @Log(module = "ç®¡ç†å‘˜åå°", method = "æ·»åŠ è€å¸ˆè¯¾ç¨‹")
     @RequestMapping("/insert_teacher_course")
     public String insertTeacherCourse(TeacherCourse teacherCourse, HttpServletResponse response) throws Exception {
         Integer i = teacherCourseService.insertTeacherCourse(teacherCourse);
 
         if(i > 0) {
-            //Ê¹ÓÃ°¢Àï°Í°ÍµÄfastJson´´½¨JSONObject
+            //ä½¿ç”¨é˜¿é‡Œå·´å·´çš„fastJsonåˆ›å»ºJSONObject
             JSONObject result = new JSONObject();
-            //½«ĞòÁĞ»¯½á¹û·ÅÈëjson¶ÔÏóÖĞ
+            //å°†åºåˆ—åŒ–ç»“æœæ”¾å…¥jsonå¯¹è±¡ä¸­
             result.put("success", true);
 
-            //Ê¹ÓÃ×Ô¶¨Òå¹¤¾ßÀàÏòresponseÖĞĞ´ÈëÊı¾İ
+            //ä½¿ç”¨è‡ªå®šä¹‰å·¥å…·ç±»å‘responseä¸­å†™å…¥æ•°æ®
             ResponseUtil.write(response, result);
         }
 

@@ -19,7 +19,7 @@ public class LogServiceImpl implements LogService {
     
     @Override
     public List<Log> selectLogList() {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         List<Log> list = logDao.selectLogList();
         return list;
     }
@@ -32,17 +32,17 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public PageBean<Log> selectLogListByPage(Log log, PageBean<Log> pageBean) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-        //²éÑ¯·ÖÒ³½á¹û
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
+        //æŸ¥è¯¢åˆ†é¡µç»“æœ
         pageBean.setResult(logDao.selectLogListByPage(log, pageBean.getStart(), pageBean.getEnd()));
-        //²éÑ¯¼ÇÂ¼×ÜÊı
+        //æŸ¥è¯¢è®°å½•æ€»æ•°
         pageBean.setTotal(logDao.selectTotal(log));
         return pageBean;
     }
 
     @Override
     public Integer insertLog(Log log) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = logDao.insertLog(log);
         return i;
     }

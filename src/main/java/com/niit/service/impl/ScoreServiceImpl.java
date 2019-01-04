@@ -29,52 +29,52 @@ public class ScoreServiceImpl implements ScoreService{
     
     @Override
     public Score selectScoreByStudentId(String studentId) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Score score = scoreDao.selectScoreByStudentId(studentId);
         return score;
     }
 
     @Override
     public Score selectScoreByCourseId(String courseId) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Score score = scoreDao.selectScoreByCourseId(courseId);
         return score;
     }
 
     @Override
     public List<Score> selectScoreList() {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         List<Score> list = scoreDao.selectScoreList();
         return list;
     }
 
     @Override
     public PageBean<Score> selectScoreListByPage(Score score, PageBean<Score> pageBean) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-        //²éÑ¯·ÖÒ³½á¹û
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
+        //æŸ¥è¯¢åˆ†é¡µç»“æœ
         pageBean.setResult(scoreDao.selectScoreListByPage(score, pageBean.getStart(), pageBean.getEnd()));
-        //²éÑ¯¼ÇÂ¼×ÜÊı
+        //æŸ¥è¯¢è®°å½•æ€»æ•°
         pageBean.setTotal(scoreDao.selectTotal(score));
         return pageBean;
     }
 
     @Override
     public Integer updateScore(Score score) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = scoreDao.updateScore(score);
         return i;
     }
 
     @Override
     public Integer deleteScoreById(String studentId, String courseId) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = scoreDao.deleteScoreById(studentId, courseId);
         return i;
     }
 
     @Override
     public Integer insertScore(Score score) {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         Integer i = scoreDao.insertScore(score);
         return i;
     }
@@ -94,7 +94,7 @@ public class ScoreServiceImpl implements ScoreService{
             resultList.add(objs);
         }
         pageBean.setResult(resultList);
-        //²éÑ¯¼ÇÂ¼×ÜÊı
+        //æŸ¥è¯¢è®°å½•æ€»æ•°
         pageBean.setTotal(scoreDao.selectTotal(score));
         return pageBean;
     }
@@ -123,7 +123,7 @@ public class ScoreServiceImpl implements ScoreService{
             }
         }
         pageBean.setResult(resultList);
-        //²éÑ¯¼ÇÂ¼×ÜÊı
+        //æŸ¥è¯¢è®°å½•æ€»æ•°
         pageBean.setTotal(scoreDao.selectTotal(score));
         return pageBean;
     }

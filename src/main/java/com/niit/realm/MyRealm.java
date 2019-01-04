@@ -32,7 +32,7 @@ public class MyRealm extends AuthorizingRealm{
     private TeacherService teacherService;
 
     /**
-     * Îªµ±Ç°µÇÂ½µÄÓÃ»§ÊÚÓè½ÇÉ«ºÍÈ¨ÏŞ
+     * ä¸ºå½“å‰ç™»é™†çš„ç”¨æˆ·æˆäºˆè§’è‰²å’Œæƒé™
      * @param principalCollection
      * @return
      */
@@ -41,66 +41,66 @@ public class MyRealm extends AuthorizingRealm{
         String id = (String) principalCollection.getPrimaryPrincipal();
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        // ¸ù¾İÓÃ»§Ãû²éÑ¯µ±Ç°ÓÃ»§ÓµÓĞµÄ½ÇÉ«
+        // æ ¹æ®ç”¨æˆ·åæŸ¥è¯¢å½“å‰ç”¨æˆ·æ‹¥æœ‰çš„è§’è‰²
         Set<String> roleNames = new HashSet<String>();
-        // ¸ù¾İÓÃ»§Ãû²éÑ¯µ±Ç°ÓÃ»§È¨ÏŞ
+        // æ ¹æ®ç”¨æˆ·åæŸ¥è¯¢å½“å‰ç”¨æˆ·æƒé™
         Set<String> permissionNames = new HashSet<String>();
         
-        Administrator administrator = administratorService.selectAdministratorById(id); //ÖØÊı¾İ¿â²éÑ¯ÓÃ»§ĞÅÏ¢
+        Administrator administrator = administratorService.selectAdministratorById(id); //é‡æ•°æ®åº“æŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯
         if (administrator != null) {
             roleNames.add("admin");
             permissionNames.add("admin");
         }
-        Teacher teacher = teacherService.selectTeacherById(id); //ÖØÊı¾İ¿â²éÑ¯ÓÃ»§ĞÅÏ¢
+        Teacher teacher = teacherService.selectTeacherById(id); //é‡æ•°æ®åº“æŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯
         if (teacher != null) {
             roleNames.add("teacher");
             permissionNames.add("teacher");
         }
-        Student student = studentService.selectStudentById(id); //ÖØÊı¾İ¿â²éÑ¯ÓÃ»§ĞÅÏ¢
+        Student student = studentService.selectStudentById(id); //é‡æ•°æ®åº“æŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯
         if (student != null) {
             roleNames.add("student");
             permissionNames.add("student");
         }
 
-        // ½«½ÇÉ«Ãû³ÆÌá¹©¸øinfo
+        // å°†è§’è‰²åç§°æä¾›ç»™info
         authorizationInfo.setRoles(roleNames);
-        // ½«È¨ÏŞÃû³ÆÌá¹©¸øinfo
+        // å°†æƒé™åç§°æä¾›ç»™info
         authorizationInfo.setStringPermissions(permissionNames);
 
         return authorizationInfo;
     }
 
     /**
-     * Éí·İÈÏÖ¤
+     * èº«ä»½è®¤è¯
      * @param authenticationToken
      * @return
      * @throws AuthenticationException
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        String id = (String) authenticationToken.getPrincipal(); //»ñÈ¡ÓÃ»§Ãû
+        String id = (String) authenticationToken.getPrincipal(); //è·å–ç”¨æˆ·å
 
-        Administrator administrator = administratorService.selectAdministratorById(id); //ÖØÊı¾İ¿â²éÑ¯ÓÃ»§ĞÅÏ¢
+        Administrator administrator = administratorService.selectAdministratorById(id); //é‡æ•°æ®åº“æŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯
         if (administrator != null) {
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(
                     administrator.getId(), administrator.getPassword(), getName());
-            SecurityUtils.getSubject().getSession().setAttribute("id", administrator.getId()); //°Ñµ±Ç°ÓÃ»§´æµ½sessionÖĞ
+            SecurityUtils.getSubject().getSession().setAttribute("id", administrator.getId()); //æŠŠå½“å‰ç”¨æˆ·å­˜åˆ°sessionä¸­
             SecurityUtils.getSubject().getSession().setAttribute("no", "0");
             return authcInfo;
         }
-        Teacher teacher = teacherService.selectTeacherById(id); //ÖØÊı¾İ¿â²éÑ¯ÓÃ»§ĞÅÏ¢
+        Teacher teacher = teacherService.selectTeacherById(id); //é‡æ•°æ®åº“æŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯
         if (teacher != null) {
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(
                     teacher.getId(), teacher.getPassword(), getName());
-            SecurityUtils.getSubject().getSession().setAttribute("id", teacher.getId()); //°Ñµ±Ç°ÓÃ»§´æµ½sessionÖĞ
+            SecurityUtils.getSubject().getSession().setAttribute("id", teacher.getId()); //æŠŠå½“å‰ç”¨æˆ·å­˜åˆ°sessionä¸­
             SecurityUtils.getSubject().getSession().setAttribute("no", "1");
             return authcInfo;
         }
-        Student student = studentService.selectStudentById(id); //ÖØÊı¾İ¿â²éÑ¯ÓÃ»§ĞÅÏ¢
+        Student student = studentService.selectStudentById(id); //é‡æ•°æ®åº“æŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯
         if (student != null) {
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(
                     student.getId(), student.getPassword(), getName());
-            SecurityUtils.getSubject().getSession().setAttribute("id", student.getId()); //°Ñµ±Ç°ÓÃ»§´æµ½sessionÖĞ
+            SecurityUtils.getSubject().getSession().setAttribute("id", student.getId()); //æŠŠå½“å‰ç”¨æˆ·å­˜åˆ°sessionä¸­
             SecurityUtils.getSubject().getSession().setAttribute("no", "2");
             return authcInfo;
         }
